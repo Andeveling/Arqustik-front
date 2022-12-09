@@ -25,14 +25,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     },
   }
 }
+const { STRAPI_SERVER } = arqustikConfig
+const { clients } = endpoints
 
 export default function ClientByID() {
   const router = useRouter()
   const clientID = router.query?.id
-  const { data, error, isValidating } = useSWR(
-    `${arqustikConfig.STRAPI_SERVER}${endpoints.clients}/${clientID}?populate=quotations`,
-    fetcher
-  )
+  const { data, error, isValidating } = useSWR(`${STRAPI_SERVER}${clients}/${clientID}?populate=quotations`, fetcher)
 
   if (error) {
     return <Container>{JSON.stringify(error)}</Container>

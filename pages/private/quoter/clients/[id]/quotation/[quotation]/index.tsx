@@ -33,11 +33,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 }
 
+const { quotations } = endpoints
+const { STRAPI_SERVER } = arqustikConfig
+
 export default function QuotationByClientID() {
   const router = useRouter()
 
   const { data: quotation, error } = useSWR<QuotationResponseI>(
-    `${arqustikConfig.STRAPI_SERVER}${endpoints.quotations}/${router.query.quotation}?populate=*`,
+    `${STRAPI_SERVER}${quotations}/${router.query.quotation}?populate=*&sort=createdAt:asc`,
     fetcher
   )
 

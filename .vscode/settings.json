@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["Arqustik", "Vitruvio"]
+  "cSpell.words": ["Arqustik", "Vitruvio"],
+  "dotenv.enableAutocloaking": false
 }

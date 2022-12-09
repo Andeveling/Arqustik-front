@@ -22,8 +22,8 @@ export interface CreateQuotationI {
   transport: boolean
   polyurethane: boolean
 
-  protection: ProtectionEnum
-  silicone: SiliconeEnum
+  protection: string
+  silicone: string
 
   transport_mount: number
 }

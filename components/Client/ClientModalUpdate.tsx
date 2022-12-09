@@ -1,6 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react"
 import { PencilIcon, XMarkIcon } from "@heroicons/react/24/outline"
-import { ClientDataI, ClientI } from "@models/Client.model"
+import { ClientDataI } from "@models/Client.model"
 import { Button } from "flowbite-react"
 import { Fragment, useState } from "react"
 import ClientUpdateForm from "./ClientUpdateForm"

@@ -27,11 +27,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 }
 
-export default function Quoter() {
-  const session = useSession()
+const { quotations } = endpoints
+const { STRAPI_SERVER } = arqustikConfig
 
+export default function Quoter() {
   const { data: clients, error } = useSWR<ResponseClientsI>(
-    [`${arqustikConfig.STRAPI_SERVER}${endpoints.clients}?sort=createdAt:desc`, session.data?.user.jwt],
+    `${STRAPI_SERVER}${endpoints.clients}?sort=createdAt:desc`,
     fetcher
   )
 
