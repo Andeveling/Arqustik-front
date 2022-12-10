@@ -1,13 +1,14 @@
-import ModalEdit from "@components/ModalEdit"
-import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid"
-import { WindowI, WindowsQuotationResponseI } from "@models/WindowPVC.model"
-import { windowPVC } from "@services/window.service"
-import { Dropdown, Table } from "flowbite-react"
-import { useRouter } from "next/router"
-import { toast } from "react-hot-toast"
-import { currencyFormatter } from "utils/currencyFormatter"
-import { ProjectDataProps } from "./WindowsPVCForm"
-import WindowsPVCUpdateForm from "./WindowsPVCUpdateForm"
+import ModalEdit from '@components/ModalEdit'
+import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/solid'
+import { WindowI, WindowsQuotationResponseI } from '@models/WindowPVC.model'
+import { windowPVC } from '@services/window.service'
+import { Button, Dropdown, Modal, Table } from 'flowbite-react'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { toast } from 'react-hot-toast'
+import { currencyFormatter } from 'utils/currencyFormatter'
+import { ProjectDataProps } from './WindowsPVCForm'
+import WindowsPVCUpdateForm from './WindowsPVCUpdateForm'
 
 const WindowsPVCList = ({
   windows,
@@ -18,13 +19,14 @@ const WindowsPVCList = ({
   projectData: ProjectDataProps
   transport_mount: number
 }) => {
+  const [openModal, setOpenModal] = useState<string | undefined>()
   let total = 0
   const router = useRouter()
-  const handleDelete = async (id: WindowI["id"]) => {
-    if (confirm("¿Desea borrar la ventana?")) {
+  const deleteHandle = async (id: WindowI['id']) => {
+    if (confirm('¿Desea borrar la ventana?')) {
       toast
         .promise(windowPVC.delete(id), {
-          loading: "Borrando...",
+          loading: 'Borrando...',
           success: <b>¡Ventana borrada!</b>,
           error: <b>Algo salio mal</b>,
         })
@@ -70,8 +72,31 @@ const WindowsPVCList = ({
                           form={<WindowsPVCUpdateForm windowID={window.id} projectData={projectData} />}
                         />
                       </Dropdown.Item>
-                      <Dropdown.Item icon={TrashIcon} onClick={() => handleDelete(window.id)}>
-                        Borrar
+                      <Dropdown.Item className='m-0 p-0' icon={TrashIcon}>
+                        <span onClick={() => setOpenModal('default')}>Borrar</span>
+
+                        <Modal
+                          size='sm'
+                          popup={true}
+                          show={openModal === 'default'}
+                          onClose={() => setOpenModal(undefined)}>
+                          <Modal.Header />
+                          <Modal.Body>
+                            <div className='text-center'>
+                              <h3 className='mb-5 text-lg font-normal text-gray-500 dark:text-gray-400'>
+                                ¿Esta seguro que desea borrar?
+                              </h3>
+                            </div>
+                            <div className='flex justify-center gap-4'>
+                              <Button color='failure' onClick={() => deleteHandle(window.id)}>
+                                Borrar
+                              </Button>
+                              <Button color='gray' onClick={() => setOpenModal(undefined)}>
+                                Rechazar
+                              </Button>
+                            </div>
+                          </Modal.Body>
+                        </Modal>
                       </Dropdown.Item>
                     </Dropdown>
                   </Table.Cell>
@@ -89,7 +114,7 @@ const WindowsPVCList = ({
         <p>Subtotal</p> <span className='text-right pr-6'>{currencyFormatter(total)}</span>
         <p>IVA 19%</p> <span className='text-right pr-6'>{currencyFormatter(total * 0.19)}</span>
         <p>Transporte</p> <span className='text-right pr-6'>{currencyFormatter(transport_mount)}</span>
-        <p>Total</p>{" "}
+        <p>Total</p>{' '}
         <span className='text-right pr-6 font-bold'>{currencyFormatter(total * 1.19 + transport_mount)}</span>
       </div>
     </div>
