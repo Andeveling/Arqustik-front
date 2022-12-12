@@ -23,15 +23,13 @@ const WindowsPVCList = ({
   let total = 0
   const router = useRouter()
   const deleteHandle = async (id: WindowI['id']) => {
-    if (confirm('¿Desea borrar la ventana?')) {
-      toast
-        .promise(windowPVC.delete(id), {
-          loading: 'Borrando...',
-          success: <b>¡Ventana borrada!</b>,
-          error: <b>Algo salio mal</b>,
-        })
-        .then(() => router.reload())
-    }
+    toast
+      .promise(windowPVC.delete(id), {
+        loading: 'Borrando...',
+        success: <b>¡Ventana borrada!</b>,
+        error: <b>Algo salio mal</b>,
+      })
+      .then(() => router.reload())
   }
 
   return (
