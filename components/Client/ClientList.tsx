@@ -65,7 +65,7 @@ const ClientList = ({ clients }: { clients: ResponseClientsI }) => {
                       <Link href={`quoter/clients/${id}`}>
                         <Button size='sm' color='dark'>
                           <DocumentIcon className='w-4 h-4 mr-2' />
-                          Detalles
+                          Cotizaciones
                         </Button>
                       </Link>
 

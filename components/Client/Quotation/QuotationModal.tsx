@@ -1,8 +1,8 @@
-import { Dialog, Transition } from "@headlessui/react"
-import { XMarkIcon, PlusIcon, PencilIcon } from "@heroicons/react/24/outline"
-import { Button } from "flowbite-react"
-import { Fragment, useState } from "react"
-import QuotationForm from "./QuotationForm"
+import { Dialog, Transition } from '@headlessui/react'
+import { XMarkIcon, PlusIcon, PencilIcon } from '@heroicons/react/24/outline'
+import { Button } from 'flowbite-react'
+import { Fragment, useState } from 'react'
+import QuotationForm from './QuotationForm'
 
 export default function QuotationModal() {
   let [isOpen, setIsOpen] = useState(false)
@@ -21,7 +21,7 @@ export default function QuotationModal() {
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as='div' className='relative z-10' onClose={closeModal}>
+        <Dialog as='div' className='relative z-10' onClose={() => {}}>
           <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'

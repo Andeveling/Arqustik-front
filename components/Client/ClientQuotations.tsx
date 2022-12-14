@@ -1,23 +1,23 @@
-import Heading from "@components/Heading"
-import { DocumentIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/solid"
-import { ClientByIDResponse, QuotationI } from "@models/Quotation.model"
-import { quotationPVC } from "@services/quotation.service"
-import { Button, Modal, Table } from "flowbite-react"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import { useState } from "react"
-import toast from "react-hot-toast"
-import ClientUpdateModal from "./ClientModalUpdate"
-import QuotationModal from "./Quotation/QuotationModal"
-import QuotationUpdateModal from "./Quotation/QuotationUpdateModal"
+import Heading from '@components/Heading'
+import { DocumentIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/solid'
+import { ClientByIDResponse, QuotationI } from '@models/Quotation.model'
+import { quotationPVC } from '@services/quotation.service'
+import { Button, Modal, Table } from 'flowbite-react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import toast from 'react-hot-toast'
+import ClientUpdateModal from './ClientModalUpdate'
+import QuotationModal from './Quotation/QuotationModal'
+import QuotationUpdateModal from './Quotation/QuotationUpdateModal'
 
 const ClientQuotations = ({ client }: { client: ClientByIDResponse }) => {
   const router = useRouter()
   const [openModal, setOpenModal] = useState<string | undefined>()
-  const deleteHandle = (id: QuotationI["id"]) => {
+  const deleteHandle = (id: QuotationI['id']) => {
     toast
       .promise(quotationPVC.delete(id), {
-        loading: "Borrando...",
+        loading: 'Borrando...',
         success: <b>¡Cotización borrada!</b>,
         error: <b>Algo salio mal</b>,
       })
@@ -54,11 +54,11 @@ const ClientQuotations = ({ client }: { client: ClientByIDResponse }) => {
                       <Link href={`${client.data.id}/quotation/${quote.id}`}>
                         <Button size='sm' color='dark'>
                           <DocumentIcon className='w-4 h-4 mr-2' />
-                          Detalles
+                          Ventanas
                         </Button>
                       </Link>
                       <QuotationUpdateModal quotation={quote} />
-                      <Button size='sm' color='dark' onClick={() => setOpenModal("default")}>
+                      <Button size='sm' color='dark' onClick={() => setOpenModal('default')}>
                         <TrashIcon className='w-4 h-4 mr-2' />
                         Borrar
                       </Button>
@@ -66,7 +66,7 @@ const ClientQuotations = ({ client }: { client: ClientByIDResponse }) => {
                       <Modal
                         size='sm'
                         popup={true}
-                        show={openModal === "default"}
+                        show={openModal === 'default'}
                         onClose={() => setOpenModal(undefined)}>
                         <Modal.Header />
                         <Modal.Body>

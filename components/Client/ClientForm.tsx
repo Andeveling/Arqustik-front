@@ -57,7 +57,7 @@ const ClientForm = () => {
       </div>
 
       <div className='mb-6'>
-        <Label htmlFor='email'>Celular</Label>
+        <Label htmlFor='email'>Email</Label>
         <TextInput type='email' id='email' {...register('email')} />
         <p className='pt-1 text-xs text-red-500'>{errors.email?.message}</p>
       </div>

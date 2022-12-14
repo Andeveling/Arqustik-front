@@ -1,6 +1,6 @@
-import { Dialog, Transition } from "@headlessui/react"
-import { Fragment, useState } from "react"
-import { XMarkIcon, PlusIcon } from "@heroicons/react/24/outline"
+import { Dialog, Transition } from '@headlessui/react'
+import { Fragment, useState } from 'react'
+import { XMarkIcon, PlusIcon } from '@heroicons/react/24/outline'
 
 export default function ModalR({ form, title }: any) {
   let [isOpen, setIsOpen] = useState(false)
@@ -19,7 +19,7 @@ export default function ModalR({ form, title }: any) {
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as='div' className='relative z-10' onClose={closeModal}>
+        <Dialog as='div' className='relative z-10' onClose={() => {}}>
           <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'

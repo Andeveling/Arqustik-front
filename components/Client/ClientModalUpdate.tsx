@@ -1,9 +1,9 @@
-import { Dialog, Transition } from "@headlessui/react"
-import { PencilIcon, XMarkIcon } from "@heroicons/react/24/outline"
-import { ClientDataI } from "@models/Client.model"
-import { Button } from "flowbite-react"
-import { Fragment, useState } from "react"
-import ClientUpdateForm from "./ClientUpdateForm"
+import { Dialog, Transition } from '@headlessui/react'
+import { PencilIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { ClientDataI } from '@models/Client.model'
+import { Button } from 'flowbite-react'
+import { Fragment, useState } from 'react'
+import ClientUpdateForm from './ClientUpdateForm'
 
 export default function ClientUpdateModal({ client }: { client: ClientDataI }) {
   let [isOpen, setIsOpen] = useState(false)
@@ -18,7 +18,7 @@ export default function ClientUpdateModal({ client }: { client: ClientDataI }) {
       </Button>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as='div' className='relative z-10' onClose={closeModal}>
+        <Dialog as='div' className='relative z-10' onClose={() => {}}>
           <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
