@@ -1,5 +1,5 @@
 import ModalEdit from '@components/ModalEdit'
-import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/solid'
+import { TrashIcon } from '@heroicons/react/24/solid'
 import { WindowI, WindowsQuotationResponseI } from '@models/WindowPVC.model'
 import { windowPVC } from '@services/window.service'
 import { Button, Dropdown, Modal, Table } from 'flowbite-react'
@@ -63,15 +63,18 @@ const WindowsPVCList = ({
                   <Table.Cell>{currencyFormatter(price)}</Table.Cell>
                   <Table.Cell>{cant} unds</Table.Cell>
                   <Table.Cell>
-                    <Dropdown label='opciones' inline={true} placement='left' arrowIcon={false}>
-                      <Dropdown.Item icon={PencilSquareIcon}>
+                    <Dropdown label='Opciones' color='dark' size='xs' placement='left' arrowIcon={false}>
+                      <Dropdown.Item>
                         <ModalEdit
                           title='Edita esta ventana'
                           form={<WindowsPVCUpdateForm windowID={window.id} projectData={projectData} />}
                         />
                       </Dropdown.Item>
-                      <Dropdown.Item className='m-0 p-0' icon={TrashIcon}>
-                        <span onClick={() => setOpenModal('default')}>Borrar</span>
+                      <Dropdown.Item className='m-0 p-0'>
+                        <Button size='xs' color='failure' onClick={() => setOpenModal('default')}>
+                          <TrashIcon className='w-4 h-4 mr-2' />
+                          <span>Borrar</span>
+                        </Button>
 
                         <Modal
                           size='sm'

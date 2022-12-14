@@ -1,14 +1,14 @@
-import SubmitInput from "@components/SubmitInput"
-import { Transition } from "@headlessui/react"
-import { yupResolver } from "@hookform/resolvers/yup"
-import { CreateQuotationI, ProtectionEnum, SiliconeEnum } from "@models/Quotation.model"
-import { quotationPVC } from "@services/quotation.service"
-import { Checkbox, Label, Select, Textarea, TextInput } from "flowbite-react"
-import { useRouter } from "next/router"
-import { useState } from "react"
-import { SubmitHandler, useForm } from "react-hook-form"
-import toast from "react-hot-toast"
-import { QuotationSchema } from "./QuotationSchema"
+import SubmitInput from '@components/SubmitInput'
+import { Transition } from '@headlessui/react'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { CreateQuotationI, ProtectionEnum, SiliconeEnum } from '@models/Quotation.model'
+import { quotationPVC } from '@services/quotation.service'
+import { Checkbox, Label, Select, Textarea, TextInput } from 'flowbite-react'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
+import { QuotationSchema } from './QuotationSchema'
 
 const QuotationForm = () => {
   const router = useRouter()
@@ -18,6 +18,7 @@ const QuotationForm = () => {
     handleSubmit,
     watch,
     getValues,
+    setValue,
     reset,
     formState: { errors },
   } = useForm<CreateQuotationI>({
@@ -25,10 +26,11 @@ const QuotationForm = () => {
     defaultValues: {
       transport: false,
     },
-    mode: "onChange",
+    mode: 'onChange',
   })
 
-  const watchTransport = watch("transport")
+  const watchTransport = watch('transport')
+  if (!watchTransport) setValue('transport_mount', 0)
 
   const onSubmit: SubmitHandler<CreateQuotationI> = async (data) => {
     setIsLoading(true)
@@ -54,10 +56,10 @@ const QuotationForm = () => {
         .then(() => reset())
         .then(() => router.reload()),
       {
-        loading: "Creando...",
+        loading: 'Creando...',
         success: <b>¡Cotización creada!</b>,
         error: <b>No se pudo crear</b>,
-      }
+      },
     )
   }
 
@@ -65,19 +67,19 @@ const QuotationForm = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className='mb-4'>
         <Label htmlFor='project'>Nombre de Proyecto</Label>
-        <TextInput type='text' id='project' {...register("project")} />
+        <TextInput type='text' id='project' {...register('project')} />
         <p className='pt-1 text-xs text-red-500'>{errors.project?.message}</p>
       </div>
 
       <div className='mb-4'>
         <Label htmlFor='arqustik_id'>ID Cotización</Label>
-        <TextInput type='text' id='arqustik_id' {...register("arqustik_id")} />
+        <TextInput type='text' id='arqustik_id' {...register('arqustik_id')} />
         <p className='pt-1 text-xs text-red-500'>{errors.arqustik_id?.message}</p>
       </div>
 
       <div className='mb-4'>
         <Label htmlFor='address'>Dirección del proyecto</Label>
-        <TextInput type='text' id='address' {...register("address")} />
+        <TextInput type='text' id='address' {...register('address')} />
         <p className='pt-1 text-xs text-red-500'>{errors.address?.message}</p>
       </div>
       <h3 className='mb-4 font-semibold text-gray-900 dark:text-white text-center'>Servicios</h3>
@@ -85,23 +87,15 @@ const QuotationForm = () => {
         <Label
           htmlFor='installation'
           className='flex items-center pl-4 p-4 rounded border border-gray-200 dark:border-gray-700'>
-          <Checkbox id='installation' {...register("installation")} /> <span className='ml-4'>Instalacíon</span>
+          <Checkbox id='installation' {...register('installation')} /> <span className='ml-4'>Instalacíon</span>
         </Label>
       </div>
-      {/*  <div className='mb-4'>
-        <Label
-          htmlFor='protection'
-          className='flex items-center pl-4 p-4 rounded border border-gray-200 dark:border-gray-700'>
-          <Checkbox id='protection' {...register("protection")} />
-          <span className='ml-4'>Protección</span>
-        </Label>
-      </div> */}
 
       <div className='mb-4'>
         <Label
           htmlFor='polyurethane'
           className='flex items-center pl-4 p-4 rounded border border-gray-200 dark:border-gray-700'>
-          <Checkbox id='polyurethane' {...register("polyurethane")} />
+          <Checkbox id='polyurethane' {...register('polyurethane')} />
           <span className='ml-4'>Sello con Poliuretano</span>
         </Label>
       </div>
@@ -110,7 +104,7 @@ const QuotationForm = () => {
         <Label
           htmlFor='transport'
           className='flex items-center pl-4 p-4 rounded border border-gray-200 dark:border-gray-700'>
-          <Checkbox id='transport' {...register("transport")} />
+          <Checkbox id='transport' {...register('transport')} />
           <span className='ml-4'>Transporte</span>
         </Label>
       </div>
@@ -132,14 +126,14 @@ const QuotationForm = () => {
             addon='$'
             type='number'
             pattern='^\$\d{1,3}(,\d{3})*(\.\d+)?$'
-            {...register("transport_mount")}
+            {...register('transport_mount')}
           />
         </div>
       </Transition>
 
       <div className='mb-6'>
         <Label htmlFor='select-model-windows'> Seleccionar Tipo de Protección</Label>
-        <Select id='select-model-windows' addon='Protección' {...register("protection")}>
+        <Select id='select-model-windows' addon='Protección' {...register('protection')}>
           <option value={ProtectionEnum.zero}>No lleva</option>
           <option value={ProtectionEnum.one}>1 Cara</option>
           <option value={ProtectionEnum.two}>2 Caras</option>
@@ -147,7 +141,7 @@ const QuotationForm = () => {
       </div>
       <div className='mb-6'>
         <Label htmlFor='select-model-windows'> Seleccionar Silicona</Label>
-        <Select id='select-model-windows' addon='Silicona' {...register("silicone")}>
+        <Select id='select-model-windows' addon='Silicona' {...register('silicone')}>
           <option value={SiliconeEnum.zero}>No lleva</option>
           <option value={SiliconeEnum.one}>1 Cara</option>
           <option value={SiliconeEnum.two}>2 Caras</option>
@@ -156,7 +150,7 @@ const QuotationForm = () => {
 
       <div className='mb-4'>
         <Label htmlFor='comment'>Observaciones</Label>
-        <Textarea id='comment' rows={4} placeholder='Añade algún comentario aca...' {...register("comment")} />
+        <Textarea id='comment' rows={4} placeholder='Añade algún comentario aca...' {...register('comment')} />
         <p className='pt-1 text-xs text-red-500'>{errors.comment?.message}</p>
       </div>
 

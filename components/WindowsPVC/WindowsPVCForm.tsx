@@ -1,23 +1,23 @@
-import SubmitInput from "@components/SubmitInput"
-import { yupResolver } from "@hookform/resolvers/yup"
-import { QuotationI } from "@models/Quotation.model"
-import { CreateWindowFormPVCI } from "@models/WindowPVC.model"
-import { getJWT } from "@services/getJWT.service"
-import { windowPVC } from "@services/window.service"
-import axios from "axios"
-import { Label, TextInput } from "flowbite-react"
-import { useRouter } from "next/router"
-import { useState } from "react"
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
-import { toast } from "react-hot-toast"
-import SelectColorPVC from "./SelectColorPVC"
-import SelectGlass from "./SelectGlass"
-import SelectModel from "./SelectModel"
-import SelectSystem from "./SelectSystem"
-import SelectType from "./SelectType"
-import SelectWindowsDetails from "./SelectWindowsDetails"
-import TitleLocation from "./TitleLocation"
-import { WindowsPVCSchema } from "./WindowsPVCSchema"
+import SubmitInput from '@components/SubmitInput'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { QuotationI } from '@models/Quotation.model'
+import { CreateWindowFormPVCI } from '@models/WindowPVC.model'
+import { getJWT } from '@services/getJWT.service'
+import { windowPVC } from '@services/window.service'
+import axios from 'axios'
+import { Checkbox, Label, TextInput } from 'flowbite-react'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
+import SelectColorPVC from './SelectColorPVC'
+import SelectGlass from './SelectGlass'
+import SelectModel from './SelectModel'
+import SelectSystem from './SelectSystem'
+import SelectType from './SelectType'
+import SelectWindowsDetails from './SelectWindowsDetails'
+import TitleLocation from './TitleLocation'
+import { WindowsPVCSchema } from './WindowsPVCSchema'
 
 export interface ProjectDataProps {
   installation: boolean
@@ -33,9 +33,9 @@ const WindowsPVCForm = ({ projectData }: { projectData: ProjectDataProps }) => {
   const methods = useForm<CreateWindowFormPVCI>({
     resolver: yupResolver(WindowsPVCSchema),
   })
-  const quotationID: QuotationI["id"] = typeof router.query.quotation === "string" ? router.query.quotation : ""
+  const quotationID: QuotationI['id'] = typeof router.query.quotation === 'string' ? router.query.quotation : ''
 
-  const { handleSubmit } = methods
+  const { handleSubmit, register } = methods
   const onSubmit: SubmitHandler<CreateWindowFormPVCI> = async (data) => {
     setLoading(true)
     const jwt = await getJWT()
@@ -54,13 +54,13 @@ const WindowsPVCForm = ({ projectData }: { projectData: ProjectDataProps }) => {
               .then((res) => res)
               .then(() => methods.reset())
               .then(() => router.reload())
-              .catch((err) => err)
+              .catch((err) => err),
           ),
         {
-          loading: "Creando...",
+          loading: 'Creando...',
           success: <b>¡Ventana creada!</b>,
           error: <b>Algo salio mal</b>,
-        }
+        },
       )
       .then(() => setLoading(false))
   }
@@ -82,10 +82,11 @@ const WindowsPVCForm = ({ projectData }: { projectData: ProjectDataProps }) => {
         <SelectGlass />
         {/* 6. Color PVC */}
         <SelectColorPVC />
+
         {/* Cant */}
         <div className='mb-4'>
           <Label htmlFor='cant'>Cantidad</Label>
-          <TextInput id='cant' defaultValue={1} addon='cant' type='number' {...methods.register("cant")} />
+          <TextInput id='cant' defaultValue={1} addon='cant' type='number' {...register('cant')} />
           {methods.formState.errors.cant?.message ? (
             <p className='text-xs text-red-500'>{methods.formState.errors.cant.message}</p>
           ) : (
@@ -93,7 +94,16 @@ const WindowsPVCForm = ({ projectData }: { projectData: ProjectDataProps }) => {
           )}
         </div>
 
-        <SubmitInput isLoading={methods.formState.isSubmitting || loading} value={"CREAR"} />
+        <div className='mb-4'>
+          <Label
+            htmlFor='dismount'
+            className='flex items-center pl-4 p-4 rounded border border-gray-200 dark:border-gray-700'>
+            <Checkbox id='dismount' {...register('dismount')} />
+            <span className='ml-4'>Desmonte</span>
+          </Label>
+        </div>
+
+        <SubmitInput isLoading={methods.formState.isSubmitting || loading} value={'CREAR'} />
       </form>
     </FormProvider>
   )

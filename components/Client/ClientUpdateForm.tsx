@@ -1,13 +1,13 @@
-import SubmitInput from "@components/SubmitInput"
-import { yupResolver } from "@hookform/resolvers/yup"
-import { ClientDataI, ClientI, UpdateClientI } from "@models/Client.model"
-import { clientPVC } from "@services/client.service"
-import { Label, TextInput } from "flowbite-react"
-import { useRouter } from "next/router"
-import { useState } from "react"
-import { SubmitHandler, useForm } from "react-hook-form"
-import toast from "react-hot-toast"
-import { CreateClientSchema } from "./ClientSchema"
+import SubmitInput from '@components/SubmitInput'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { ClientDataI, ClientI, UpdateClientI } from '@models/Client.model'
+import { clientPVC } from '@services/client.service'
+import { Label, TextInput } from 'flowbite-react'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
+import { CreateClientSchema } from './ClientSchema'
 
 const ClientUpdateForm = ({ client }: { client: ClientDataI }) => {
   const router = useRouter()
@@ -36,17 +36,16 @@ const ClientUpdateForm = ({ client }: { client: ClientDataI }) => {
           data: {
             fullName: data.fullName,
             cellphone: data.cellphone,
-            address: data.address,
             email: data.email,
           },
         })
         .then(() => reset())
         .then(() => router.reload()),
       {
-        loading: "Actualizando...",
+        loading: 'Actualizando...',
         success: <b>¡Cliente actualizado!</b>,
         error: <b>No se pudo actualizar el Cliente</b>,
-      }
+      },
     )
   }
 
@@ -56,7 +55,7 @@ const ClientUpdateForm = ({ client }: { client: ClientDataI }) => {
         <Label htmlFor='fullName' className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>
           Nombre y apellidos
         </Label>
-        <TextInput type='text' id='fullName' {...register("fullName")} />
+        <TextInput type='text' id='fullName' {...register('fullName')} />
         <p className='pt-1 text-xs text-red-500'>{errors.fullName?.message}</p>
       </div>
 
@@ -64,22 +63,15 @@ const ClientUpdateForm = ({ client }: { client: ClientDataI }) => {
         <Label htmlFor='cellphone' className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>
           Celular
         </Label>
-        <TextInput type='text' id='cellphone' {...register("cellphone")} />
+        <TextInput type='text' id='cellphone' {...register('cellphone')} />
         <p className='pt-1 text-xs text-red-500'>{errors.cellphone?.message}</p>
       </div>
 
       <div className='mb-6'>
-        <Label htmlFor='address' className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>
-          Dirección
-        </Label>
-        <TextInput type='text' id='address' {...register("address")} />
-        <p className='pt-1 text-xs text-red-500'>{errors.address?.message}</p>
-      </div>
-      <div className='mb-6'>
         <Label htmlFor='email' className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>
           Correo electronico
         </Label>
-        <TextInput type='email' id='email' {...register("email")} />
+        <TextInput type='email' id='email' {...register('email')} />
         <p className='pt-1 text-xs text-red-500'>{errors.email?.message}</p>
       </div>
 

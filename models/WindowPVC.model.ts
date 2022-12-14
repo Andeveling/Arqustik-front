@@ -1,6 +1,7 @@
-import { ProjectDataProps } from "@components/WindowsPVC/WindowsPVCForm"
-import { QuotationI } from "./Quotation.model"
-import { SystemsEnum } from "./System.model"
+import { ProjectDataProps } from '@components/WindowsPVC/WindowsPVCForm'
+import { GlassResponseI } from './Glass.model'
+import { QuotationI } from './Quotation.model'
+import { SystemsEnum } from './System.model'
 
 export interface WindowI {
   id: number | string
@@ -18,33 +19,34 @@ export interface WindowI {
 }
 
 export enum WindowTypeEnum {
-  WINDOW = "window",
-  DOOR = "door",
+  WINDOW = 'window',
+  DOOR = 'door',
 }
 
 export enum WindowModelsEnum {
-  XO = "XO",
-  OX = "OX",
-  XX = "XX",
-  OXXO = "OXXO",
-  XXO = "XXO",
-  OXX = "OXX",
-  XXX = "XXX",
+  XO = 'XO',
+  OX = 'OX',
+  XX = 'XX',
+  OXXO = 'OXXO',
+  XXO = 'XXO',
+  OXX = 'OXX',
+  XXX = 'XXX',
 }
 
-export interface CreateWindowFormPVCI extends Omit<WindowI, "id" | "price"> {
+export interface CreateWindowFormPVCI extends Omit<WindowI, 'id' | 'price'> {
   jwt?: string
   projectData: ProjectDataProps
   quotationID: number | string
   windowID?: number | string
+  dismount: boolean
 }
 
-export interface CreateWindowPVCI extends Pick<WindowI, "title" | "location" | "width" | "height" | "price"> {
+export interface CreateWindowPVCI extends Pick<WindowI, 'title' | 'location' | 'width' | 'height' | 'price'> {
   jwt?: string
   cost: number
   profit: number
-  quotation: QuotationI["id"]
-  window: WindowI["id"]
+  quotation: QuotationI['id']
+  window: WindowI['id']
 }
 
 export interface ClientQuotationResponseI {
@@ -86,6 +88,7 @@ export interface WindowsAttributes {
   cant: number
   model: WindowModelsEnum
   color: string
+  glass: GlassResponseI
   description: string
   createdAt: Date
   updatedAt: Date

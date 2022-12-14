@@ -1,11 +1,11 @@
-import { WindowsDatum } from "@models/WindowPVC.model"
-import { currencyFormatter } from "@utils/currencyFormatter"
-import { getArea, getMillimeters } from "@utils/getDimensions"
-import WindowDraw from "./WindowDraw"
+import { WindowsDatum } from '@models/WindowPVC.model'
+import { currencyFormatter } from '@utils/currencyFormatter'
+import { getArea, getMillimeters } from '@utils/getDimensions'
+import WindowDraw from './WindowDraw'
 
 const WindowPDFDetailsCard = ({ window }: { window: WindowsDatum }) => {
   const {
-    attributes: { title, location, height, width, price, cant, model, color, description },
+    attributes: { title, location, height, width, price, cant, model, color, description, glass },
   } = window
   return (
     <div className='grid sm:grid-cols-2 print:grid-cols-2 grid-cols-1 justify-center my-5 border-t p-4 break-after-auto break-before-auto  break-inside-avoid'>
@@ -18,6 +18,7 @@ const WindowPDFDetailsCard = ({ window }: { window: WindowsDatum }) => {
           <p className='font-bold'>Ubicación:</p> <span>{location}</span>
           <p className='font-bold'>Color:</p> <span className=''>{color?.toUpperCase()}</span>
           <p className='font-bold'>Despcripción:</p> <span className=''>{description}</span>
+          <p className='font-bold'>Cristal:</p> <span className=''>{glass}</span>
         </div>
 
         <div className='py-2'>

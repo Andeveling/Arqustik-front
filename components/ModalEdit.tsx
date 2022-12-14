@@ -1,6 +1,7 @@
-import { Dialog, Transition } from "@headlessui/react"
-import { Fragment, useState } from "react"
-import { XMarkIcon, PlusIcon } from "@heroicons/react/24/outline"
+import { Dialog, Transition } from '@headlessui/react'
+import { PencilSquareIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Button } from 'flowbite-react'
+import { Fragment, useState } from 'react'
 
 export default function ModalEdit({ form, title }: any) {
   let [isOpen, setIsOpen] = useState(false)
@@ -9,9 +10,10 @@ export default function ModalEdit({ form, title }: any) {
 
   return (
     <>
-      <div className='flex items-center justify-center'>
-        <span onClick={openModal}>Editar</span>
-      </div>
+      <Button size='xs' color='success' onClick={openModal}>
+        <PencilSquareIcon className='w-4 h-4 mr-2' />
+        <span>Editar</span>
+      </Button>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as='div' className='relative z-10' onClose={closeModal}>

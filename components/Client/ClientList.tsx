@@ -1,22 +1,22 @@
-import Heading from "@components/Heading"
-import { MagnifyingGlassIcon, PencilIcon, TrashIcon, DocumentIcon } from "@heroicons/react/24/outline"
-import { ClientI, ResponseClientsI } from "@models/Client.model"
-import { clientPVC } from "@services/client.service"
-import { Button, Modal, Table } from "flowbite-react"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import { useState } from "react"
-import toast from "react-hot-toast"
-import ClientModal from "./ClientModal"
-import ClientModalUpdate from "./ClientModalUpdate"
+import Heading from '@components/Heading'
+import { MagnifyingGlassIcon, PencilIcon, TrashIcon, DocumentIcon } from '@heroicons/react/24/outline'
+import { ClientI, ResponseClientsI } from '@models/Client.model'
+import { clientPVC } from '@services/client.service'
+import { Button, Modal, Table } from 'flowbite-react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import toast from 'react-hot-toast'
+import ClientModal from './ClientModal'
+import ClientModalUpdate from './ClientModalUpdate'
 
 const ClientList = ({ clients }: { clients: ResponseClientsI }) => {
   const router = useRouter()
   const [openPopup, setOpenPopup] = useState<string | undefined>()
-  const deleteHandle = (id: ClientI["id"]) => {
+  const deleteHandle = (id: ClientI['id']) => {
     toast
       .promise(clientPVC.delete(id), {
-        loading: "Borrando...",
+        loading: 'Borrando...',
         success: <b>¡Cliente borrado!</b>,
         error: <b>Algo salio mal</b>,
       })
@@ -47,7 +47,6 @@ const ClientList = ({ clients }: { clients: ResponseClientsI }) => {
           <Table.Head>
             <Table.HeadCell>Nombre de cliente</Table.HeadCell>
             <Table.HeadCell>Telefono</Table.HeadCell>
-            <Table.HeadCell>Dirección</Table.HeadCell>
             <Table.HeadCell>Correo</Table.HeadCell>
             <Table.HeadCell className='text-center'>Opciones</Table.HeadCell>
           </Table.Head>
@@ -60,7 +59,7 @@ const ClientList = ({ clients }: { clients: ResponseClientsI }) => {
                   <Table.Row className="pl-10'" key={id}>
                     <Table.Cell className='font-bold'>{fullName}</Table.Cell>
                     <Table.Cell>{cellphone}</Table.Cell>
-                    <Table.Cell>{address}</Table.Cell>
+
                     <Table.Cell>{email}</Table.Cell>
                     <Table.Cell className='flex justify-center gap-2'>
                       <Link href={`quoter/clients/${id}`}>
@@ -72,7 +71,7 @@ const ClientList = ({ clients }: { clients: ResponseClientsI }) => {
 
                       <ClientModalUpdate client={client} />
 
-                      <Button size='sm' color='dark' onClick={() => setOpenPopup("default")}>
+                      <Button size='sm' color='dark' onClick={() => setOpenPopup('default')}>
                         <TrashIcon className='w-4 h-4 mr-2' />
                         Borrar
                       </Button>
@@ -80,7 +79,7 @@ const ClientList = ({ clients }: { clients: ResponseClientsI }) => {
                       <Modal
                         size='sm'
                         popup={true}
-                        show={openPopup === "default"}
+                        show={openPopup === 'default'}
                         onClose={() => setOpenPopup(undefined)}>
                         <Modal.Header />
                         <Modal.Body>

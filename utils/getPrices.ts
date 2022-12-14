@@ -1,6 +1,6 @@
-import { SystemsEnum } from "@models/System.model"
-import { CreateWindowFormPVCI, WindowModelsEnum, WindowTypeEnum } from "@models/WindowPVC.model"
-import { getSystem } from "./getSystem"
+import { SystemsEnum } from '@models/System.model'
+import { CreateWindowFormPVCI, WindowModelsEnum, WindowTypeEnum } from '@models/WindowPVC.model'
+import { getSystem } from './getSystem'
 
 export const getPrice = async ({
   title,
@@ -16,6 +16,7 @@ export const getPrice = async ({
   jwt,
   projectData,
   quotationID,
+  dismount,
   windowID,
 }: CreateWindowFormPVCI) => {
   const widthM = width / 1000
@@ -58,6 +59,7 @@ export const getPrice = async ({
       silicone: 0,
       polyurethane: 0,
       transport: 0,
+      dismount: 0,
     },
     material: {
       installation: 0,
@@ -69,8 +71,9 @@ export const getPrice = async ({
     priceWithProfit: 0,
     dollar: 0,
     description: (() => {
-      return type === "window" ? `Ventana Europea ${system?.toUpperCase()}` : `Puerta Ventana ${system?.toUpperCase()}`
+      return type === 'window' ? `Ventana Europea ${system?.toUpperCase()}` : `Puerta Ventana ${system?.toUpperCase()}`
     })(),
+    glass: '',
   }
   const { installation, polyurethane, protection, silicone, transport } = projectData
 
@@ -83,7 +86,7 @@ export const getPrice = async ({
             attributes: { profiles, accessories, glasses, administrative_costs, services },
           },
         } = bella
-        const dollar = administrative_costs.data.find((cost) => cost.attributes.title === "dollar")
+        const dollar = administrative_costs.data.find((cost) => cost.attributes.title === 'dollar')
         if (dollar?.attributes.value) cost.dollar = dollar?.attributes.value
 
         switch (type) {
@@ -115,8 +118,8 @@ export const getPrice = async ({
                   const {
                     attributes: { title, value },
                   } = adminCost
-                  if (title === "MOD") monorailCost.MOD += value
-                  if (title === "CIF") monorailCost.CIF += value
+                  if (title === 'MOD') monorailCost.MOD += value
+                  if (title === 'CIF') monorailCost.CIF += value
                 }
                 cost.adminCost = {
                   MOD: monorailCost.hours * monorailCost.MOD,
@@ -130,33 +133,33 @@ export const getPrice = async ({
                   } = profile
                   // Perfiles pricipales
                   // Marco
-                  if (id_provider === "12461") monorailCost.frame += price
+                  if (id_provider === '12461') monorailCost.frame += price
                   // pisavidrio
-                  if (id_provider === "12476") monorailCost.glazing_bead += price
+                  if (id_provider === '12476') monorailCost.glazing_bead += price
                   // Hoja
-                  if (id_provider === "12471") {
+                  if (id_provider === '12471') {
                     monorailCost.sash += price
                     monorailCost.transom += price
                   }
                   // closing - tapas monoriel marco
-                  if (id_provider === "12469") monorailCost.closing += price
+                  if (id_provider === '12469') monorailCost.closing += price
                   // interlock
-                  if (id_provider === "12468") monorailCost.interlock += price
+                  if (id_provider === '12468') monorailCost.interlock += price
                   // Ref Marco
-                  if (id_provider === "12952") monorailCost.rFrame += price
+                  if (id_provider === '12952') monorailCost.rFrame += price
                   // Ref Hoja
-                  if (id_provider === "12987") {
+                  if (id_provider === '12987') {
                     monorailCost.rSash += price
                     monorailCost.rTransom += price
                   }
                 }
                 for (const accessory of accessories.data) {
                   // Haladera
-                  if (accessory.attributes.id_provider === "13119") monorailCost.e_handle += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '13119') monorailCost.e_handle += accessory.attributes.price
                   // Manija
-                  if (accessory.attributes.id_provider === "13506") monorailCost.handle += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '13506') monorailCost.handle += accessory.attributes.price
                   // rueda
-                  if (accessory.attributes.id_provider === "13189") monorailCost.roller += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '13189') monorailCost.roller += accessory.attributes.price
                 }
                 for (const glassA of glasses.data) {
                   if (glassA.attributes.id_arqustik === glass) monorailCost.glass += glassA.attributes.price
@@ -220,8 +223,8 @@ export const getPrice = async ({
                   const {
                     attributes: { title, value },
                   } = adminCost
-                  if (title === "MOD") cost.adminCost.MOD = doubleRailCost.hours * value
-                  if (title === "CIF") cost.adminCost.CIF = doubleRailCost.hours * value
+                  if (title === 'MOD') cost.adminCost.MOD = doubleRailCost.hours * value
+                  if (title === 'CIF') cost.adminCost.CIF = doubleRailCost.hours * value
                 }
 
                 for (const profile of profiles.data) {
@@ -230,27 +233,27 @@ export const getPrice = async ({
                     attributes: { id_provider, price },
                   } = profile
                   // pisavidrio
-                  if (id_provider === "12476") doubleRailCost.glazing_bead += price
-                  if (id_provider === "12500")
+                  if (id_provider === '12476') doubleRailCost.glazing_bead += price
+                  if (id_provider === '12500')
                     // Marco XX
                     doubleRailCost.frame += price
                   // Hoja XX
-                  if (id_provider === "12471") doubleRailCost.sash += price
+                  if (id_provider === '12471') doubleRailCost.sash += price
                   // interlock XX
-                  if (id_provider === "12468") doubleRailCost.interlock += price
+                  if (id_provider === '12468') doubleRailCost.interlock += price
                   // Ref Marco XX
-                  if (id_provider === "12985") doubleRailCost.rFrame += price
+                  if (id_provider === '12985') doubleRailCost.rFrame += price
                   // Ref Hoja XX
-                  if (id_provider === "12987") doubleRailCost.rSash += price
+                  if (id_provider === '12987') doubleRailCost.rSash += price
                 }
                 for (const accessory of accessories.data) {
                   // Haladera
-                  if (accessory.attributes.id_provider === "13119")
+                  if (accessory.attributes.id_provider === '13119')
                     doubleRailCost.e_handle += accessory.attributes.price
                   // Manija
-                  if (accessory.attributes.id_provider === "13506") doubleRailCost.handle += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '13506') doubleRailCost.handle += accessory.attributes.price
                   // rueda
-                  if (accessory.attributes.id_provider === "13189") doubleRailCost.roller += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '13189') doubleRailCost.roller += accessory.attributes.price
                 }
                 for (const glassA of glasses.data) {
                   if (glassA.attributes.id_arqustik === glass) doubleRailCost.glass += glassA.attributes.price
@@ -321,35 +324,35 @@ export const getPrice = async ({
                   const {
                     attributes: { title, value },
                   } = adminCost
-                  if (title === "MOD") cost.adminCost.MOD = tripleRailCost.hours * value
-                  if (title === "CIF") cost.adminCost.CIF = tripleRailCost.hours * value
+                  if (title === 'MOD') cost.adminCost.MOD = tripleRailCost.hours * value
+                  if (title === 'CIF') cost.adminCost.CIF = tripleRailCost.hours * value
                 }
 
                 for (const profile of profiles.data) {
                   // Perfiles pricipales XXO XXX
                   // Pisavidrio
-                  if (profile.attributes.id_provider === "12476")
+                  if (profile.attributes.id_provider === '12476')
                     tripleRailCost.glazing_bead += profile.attributes.price
                   // Marco XXO XXX
-                  if (profile.attributes.id_provider === "12464") tripleRailCost.frame += profile.attributes.price
+                  if (profile.attributes.id_provider === '12464') tripleRailCost.frame += profile.attributes.price
                   // Hoja XXO
-                  if (profile.attributes.id_provider === "12471") tripleRailCost.sash += profile.attributes.price
+                  if (profile.attributes.id_provider === '12471') tripleRailCost.sash += profile.attributes.price
                   // interlock XXO XXX
-                  if (profile.attributes.id_provider === "12468") tripleRailCost.interlock += profile.attributes.price
+                  if (profile.attributes.id_provider === '12468') tripleRailCost.interlock += profile.attributes.price
                   // Frontal
                   // if (profile.attributes.id_provider === '12669') tripleRailCost.frontal += profile.attributes.price
                   // Ref Marco XXO XXX
-                  if (profile.attributes.id_provider === "12985") tripleRailCost.rFrame += profile.attributes.price
+                  if (profile.attributes.id_provider === '12985') tripleRailCost.rFrame += profile.attributes.price
                   // Ref Hoja XXO XXX
-                  if (profile.attributes.id_provider === "12987") tripleRailCost.rSash += profile.attributes.price
+                  if (profile.attributes.id_provider === '12987') tripleRailCost.rSash += profile.attributes.price
                 }
                 for (const accessory of accessories.data) {
                   // Manija XXO XXX
-                  if (accessory.attributes.id_provider === "12873") tripleRailCost.handle += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '12873') tripleRailCost.handle += accessory.attributes.price
                   // Cremona XXO XXX
-                  if (accessory.attributes.id_provider === "13317") tripleRailCost.cremone += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '13317') tripleRailCost.cremone += accessory.attributes.price
                   // rueda XXO XXX
-                  if (accessory.attributes.id_provider === "13189") tripleRailCost.roller += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '13189') tripleRailCost.roller += accessory.attributes.price
                 }
                 // Vidrios
                 for (const glassA of glasses.data) {
@@ -424,46 +427,46 @@ export const getPrice = async ({
                   const {
                     attributes: { title, value },
                   } = adminCost
-                  if (title === "MOD") cost.adminCost.MOD = monorailDoubleCost.hours * value
-                  if (title === "CIF") cost.adminCost.CIF = monorailDoubleCost.hours * value
+                  if (title === 'MOD') cost.adminCost.MOD = monorailDoubleCost.hours * value
+                  if (title === 'CIF') cost.adminCost.CIF = monorailDoubleCost.hours * value
                 }
 
                 for (const profile of profiles.data) {
                   // Perfiles pricipales
                   // Pisavidrio
-                  if (profile.attributes.id_provider === "12476")
+                  if (profile.attributes.id_provider === '12476')
                     monorailDoubleCost.glazing_bead += profile.attributes.price
                   // Marco
-                  if (profile.attributes.id_provider === "12461") monorailDoubleCost.frame += profile.attributes.price
+                  if (profile.attributes.id_provider === '12461') monorailDoubleCost.frame += profile.attributes.price
                   // Hoja
-                  if (profile.attributes.id_provider === "12471") {
+                  if (profile.attributes.id_provider === '12471') {
                     monorailDoubleCost.sash += profile.attributes.price
                     monorailDoubleCost.transom += profile.attributes.price
                   }
                   // closing - tapas monoriel marco
-                  if (profile.attributes.id_provider === "12469") monorailDoubleCost.closing += profile.attributes.price
+                  if (profile.attributes.id_provider === '12469') monorailDoubleCost.closing += profile.attributes.price
                   // interlock
-                  if (profile.attributes.id_provider === "12468")
+                  if (profile.attributes.id_provider === '12468')
                     monorailDoubleCost.interlock += profile.attributes.price
                   // fontal
-                  if (profile.attributes.id_provider === "12669") monorailDoubleCost.frontal += profile.attributes.price
+                  if (profile.attributes.id_provider === '12669') monorailDoubleCost.frontal += profile.attributes.price
                   // Ref Marco
-                  if (profile.attributes.id_provider === "12952") monorailDoubleCost.rFrame += profile.attributes.price
+                  if (profile.attributes.id_provider === '12952') monorailDoubleCost.rFrame += profile.attributes.price
                   // Ref Hoja
-                  if (profile.attributes.id_provider === "12987") {
+                  if (profile.attributes.id_provider === '12987') {
                     monorailDoubleCost.rSash += profile.attributes.price
                     monorailDoubleCost.rTransom += profile.attributes.price
                   }
                 }
                 for (const accessory of accessories.data) {
                   // Haladera
-                  if (accessory.attributes.id_provider === "13119")
+                  if (accessory.attributes.id_provider === '13119')
                     monorailDoubleCost.handle += accessory.attributes.price
                   // Manija
-                  if (accessory.attributes.id_provider === "13506")
+                  if (accessory.attributes.id_provider === '13506')
                     monorailDoubleCost.cremone += accessory.attributes.price
                   // rueda
-                  if (accessory.attributes.id_provider === "13189")
+                  if (accessory.attributes.id_provider === '13189')
                     monorailDoubleCost.roller += accessory.attributes.price
                 }
                 for (const glassA of glasses.data) {
@@ -533,42 +536,42 @@ export const getPrice = async ({
                   const {
                     attributes: { title, value },
                   } = adminCost
-                  if (title === "MOD") cost.adminCost.MOD = monorailCost.hours * value
-                  if (title === "CIF") cost.adminCost.CIF = monorailCost.hours * value
+                  if (title === 'MOD') cost.adminCost.MOD = monorailCost.hours * value
+                  if (title === 'CIF') cost.adminCost.CIF = monorailCost.hours * value
                 }
 
                 for (const profile of profiles.data) {
                   // Perfiles pricipales
                   // Pisavidrio
-                  if (profile.attributes.id_provider === "12476") monorailCost.glazing_bead += profile.attributes.price
+                  if (profile.attributes.id_provider === '12476') monorailCost.glazing_bead += profile.attributes.price
                   // Marco
-                  if (profile.attributes.id_provider === "12461") monorailCost.frame += profile.attributes.price
+                  if (profile.attributes.id_provider === '12461') monorailCost.frame += profile.attributes.price
                   // Hoja
-                  if (profile.attributes.id_provider === "12474") {
+                  if (profile.attributes.id_provider === '12474') {
                     monorailCost.sash += profile.attributes.price
                     monorailCost.transom += profile.attributes.price
                   }
                   // closing - tapas monoriel marco
-                  if (profile.attributes.id_provider === "12469") monorailCost.closing += profile.attributes.price
+                  if (profile.attributes.id_provider === '12469') monorailCost.closing += profile.attributes.price
                   // interlock
-                  if (profile.attributes.id_provider === "12468") monorailCost.interlock += profile.attributes.price
+                  if (profile.attributes.id_provider === '12468') monorailCost.interlock += profile.attributes.price
                   // Ref Marco
-                  if (profile.attributes.id_provider === "12952") monorailCost.rFrame += profile.attributes.price
+                  if (profile.attributes.id_provider === '12952') monorailCost.rFrame += profile.attributes.price
                   // Ref Hoja
-                  if (profile.attributes.id_provider === "12957") {
+                  if (profile.attributes.id_provider === '12957') {
                     monorailCost.rSash += profile.attributes.price
                     monorailCost.rTransom += profile.attributes.price
                   }
                 }
                 for (const accessory of accessories.data) {
                   // Haladera
-                  if (accessory.attributes.id_provider === "13119") monorailCost.e_handle += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '13119') monorailCost.e_handle += accessory.attributes.price
                   // Manija
-                  if (accessory.attributes.id_provider === "12873") monorailCost.handle += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '12873') monorailCost.handle += accessory.attributes.price
                   // rueda
-                  if (accessory.attributes.id_provider === "13189") monorailCost.roller += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '13189') monorailCost.roller += accessory.attributes.price
                   // cremone
-                  if (accessory.attributes.id_provider === "13317") monorailCost.cremone += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '13317') monorailCost.cremone += accessory.attributes.price
                 }
                 for (const glassA of glasses.data) {
                   if (glassA.attributes.id_arqustik === glass) monorailCost.glass += glassA.attributes.price
@@ -632,33 +635,33 @@ export const getPrice = async ({
                   const {
                     attributes: { title, value },
                   } = adminCost
-                  if (title === "MOD") cost.adminCost.MOD = doubleRailCost.hours * value
-                  if (title === "CIF") cost.adminCost.CIF = doubleRailCost.hours * value
+                  if (title === 'MOD') cost.adminCost.MOD = doubleRailCost.hours * value
+                  if (title === 'CIF') cost.adminCost.CIF = doubleRailCost.hours * value
                 }
 
                 for (const profile of profiles.data) {
                   // Perfiles pricipales XX
                   // Marco XX
-                  if (profile.attributes.id_provider === "12500") doubleRailCost.frame += profile.attributes.price
+                  if (profile.attributes.id_provider === '12500') doubleRailCost.frame += profile.attributes.price
                   // Hoja XX
-                  if (profile.attributes.id_provider === "12474") doubleRailCost.sash += profile.attributes.price
+                  if (profile.attributes.id_provider === '12474') doubleRailCost.sash += profile.attributes.price
                   // interlock XX
-                  if (profile.attributes.id_provider === "12468") doubleRailCost.interlock += profile.attributes.price
+                  if (profile.attributes.id_provider === '12468') doubleRailCost.interlock += profile.attributes.price
                   // Ref Marco XX
-                  if (profile.attributes.id_provider === "12985") doubleRailCost.rFrame += profile.attributes.price
+                  if (profile.attributes.id_provider === '12985') doubleRailCost.rFrame += profile.attributes.price
                   // Ref Hoja XX
-                  if (profile.attributes.id_provider === "12957") doubleRailCost.rSash += profile.attributes.price
+                  if (profile.attributes.id_provider === '12957') doubleRailCost.rSash += profile.attributes.price
                 }
                 for (const accessory of accessories.data) {
                   // Tapa
-                  if (accessory.attributes.id_provider === "13119")
+                  if (accessory.attributes.id_provider === '13119')
                     doubleRailCost.e_handle += accessory.attributes.price
                   // Manija
-                  if (accessory.attributes.id_provider === "13506") doubleRailCost.handle += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '13506') doubleRailCost.handle += accessory.attributes.price
                   // rueda
-                  if (accessory.attributes.id_provider === "13189") doubleRailCost.roller += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '13189') doubleRailCost.roller += accessory.attributes.price
                   // cremone
-                  if (accessory.attributes.id_provider === "13317") doubleRailCost.cremone += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '13317') doubleRailCost.cremone += accessory.attributes.price
                 }
                 for (const glassA of glasses.data) {
                   if (glassA.attributes.id_arqustik === glass) doubleRailCost.glass += glassA.attributes.price
@@ -728,37 +731,37 @@ export const getPrice = async ({
                   const {
                     attributes: { title, value },
                   } = adminCost
-                  if (title === "MOD") cost.adminCost.MOD = tripleRailCost.hours * value
-                  if (title === "CIF") cost.adminCost.CIF = tripleRailCost.hours * value
+                  if (title === 'MOD') cost.adminCost.MOD = tripleRailCost.hours * value
+                  if (title === 'CIF') cost.adminCost.CIF = tripleRailCost.hours * value
                 }
 
                 for (const profile of profiles.data) {
                   // Perfiles pricipales XXO XXX
                   // Pisavidrio
-                  if (profile.attributes.id_provider === "12476")
+                  if (profile.attributes.id_provider === '12476')
                     tripleRailCost.glazing_bead += profile.attributes.price
                   // Marco XXO XXX
-                  if (profile.attributes.id_provider === "12464") tripleRailCost.frame += profile.attributes.price
+                  if (profile.attributes.id_provider === '12464') tripleRailCost.frame += profile.attributes.price
                   // Hoja XXO
-                  if (profile.attributes.id_provider === "12474") tripleRailCost.sash += profile.attributes.price
+                  if (profile.attributes.id_provider === '12474') tripleRailCost.sash += profile.attributes.price
                   // interlock XXO XXX
-                  if (profile.attributes.id_provider === "12468") tripleRailCost.interlock += profile.attributes.price
+                  if (profile.attributes.id_provider === '12468') tripleRailCost.interlock += profile.attributes.price
                   // Frontal
                   // if (profile.attributes.id_provider === '12669') tripleRailCost.frontal += profile.attributes.price
                   // Ref Marco XXO XXX
-                  if (profile.attributes.id_provider === "12985") tripleRailCost.rFrame += profile.attributes.price
+                  if (profile.attributes.id_provider === '12985') tripleRailCost.rFrame += profile.attributes.price
                   // Ref Hoja XXO XXX
-                  if (profile.attributes.id_provider === "12957") tripleRailCost.rSash += profile.attributes.price
+                  if (profile.attributes.id_provider === '12957') tripleRailCost.rSash += profile.attributes.price
                 }
                 for (const accessory of accessories.data) {
                   // Manija XXO XXX
-                  if (accessory.attributes.id_provider === "12873") tripleRailCost.handle += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '12873') tripleRailCost.handle += accessory.attributes.price
                   // Cremona XXO XXX
-                  if (accessory.attributes.id_provider === "13317") tripleRailCost.cremone += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '13317') tripleRailCost.cremone += accessory.attributes.price
                   // rueda XXO XXX
-                  if (accessory.attributes.id_provider === "13189") tripleRailCost.roller += accessory.attributes.price
+                  if (accessory.attributes.id_provider === '13189') tripleRailCost.roller += accessory.attributes.price
                   // cremone
-                  if (accessory.attributes.id_provider === "13119")
+                  if (accessory.attributes.id_provider === '13119')
                     tripleRailCost.e_handle += accessory.attributes.price
                 }
                 // Vidrios
@@ -833,32 +836,32 @@ export const getPrice = async ({
                   const {
                     attributes: { title, value },
                   } = adminCost
-                  if (title === "MOD") cost.adminCost.MOD = monorailDoubleCost.hours * value
-                  if (title === "CIF") cost.adminCost.CIF = monorailDoubleCost.hours * value
+                  if (title === 'MOD') cost.adminCost.MOD = monorailDoubleCost.hours * value
+                  if (title === 'CIF') cost.adminCost.CIF = monorailDoubleCost.hours * value
                 }
 
                 for (const profile of profiles.data) {
                   // Perfiles pricipales
                   // Pisavidrio OXXO
-                  if (profile.attributes.id_provider === "12476") monorailDoubleCost.frame += profile.attributes.price
+                  if (profile.attributes.id_provider === '12476') monorailDoubleCost.frame += profile.attributes.price
                   // Marco OXXO
-                  if (profile.attributes.id_provider === "12461") monorailDoubleCost.frame += profile.attributes.price
+                  if (profile.attributes.id_provider === '12461') monorailDoubleCost.frame += profile.attributes.price
                   // Hoja OXXO
-                  if (profile.attributes.id_provider === "12474") {
+                  if (profile.attributes.id_provider === '12474') {
                     monorailDoubleCost.sash += profile.attributes.price
                     monorailDoubleCost.transom += profile.attributes.price
                   }
                   // closing - tapas monoriel marco
-                  if (profile.attributes.id_provider === "12469") monorailDoubleCost.closing += profile.attributes.price
+                  if (profile.attributes.id_provider === '12469') monorailDoubleCost.closing += profile.attributes.price
                   // interlock OXXO
-                  if (profile.attributes.id_provider === "12468")
+                  if (profile.attributes.id_provider === '12468')
                     monorailDoubleCost.interlock += profile.attributes.price
                   // fontal OXXO
-                  if (profile.attributes.id_provider === "12669") monorailDoubleCost.frontal += profile.attributes.price
+                  if (profile.attributes.id_provider === '12669') monorailDoubleCost.frontal += profile.attributes.price
                   // Ref Marco OXXO
-                  if (profile.attributes.id_provider === "12952") monorailDoubleCost.rFrame += profile.attributes.price
+                  if (profile.attributes.id_provider === '12952') monorailDoubleCost.rFrame += profile.attributes.price
                   // Ref Hoja OXXO
-                  if (profile.attributes.id_provider === "12957") {
+                  if (profile.attributes.id_provider === '12957') {
                     monorailDoubleCost.rSash += profile.attributes.price
                     monorailDoubleCost.rTransom += profile.attributes.price
                   }
@@ -866,16 +869,16 @@ export const getPrice = async ({
                 for (const accessory of accessories.data) {
                   // Tapa OXXO
                   // haladera
-                  if (accessory.attributes.id_provider === "13119")
+                  if (accessory.attributes.id_provider === '13119')
                     monorailDoubleCost.e_handle += accessory.attributes.price
                   // Manija OXXO
-                  if (accessory.attributes.id_provider === "12873")
+                  if (accessory.attributes.id_provider === '12873')
                     monorailDoubleCost.handle += accessory.attributes.price
                   //cremona OXXO
-                  if (accessory.attributes.id_provider === "13317")
+                  if (accessory.attributes.id_provider === '13317')
                     monorailDoubleCost.cremone += accessory.attributes.price
                   // rueda OXXO
-                  if (accessory.attributes.id_provider === "13189")
+                  if (accessory.attributes.id_provider === '13189')
                     monorailDoubleCost.roller += accessory.attributes.price
                 }
                 for (const glassA of glasses.data) {
@@ -917,38 +920,43 @@ export const getPrice = async ({
 
         for (const service of services.data) {
           if (installation) {
-            if (service.attributes.title === "installation")
+            if (service.attributes.title === 'installation')
               cost.services.installation = (service.attributes.price + service.attributes.material) * area
           }
-
+          if (dismount) {
+            if (service.attributes.title === 'unmount') cost.services.dismount = service.attributes.price * area
+          }
           if (transport) {
-            if (service.attributes.title === "transport") cost.services.transport = service.attributes.price
+            if (service.attributes.title === 'transport') cost.services.transport = service.attributes.price
           }
           if (protection) {
-            if (protection === "zero") cost.services.protection = 0
-            if (protection === "one") {
-              if (service.attributes.title === "protection1")
+            if (protection === 'zero') cost.services.protection = 0
+            if (protection === 'one') {
+              if (service.attributes.title === 'protection1')
                 cost.services.protection = (service.attributes.price + service.attributes.material) * area
-            } else if (silicone === "two") {
-              if (service.attributes.title === "protection2")
+            } else if (silicone === 'two') {
+              if (service.attributes.title === 'protection2')
                 cost.services.protection = (service.attributes.price + service.attributes.material) * area
             }
           }
 
           if (polyurethane) {
-            if (service.attributes.title === "polyurethane")
+            if (service.attributes.title === 'polyurethane')
               cost.services.polyurethane = (service.attributes.price + service.attributes.material) * linealMeters
           }
           if (silicone) {
-            if (silicone === "zero") cost.services.silicone = 0
-            if (silicone === "one") {
-              if (service.attributes.title === "silicone1")
+            if (silicone === 'zero') cost.services.silicone = 0
+            if (silicone === 'one') {
+              if (service.attributes.title === 'silicone1')
                 cost.services.silicone = (service.attributes.price + service.attributes.material) * linealMeters
-            } else if (silicone === "two") {
-              if (service.attributes.title === "silicone2")
+            } else if (silicone === 'two') {
+              if (service.attributes.title === 'silicone2')
                 cost.services.silicone = (service.attributes.price + service.attributes.material) * linealMeters
             }
           }
+        }
+        for (const glassA of glasses.data) {
+          if (glassA.attributes.id_arqustik === glass) cost.glass = glassA.attributes.title
         }
       }
 
@@ -986,6 +994,7 @@ export const getPrice = async ({
     cost: cost.price * cost.dollar,
     profit: cost.adminCost.profit * cost.dollar,
     price: cost.priceWithProfit * cost.dollar,
+    glass: cost.glass,
     cant,
     width,
     height,

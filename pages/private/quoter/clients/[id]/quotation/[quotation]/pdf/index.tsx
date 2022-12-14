@@ -1,17 +1,16 @@
-import LoadingSpinner from "@components/LoadingSpinner"
-import QuotationBodyPDF from "@components/QuotationPDF/QuotationBodyPDF"
-import QuotationHeaderPDF from "@components/QuotationPDF/QuotationHeaderPDF"
-import { QuotationResponseI } from "@models/Quotation.model"
-import { fetcher } from "@services/fetcher.service"
-import { arqustikConfig, endpoints } from "arqustik.config"
-import { Button } from "flowbite-react"
-import { useRouter } from "next/router"
-import { useRef } from "react"
-import { useEffect, useState } from "react"
-import useSWR from "swr"
-import { useReactToPrint } from "react-to-print"
-import QuotationFooter from "@components/QuotationPDF/QuotationFooter"
-import Heading from "@components/Heading"
+import Heading from '@components/Heading'
+import LoadingSpinner from '@components/LoadingSpinner'
+import QuotationBodyPDF from '@components/QuotationPDF/QuotationBodyPDF'
+import QuotationHeaderPDF from '@components/QuotationPDF/QuotationHeaderPDF'
+import { QuotationResponseI } from '@models/Quotation.model'
+import { fetcher } from '@services/fetcher.service'
+import { arqustikConfig, endpoints } from 'arqustik.config'
+import { Button } from 'flowbite-react'
+import { useRouter } from 'next/router'
+import { useEffect, useRef, useState } from 'react'
+import { useReactToPrint } from 'react-to-print'
+import useSWR from 'swr'
+import { PrinterIcon, ArrowLeftIcon } from '@heroicons/react/24/solid'
 
 const { STRAPI_SERVER } = arqustikConfig
 const { quotations } = endpoints
@@ -26,9 +25,9 @@ export default function Pdf() {
   const componentRef = useRef(null)
   const { data: quotation, error } = useSWR<QuotationResponseI>(
     `${STRAPI_SERVER}${quotations}/${router.query.quotation}?populate=*`,
-    fetcher
+    fetcher,
   )
-
+  console.log(quotation)
   if (!quotation) return <LoadingSpinner />
   if (error) return <p>{error.message}</p>
 
@@ -36,20 +35,26 @@ export default function Pdf() {
     <div
       ref={componentRef}
       style={{
-        width: "100%",
+        width: '100%',
         height: window.innerHeight,
-        overflow: "visible",
-        display: "flex",
-        flexDirection: "column",
+        overflow: 'visible',
+        display: 'flex',
+        flexDirection: 'column',
       }}>
-      <Button className='print:hidden' color='dark' onClick={handlePrint}>
-        Print
-      </Button>
-      <div className='max-w-7xl mx-auto'>
+      <div className='flex gap-4 m-4'>
+        <Button size='xl' className='print:hidden w-1/2' onClick={handlePrint}>
+          <PrinterIcon className='w-6 h-6 mr-4' />
+          <span>Imprimir</span>
+        </Button>
+        <Button size='xl' className='print:hidden w-1/2' color='failure' onClick={router.back}>
+          <ArrowLeftIcon className='w-6 h-6 mr-4' /> <span>Atras</span>
+        </Button>
+      </div>
+      <div className='max-w-7xl mx-auto '>
         {/* ENCABEZADO */}
         <QuotationHeaderPDF quotation={quotation} />
         {/* PARRAFO */}
-        <div className='text-base print:text-xs'>
+        <div className='text-base print:text-xs px-2'>
           <p className='text-justify'>
             De acuerdo a sus indicaciones, le presentamos la oferta que solicitó; suministro, instalación y transporte
             de ventanas en PVC color blanco. Agradecemos la confianza depositada en nuestra compañía y le invitamos a

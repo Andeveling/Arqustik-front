@@ -1,6 +1,8 @@
-import Heading from "@components/Heading"
-import { QuotationResponseI } from "@models/Quotation.model"
-import { ClientQuotationResponseI } from "@models/WindowPVC.model"
+import Heading from '@components/Heading'
+import { QuotationResponseI } from '@models/Quotation.model'
+import { ClientQuotationResponseI } from '@models/WindowPVC.model'
+import Image from 'next/image'
+import logo from '@public/img/logo.png'
 
 const QuotationHeaderPDF = ({ quotation }: { quotation: QuotationResponseI }) => {
   const {
@@ -10,18 +12,18 @@ const QuotationHeaderPDF = ({ quotation }: { quotation: QuotationResponseI }) =>
   } = quotation
 
   return (
-    <header>
+    <header className='px-2'>
       <div className='flex justify-between'>
         <div>
-          <Heading>Arqustik</Heading>
+          <Image width={200} src={logo} alt={''} />
         </div>
         <div>
           <p>{new Date(client.data.attributes.publishedAt).toLocaleDateString()}</p>
         </div>
       </div>
-
+      <hr className='my-4' />
       <div className='grid grid-cols-2 my-4'>
-        <div className='col-span-1'>
+        <div className='col-span-2'>
           <div className='text-lg flex '>
             <p className='font-bold'>Cliente: &nbsp;&nbsp;</p> <span> {client.data.attributes.fullName}</span>
           </div>
