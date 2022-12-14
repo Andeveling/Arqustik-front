@@ -88,7 +88,7 @@ export interface WindowsAttributes {
   cant: number
   model: WindowModelsEnum
   color: string
-  glass: GlassResponseI
+  glass: string
   description: string
   createdAt: Date
   updatedAt: Date
