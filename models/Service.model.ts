@@ -5,13 +5,15 @@ export interface ServicesResponseI {
 
 export interface ServiceI {
   id: number
-  attributes: Attributes
+  attributes: ServiceIAttributes
 }
 
-export interface Attributes {
+export interface ServiceIAttributes {
   title: string
   price: number
   material: number
+  description: string
+  UOM: string
   createdAt: Date
   updatedAt: Date
   publishedAt: Date

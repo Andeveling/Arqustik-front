@@ -9,4 +9,6 @@ export const endpoints = {
   quotations: '/quotations',
   clients: '/clients',
   windows: '/windows',
+  services: '/services',
+  administrative_costs: '/administrative-costs',
 }

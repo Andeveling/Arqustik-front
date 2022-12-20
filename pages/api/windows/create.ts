@@ -1,3 +1,4 @@
+import { Console } from 'console'
 import { NextApiHandler } from 'next'
 import { getPrice } from 'utils/getPrices'
 

@@ -1,11 +1,11 @@
-import { ArrowLeftIcon, BuildingOffice2Icon, Cog6ToothIcon, WrenchIcon } from "@heroicons/react/24/outline"
-import { Avatar, Dropdown } from "flowbite-react"
-import { signOut, useSession } from "next-auth/react"
-import Link from "next/link"
+import { ArrowLeftIcon, BuildingOffice2Icon, Cog6ToothIcon, WrenchIcon } from '@heroicons/react/24/outline'
+import { Avatar, Dropdown } from 'flowbite-react'
+import { signOut, useSession } from 'next-auth/react'
+import Link from 'next/link'
 
 export default function QuoterMenu() {
   const { data: session, status } = useSession()
-  if (status === "loading") return null
+  if (status === 'loading') return null
   if (session) {
     return (
       <Dropdown
@@ -22,7 +22,9 @@ export default function QuoterMenu() {
         <Dropdown.Item icon={BuildingOffice2Icon}>
           <Link href='/private/systems'>Sistemas PVC</Link>
         </Dropdown.Item>
-        <Dropdown.Item icon={Cog6ToothIcon}>Configuraciones</Dropdown.Item>
+        <Dropdown.Item icon={Cog6ToothIcon}>
+          <Link href='/private/config'>Configuraciones</Link>
+        </Dropdown.Item>
         <Dropdown.Divider />
         <Dropdown.Item icon={ArrowLeftIcon} onClick={() => signOut()}>
           <span className='text-sm font-bold text-red-500'>Logout</span>

@@ -68,6 +68,7 @@ export const getPrice = async ({
       polyurethane: 0,
     },
     price: 0,
+    COP: 0,
     priceWithProfit: 0,
     dollar: 0,
     description: (() => {
@@ -123,8 +124,8 @@ export const getPrice = async ({
                 }
                 cost.adminCost = {
                   MOD: monorailCost.hours * monorailCost.MOD,
-                  CIF: monorailCost.hours * monorailCost.MOD,
-                  profit: monorailCost.hours * monorailCost.MOD,
+                  CIF: monorailCost.hours * monorailCost.CIF,
+                  profit: 0,
                 }
 
                 for (const profile of profiles.data) {
@@ -641,6 +642,9 @@ export const getPrice = async ({
 
                 for (const profile of profiles.data) {
                   // Perfiles pricipales XX
+                  // Pisavidrio
+                  if (profile.attributes.id_provider === '12476')
+                    doubleRailCost.glazing_bead += profile.attributes.price
                   // Marco XX
                   if (profile.attributes.id_provider === '12500') doubleRailCost.frame += profile.attributes.price
                   // Hoja XX
@@ -843,7 +847,8 @@ export const getPrice = async ({
                 for (const profile of profiles.data) {
                   // Perfiles pricipales
                   // Pisavidrio OXXO
-                  if (profile.attributes.id_provider === '12476') monorailDoubleCost.frame += profile.attributes.price
+                  if (profile.attributes.id_provider === '12476')
+                    monorailDoubleCost.glazing_bead += profile.attributes.price
                   // Marco OXXO
                   if (profile.attributes.id_provider === '12461') monorailDoubleCost.frame += profile.attributes.price
                   // Hoja OXXO
@@ -977,24 +982,30 @@ export const getPrice = async ({
   for (const iterator of Object.values(cost.glasses)) {
     cost.price += iterator
   }
+
   for (const iterator of Object.values(cost.adminCost)) {
-    cost.price += iterator
+    cost.COP += iterator
   }
   for (const iterator of Object.values(cost.services)) {
-    cost.price += iterator
+    cost.COP += iterator
   }
+  // pesos
+  const costWindow = cost.price * cost.dollar + cost.COP
 
-  cost.adminCost.profit = cost.price / ((100 - 35) / 100) - cost.price
-  cost.priceWithProfit = cost.price + cost.adminCost.profit
+  const profitWindow = costWindow / ((100 - 35) / 100) - costWindow
+
+
 
   const newWindow = {
     title,
     location,
     quotation: quotationID,
-    cost: cost.price * cost.dollar,
-    profit: cost.adminCost.profit * cost.dollar,
-    price: cost.priceWithProfit * cost.dollar,
+
+    cost: costWindow,
+    profit: profitWindow,
+    price: profitWindow + costWindow,
     glass: cost.glass,
+
     cant,
     width,
     height,
@@ -1002,6 +1013,8 @@ export const getPrice = async ({
     color,
     description: cost.description,
   }
+
+  console.log(newWindow)
 
   return newWindow
 }

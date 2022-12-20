@@ -5,10 +5,10 @@ export interface AdminCostResponseI {
 
 export interface AdminCostI {
   id: number
-  attributes: Attributes
+  attributes: AdminCostIAttributesI
 }
 
-export interface Attributes {
+export interface AdminCostIAttributesI {
   title: string
   value: number
   createdAt: Date
