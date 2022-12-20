@@ -1,5 +1,5 @@
 import AdminCost from '@components/Config/Admin/AdminCost'
-import Conts from '@components/Config/Conts/Conts'
+import Contractor from '@components/Config/Contractor/Contractor'
 import Container from '@components/Container'
 import { Tab } from '@headlessui/react'
 import { AdminCostResponseI } from '@models/AdminCost.model'
@@ -95,11 +95,7 @@ const Config = () => {
               <AdminCost adminCost={administrative_costData} />
             </Tab.Panel>
             <Tab.Panel className={cn('rounded-xl bg-gray-300 dark:bg-gray-900 p-3', 'ring-white ring-opacity-60')}>
-              {servicesData && administrative_costData ? (
-                <Conts dollar={dollar?.attributes.value ?? 0} services={servicesData} />
-              ) : (
-                <></>
-              )}
+              {servicesData && administrative_costData ? <Contractor services={servicesData} /> : <></>}
             </Tab.Panel>
           </Tab.Panels>
         </Tab.Group>

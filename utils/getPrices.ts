@@ -994,8 +994,6 @@ export const getPrice = async ({
 
   const profitWindow = costWindow / ((100 - 35) / 100) - costWindow
 
-
-
   const newWindow = {
     title,
     location,
@@ -1013,8 +1011,6 @@ export const getPrice = async ({
     color,
     description: cost.description,
   }
-
-  console.log(newWindow)
 
   return newWindow
 }

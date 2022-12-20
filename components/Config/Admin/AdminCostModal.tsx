@@ -11,7 +11,7 @@ import toast from 'react-hot-toast'
 import { UpdateAdministrativeCostSchema } from './UpdateAdministrativeCostSchema'
 import { currencyFormatter } from '@utils/currencyFormatter'
 
-export default function AdminCostModalR({ dollar, adminCost }: { dollar: number; adminCost: AdminCostI }) {
+export default function AdminCostModalR({ adminCost }: { adminCost: AdminCostI }) {
   let [isOpen, setIsOpen] = useState(false)
   const closeModal = () => setIsOpen(false)
   const openModal = () => setIsOpen(true)
@@ -83,7 +83,10 @@ export default function AdminCostModalR({ dollar, adminCost }: { dollar: number;
                   <Dialog.Title
                     as='h2'
                     className='text-lg font-medium text-center leading-6 text-gray-900 dark:text-gray-50'>
-                    Valor {adminCost.attributes.title} {currencyFormatter(adminCost.attributes.value * dollar)}
+                    Valor {adminCost.attributes.title}{' '}
+                    {adminCost.attributes.title !== 'profit'
+                      ? currencyFormatter(adminCost.attributes.value)
+                      : `${adminCost.attributes.value}%`}
                   </Dialog.Title>
                   <form className='flex justify-center flex-col' onSubmit={handleSubmit(onSubmit)}>
                     <div className='mt-2'>
