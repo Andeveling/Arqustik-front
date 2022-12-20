@@ -4,12 +4,14 @@ import ContractorModalR from './ContractorModal'
 
 const Contractor = ({ services }: { services: ServicesResponseI }) => {
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2  gap-1'>
+    <div className='grid grid-col- sm:grid-cols-2  gap-1'>
       {services.data.map((service) => (
         <div key={service.id} className=' pb-4 border border-gray-600'>
           <div className='grid grid-cols-2'>
             <div className='col-span-2 text-center flex justify-between pt-4 px-4'>
-              <legend className='font-medium text-base'>{service.attributes.description.toUpperCase()}</legend>
+              <legend className='font-medium text-base'>
+                {service.attributes.description && service.attributes.description.toUpperCase()}
+              </legend>
               <ContractorModalR
                 id={service.id}
                 UOM={service.attributes.UOM}
