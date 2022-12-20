@@ -10,12 +10,11 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { UpdateServiceSchema } from './updateService.schema'
 
-interface ConstModalProps extends Partial<ServiceIAttributes> {
+interface ContractorModalProps extends Partial<ServiceIAttributes> {
   id: ServiceI['id']
-  dollar: number
 }
 
-export default function ContsModalR({ id, UOM, description, price, material, dollar }: ConstModalProps) {
+export default function ContractorModalR({ id, UOM, description }: ContractorModalProps) {
   let [isOpen, setIsOpen] = useState(false)
   const closeModal = () => setIsOpen(false)
   const openModal = () => setIsOpen(true)
@@ -33,8 +32,8 @@ export default function ContsModalR({ id, UOM, description, price, material, dol
       arqustikService
         .update(id, {
           data: {
-            material: (service.material as number) / dollar,
-            price: (service.price as number) / dollar,
+            material: service.material,
+            price: service.price,
           },
         })
         .then(() => reset())

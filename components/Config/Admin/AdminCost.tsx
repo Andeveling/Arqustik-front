@@ -1,12 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { AdminCostI, AdminCostIAttributesI, AdminCostResponseI } from '@models/AdminCost.model'
-import { adminCostService } from '@services/adminCost.service'
 import { currencyFormatter } from '@utils/currencyFormatter'
-import { Button, Label, TextInput } from 'flowbite-react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
-import { UpdateAdministrativeCostSchema } from './UpdateAdministrativeCostSchema'
 import AdminCostModalR from './AdminCostModal'
+import { UpdateAdministrativeCostSchema } from './UpdateAdministrativeCostSchema'
 
 const AdminCost = ({ adminCost }: { adminCost: AdminCostResponseI }) => {
   const dollar = adminCost.data.find((item) => item.attributes.title === 'dollar')
@@ -39,24 +36,43 @@ const AdminCost = ({ adminCost }: { adminCost: AdminCostResponseI }) => {
   }
 
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4'>
+    <div className='grid grid-cols-1 gap-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4'>
       {adminCost.data.map((cost) => {
-        return (
-          <div key={cost.id}>
-            <div className='flex items-center space-x-2'>
-              <legend className='font-medium text-xl'>{cost.attributes.title}</legend>
-              <div className='text-center'>
-                <span className='font-medium text-xl'>{currencyFormatter(cost.attributes.value)}</span>
+        if (cost.attributes.title !== 'profit') {
+          return (
+            <div key={cost.id} className='p-4 border border-gray-600'>
+              <div className='flex items-center justify-between space-x-2'>
+                <legend className='font-medium text-xl'>{cost.attributes.title.toUpperCase()}</legend>
+                <div className='text-center'>
+                  <span className='font-medium text-xl'>{currencyFormatter(cost.attributes.value)}</span>
+                </div>
+                <AdminCostModalR adminCost={cost} />
               </div>
-              <AdminCostModalR dollar={dollar?.attributes.value ?? 0} adminCost={cost} />
+              <div className=''>
+                <p className='text-green-500'>
+                  Ultima Actualización: <span>{new Date(cost.attributes.updatedAt).toLocaleDateString()}</span>
+                </p>
+              </div>
             </div>
-            <div className=''>
-              <p className='text-green-500'>
-                Ultima Actualización: <span>{new Date(cost.attributes.updatedAt).toLocaleDateString()}</span>
-              </p>
+          )
+        } else {
+          return (
+            <div key={cost.id} className='p-2 border border-gray-600'>
+              <div className='flex items-center justify-between space-x-2'>
+                <legend className='font-medium text-xl'>{cost.attributes.title.toUpperCase()}</legend>
+                <div className='text-center'>
+                  <span className='font-medium text-xl'>{cost.attributes.value} %</span>
+                </div>
+                <AdminCostModalR adminCost={cost} />
+              </div>
+              <div className=''>
+                <p className='text-green-500'>
+                  Ultima Actualización: <span>{new Date(cost.attributes.updatedAt).toLocaleDateString()}</span>
+                </p>
+              </div>
             </div>
-          </div>
-        )
+          )
+        }
       })}
     </div>
   )
