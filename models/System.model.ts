@@ -1,8 +1,8 @@
-import { AccessoriesResponseI } from "./Accessories.model"
-import { AdminCostResponseI } from "./AdminCost.model"
-import { GlassesResponseI } from "./Glass.model"
-import { ProfilesResponseI } from "./Profile.model"
-import { ServicesResponseI } from "./Service.model"
+import { AccessoriesResponseI } from './Accessories.model'
+import { AdminCostResponseI } from './AdminCost.model'
+import { GlassesResponseI } from './Glass.model'
+import { ProfilesResponseI } from './Profile.model'
+import { ServicesResponseI } from './Service.model'
 
 export interface SystemResponseI {
   data: SystemI
@@ -15,10 +15,10 @@ export interface SystemsResponseI {
 
 export interface SystemI {
   id: number
-  attributes: Attributes
+  attributes: SystemAttributesI
 }
 
-export interface Attributes {
+export interface SystemAttributesI {
   createdAt: Date
   updatedAt: Date
   publishedAt: Date
@@ -35,5 +35,5 @@ export interface Attributes {
 export interface Meta {}
 
 export enum SystemsEnum {
-  BellaSliding = "bella-sliding",
+  BellaSliding = 'bella-sliding',
 }

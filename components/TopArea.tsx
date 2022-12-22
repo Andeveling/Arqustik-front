@@ -1,11 +1,11 @@
 import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid'
-import { Button } from 'flowbite-react'
+import { Button, Spinner } from 'flowbite-react'
 import { signIn, useSession } from 'next-auth/react'
 import QuoterMenu from './QuoterMenu'
 
 export default function TopArea() {
   const { data: session, status } = useSession()
-  if (status === 'loading') return null
+  if (status === 'loading') return <Spinner />
   if (session) {
     return <QuoterMenu />
   } else {

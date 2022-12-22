@@ -1,3 +1,5 @@
+import type { SWRConfiguration } from 'swr'
+
 const dev = process.env.NODE_ENV !== 'production'
 
 export const arqustikConfig = {
@@ -10,5 +12,10 @@ export const endpoints = {
   clients: '/clients',
   windows: '/windows',
   services: '/services',
+  systems: '/system-pvcs',
   administrative_costs: '/administrative-costs',
+}
+
+export const SWRArqustikConfig: SWRConfiguration = {
+  refreshInterval: 60000,
 }

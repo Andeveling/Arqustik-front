@@ -1,7 +1,7 @@
 import SubmitInput from '@components/SubmitInput'
 import { Transition } from '@headlessui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { CreateQuotationI, QuotationI, SiliconeEnum } from '@models/Quotation.model'
+import { CreateQuotationI, ProtectionEnum, QuotationI, SiliconeEnum } from '@models/Quotation.model'
 import { quotationPVC } from '@services/quotation.service'
 import { Checkbox, Label, Select, Textarea, TextInput } from 'flowbite-react'
 import { useRouter } from 'next/router'
@@ -104,14 +104,6 @@ const QuotationUpdateForm = ({ quotation }: { quotation: QuotationI }) => {
           <Checkbox id='installation' {...register('installation')} /> <span className='ml-4'>Instalacíon</span>
         </Label>
       </div>
-      <div className='mb-4'>
-        <Label
-          htmlFor='protection'
-          className='flex items-center pl-4 p-4 rounded border border-gray-200 dark:border-gray-700'>
-          <Checkbox id='protection' {...register('protection')} />
-          <span className='ml-4'>Protección</span>
-        </Label>
-      </div>
 
       <div className='mb-4'>
         <Label
@@ -152,6 +144,15 @@ const QuotationUpdateForm = ({ quotation }: { quotation: QuotationI }) => {
           />
         </div>
       </Transition>
+
+      <div className='mb-6'>
+        <Label htmlFor='select-model-windows'> Seleccionar Tipo de Protección</Label>
+        <Select id='select-model-windows' addon='Protección' {...register('protection')}>
+          <option value={ProtectionEnum.zero}>No lleva</option>
+          <option value={ProtectionEnum.one}>1 Cara</option>
+          <option value={ProtectionEnum.two}>2 Caras</option>
+        </Select>
+      </div>
 
       <div className='mb-4'>
         <Label htmlFor='select-model-windows'> Seleccionar Silicona</Label>

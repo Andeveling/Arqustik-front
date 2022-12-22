@@ -1,11 +1,11 @@
-import { SystemI } from "@models/System.model"
-import { arqustikConfig } from "arqustik.config"
-import axios from "axios"
-import { Button, Card } from "flowbite-react"
-import { useSession } from "next-auth/react"
-import { useRouter } from "next/router"
-import { useState } from "react"
-import useSWR, { useSWRConfig } from "swr"
+import { SystemI } from '@models/System.model'
+import { arqustikConfig } from 'arqustik.config'
+import axios from 'axios'
+import { Button, Card } from 'flowbite-react'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { useSWRConfig } from 'swr'
 
 const URL = `${arqustikConfig.NEXT_SERVER}/systems/update-system`
 
@@ -36,7 +36,7 @@ const SystemCard = ({ system }: { system: SystemI }) => {
         data: {
           update: false,
         },
-      })
+      }),
     ).then(() => router.reload())
   }
 
@@ -48,7 +48,7 @@ const SystemCard = ({ system }: { system: SystemI }) => {
         Ultima Actualización: {new Date(updatedAt).toLocaleString()}
       </p>
       <div className='flex justify-end'>
-        {update ? <Button onClick={() => updateHandle(id)}>{loading ? "loading" : "Actualizar"}</Button> : <></>}
+        {update ? <Button onClick={() => updateHandle(id)}>{loading ? 'loading' : 'Actualizar'}</Button> : <></>}
       </div>
     </Card>
   )
