@@ -1,19 +1,19 @@
-import { Disclosure, Transition } from "@headlessui/react"
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
-import { useEffect, useState } from "react"
-import MenuLinks from "./MenuLinks"
-import NextLink from "./NextLink"
-import ThemeHandled from "./ThemeHandled"
-import TopArea from "./TopArea"
+import { Disclosure, Transition } from '@headlessui/react'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useEffect, useState } from 'react'
+import MenuLinks from './MenuLinks'
+import NextLink from './NextLink'
+import ThemeHandled from './ThemeHandled'
+import TopArea from './TopArea'
 
 const navigation = [
-  { name: "Inicio", href: "/", current: false },
-  { name: "Nosotros", href: "/about", current: false },
-  { name: "Cotizar", href: "/quote", current: false },
+  { name: 'Inicio', href: '/', current: false },
+  { name: 'Nosotros', href: '/about', current: false },
+  { name: 'Cotizar', href: '/quote', current: false },
 ]
 
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ")
+  return classes.filter(Boolean).join(' ')
 }
 
 export default function Header() {
@@ -21,7 +21,7 @@ export default function Header() {
   useEffect(() => setMounted(true), [])
   if (!mounted) return null
   return (
-    <header className='min-h-full  dark:bg-gray-900'>
+    <header className='min-h-full bg-gray-200 dark:bg-gray-900'>
       <Disclosure as='nav'>
         {({ open }) => (
           <>
@@ -69,10 +69,10 @@ export default function Header() {
                     <Disclosure.Button
                       key={item.name}
                       className={classNames(
-                        item.current ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "block px-3 py-2 rounded-md text-base font-medium"
+                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        'block px-3 py-2 rounded-md text-base font-medium',
                       )}
-                      aria-current={item.current ? "page" : undefined}>
+                      aria-current={item.current ? 'page' : undefined}>
                       <NextLink href={item.href} text={item.name} />
                     </Disclosure.Button>
                   ))}

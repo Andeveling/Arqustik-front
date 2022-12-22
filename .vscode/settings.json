@@ -1,4 +1,14 @@
 {
   "cSpell.words": ["Arqustik", "Conts", "dolares", "Vitruvio"],
-  "dotenv.enableAutocloaking": false
+  "dotenv.enableAutocloaking": false,
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#113f77",
+    "activityBar.background": "#113f77",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#000000",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "sash.hoverBorder": "#113f77"
+  },
+  "peacock.color": "#1857a4"
 }

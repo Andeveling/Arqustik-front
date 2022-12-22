@@ -1,15 +1,14 @@
-import { PropsWithChildren } from "react"
-import Footer from "./Footer"
-import Header from "./Header"
-import { Suspense } from "react"
-import Head from "next/head"
+import Head from 'next/head'
+import { Suspense } from 'react'
+import Footer from './Footer'
+import Header from './Header'
 
 export default function Container(props: { [x: string]: any; children: any }) {
   const { children, ...customMeta } = props
   const meta = {
-    title: "Arqustik PVC Quoter",
+    title: 'Arqustik PVC Quoter',
     description: `Empresa dedicada a la fabricación de ventanas y puertaventanas en PVC`,
-    type: "website",
+    type: 'website',
     ...customMeta,
   }
 
