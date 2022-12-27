@@ -1,0 +1,113 @@
+[
+  {
+    "bella-sliding": {
+      "id": 2,
+      "title": "bella-sliding",
+      "models": {
+        "window": {
+          "XO": {
+            "title": "XO",
+            "minW": 700,
+            "maxW": 2000,
+            "minH": 600,
+            "maxH": 1600
+          },
+          "OX": {
+            "title": "OX",
+            "minW": 700,
+            "maxW": 2000,
+            "minH": 600,
+            "maxH": 1600
+          },
+          "XX": {
+            "title": "XX",
+            "minW": 700,
+            "maxW": 2200,
+            "minH": 600,
+            "maxH": 1600
+          },
+          "XXX": {
+            "title": "XXX",
+            "minW": 1000,
+            "maxW": 3200,
+            "minH": 600,
+            "maxH": 1600
+          },
+          "XXO": {
+            "title": "XXO",
+            "minW": 1000,
+            "maxW": 3200,
+            "minH": 600,
+            "maxH": 1600
+          },
+          "OXX": {
+            "title": "OXX",
+            "minW": 1000,
+            "maxW": 3200,
+            "minH": 600,
+            "maxH": 1600
+          },
+          "OXXO": {
+            "title": "OXXO",
+            "minW": 1600,
+            "maxW": 4200,
+            "minH": 600,
+            "maxH": 1600
+          }
+        },
+
+        "door": {
+          "XO": {
+            "title": "OX",
+            "minW": 1000,
+            "maxW": 2200,
+            "minH": 700,
+            "maxH": 2400
+          },
+          "OX": {
+            "title": "OX",
+            "minW": 1000,
+            "maxW": 2200,
+            "minH": 700,
+            "maxH": 2400
+          },
+          "XX": {
+            "title": "XX",
+            "minW": 1000,
+            "maxW": 2200,
+            "minH": 700,
+            "maxH": 2400
+          },
+          "XXX": {
+            "title": "XXX",
+            "minW": 1200,
+            "maxW": 3200,
+            "minH": 700,
+            "maxH": 2400
+          },
+          "XXO": {
+            "title": "XXO",
+            "minW": 1200,
+            "maxW": 3200,
+            "minH": 700,
+            "maxH": 2400
+          },
+          "OXX": {
+            "title": "OXX",
+            "minW": 1200,
+            "maxW": 3200,
+            "minH": 700,
+            "maxH": 2400
+          },
+          "OXXO": {
+            "title": "OXXO",
+            "minW": 1600,
+            "maxW": 4200,
+            "minH": 700,
+            "maxH": 2400
+          }
+        }
+      }
+    }
+  }
+]

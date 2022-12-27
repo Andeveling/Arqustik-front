@@ -3,6 +3,7 @@ import { AdminCostResponseI } from './AdminCost.model'
 import { GlassesResponseI } from './Glass.model'
 import { ProfilesResponseI } from './Profile.model'
 import { ServicesResponseI } from './Service.model'
+import { WindowModelsResponseI } from './WindowModels.model'
 
 export interface SystemResponseI {
   data: SystemI
@@ -30,6 +31,7 @@ export interface SystemAttributesI {
   glasses: GlassesResponseI
   administrative_costs: AdminCostResponseI
   services: ServicesResponseI
+  window_models: WindowModelsResponseI
 }
 
 export interface Meta {}

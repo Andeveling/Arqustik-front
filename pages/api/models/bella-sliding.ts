@@ -7,7 +7,7 @@ const handler: NextApiHandler = async (req, res) => {
   try {
     const jsonDirectory = path.join(process.cwd(), 'json')
     //Read the json data file data.json
-    const fileContents = await fs.readFile(jsonDirectory + '/bella-sliding.json', 'utf8')
+    const fileContents = await fs.readFile(jsonDirectory + '/systems-models.json', 'utf8')
     //Return the content of the data file in json format
     res.status(200).json(JSON.parse(fileContents))
   } catch (error) {

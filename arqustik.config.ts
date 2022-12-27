@@ -14,6 +14,7 @@ export const endpoints = {
   services: '/services',
   systems: '/system-pvcs',
   administrative_costs: '/administrative-costs',
+  window_models: '/window_models',
 }
 
 export const SWRArqustikConfig: SWRConfiguration = {

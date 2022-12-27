@@ -69,7 +69,9 @@ export default function QuotationByClientID() {
     return (
       <Container>
         <div className='flex justify-between'>
-          <Heading as='h2'>Cotización</Heading>
+          <Heading as='h2'>
+            Cotización: <span className='font-light'>{`${quotation.data.attributes.project}`} </span>
+          </Heading>
           <ModalR title='Ventana Nueva' form={<WindowsPVCForm projectData={projectData} />} />
         </div>
         <hr />
