@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, BuildingOffice2Icon, Cog6ToothIcon, WrenchIcon } from '@heroicons/react/24/outline'
+import { ArrowLeftIcon, BuildingOffice2Icon, Cog6ToothIcon, WrenchIcon, UserIcon } from '@heroicons/react/24/outline'
 import { Avatar, Dropdown } from 'flowbite-react'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
@@ -18,6 +18,9 @@ export default function QuoterMenu() {
         </Dropdown.Header>
         <Dropdown.Item icon={WrenchIcon}>
           <Link href='/private/quoter'>Cotizador V-1.0</Link>
+        </Dropdown.Item>
+        <Dropdown.Item icon={UserIcon}>
+          <Link href='/private/interested'>Interesados</Link>
         </Dropdown.Item>
         <Dropdown.Item icon={BuildingOffice2Icon}>
           <Link href='/private/systems'>Sistemas PVC</Link>

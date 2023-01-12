@@ -53,7 +53,9 @@ const Systems = () => {
         />
       )}
 
-      <Heading as='h3'>Ventanas</Heading>
+      <div className='mt-10'>
+        <Heading as='h3'>Puertas Ventanas</Heading>
+      </div>
       <hr />
       {system && system.data.attributes.window_models.data && (
         <ModelsList

@@ -1,10 +1,9 @@
 import { CartItemI } from '@models/CartItem.model'
 import SummaryCard from './SummaryCard'
-import { Card } from 'flowbite-react'
 
 const SummaryList = ({ windows }: { windows: CartItemI[] }) => {
   return (
-    <div>
+    <>
       {windows && windows.length ? (
         windows.map((item) => {
           return (
@@ -14,9 +13,9 @@ const SummaryList = ({ windows }: { windows: CartItemI[] }) => {
           )
         })
       ) : (
-        <></>
+        <p>No tienes ventanas en el carrito.</p>
       )}
-    </div>
+    </>
   )
 }
 export default SummaryList

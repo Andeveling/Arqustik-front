@@ -21,8 +21,8 @@ export default function Pdf() {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   })
-  const router = useRouter()
   const componentRef = useRef(null)
+  const router = useRouter()
   const { data: quotation, error } = useSWR<QuotationResponseI>(
     `${STRAPI_SERVER}${quotations}/${router.query.quotation}?populate=*`,
     fetcher,

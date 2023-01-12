@@ -6,8 +6,8 @@ export interface ClientI {
   email: string
 }
 
-export interface CreateClientI extends Omit<ClientI, "id"> {}
-export interface UpdateClientI extends Omit<ClientI, "id"> {}
+export interface CreateClientI extends Omit<ClientI, 'id'> {}
+export interface UpdateClientI extends Omit<ClientI, 'id'> {}
 
 export interface ResponseClientsI {
   data: ClientDataI[]
@@ -16,10 +16,10 @@ export interface ResponseClientsI {
 
 export interface ClientDataI {
   id: number
-  attributes: Attributes
+  attributes: ClientAttributes
 }
 
-export interface Attributes {
+export interface ClientAttributes {
   createdAt: Date
   updatedAt: Date
   publishedAt: Date

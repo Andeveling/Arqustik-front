@@ -17,7 +17,7 @@ const SystemCard = ({ system }: { system: SystemResponseI['data'] }) => {
         />
       </div>
       <div className='flex justify-between flex-col '>
-        <h1 className='text-5xl mb-2 font-bold'>{system.attributes.title.toUpperCase()}</h1>
+        <h1 className='mb-2 font-bold text-3xl sm:text-5xl'>{system.attributes.title.toUpperCase()}</h1>
         <p className='text-xl text-justify'>{system.attributes.description}</p>
         <div className='flex w-full mt-4 justify-center sm:justify-end gap-4 '>
           <Tooltip content='Ver modelos disponibles'>

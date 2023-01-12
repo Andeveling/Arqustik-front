@@ -14,11 +14,11 @@ const SummaryCard = ({ window }: { window: CartItemI }) => {
     toast.success('¡Producto Removido!')
     removeFromCart(window)
   }
-  const { width, height, model, title, color, glass, cant, price } = window
+  const { width, height, model, title, color, glass, cant, price, description } = window
   return (
-    <div className='grid sm:grid-cols-2 print:grid-cols-2 grid-cols-1 justify-center my-5 border-t p-4 break-after-auto break-before-auto  break-inside-avoid'>
-      <div className='flex justify-end col-auto sm:col-span-2'>
-        <Button size='xs' color='failure' onClick={() => setOpenPopup('default')}>
+    <div className='grid print:w-full print:grid-cols-2 sm:grid-cols-2 grid-cols-1 justify-center my-5 border-t p-4 break-after-auto break-before-auto  break-inside-avoid'>
+      <div className='flex justify-end col-span-1 sm:col-span-2 print:col-span-2'>
+        <Button className='print:hidden' size='xs' color='failure' onClick={() => setOpenPopup('default')}>
           X
         </Button>
         <Modal size='sm' popup={true} show={openPopup === 'default'} onClose={() => setOpenPopup(undefined)}>
@@ -48,8 +48,8 @@ const SummaryCard = ({ window }: { window: CartItemI }) => {
         <div className='grid sm:grid-cols-2 grid-cols-2'>
           <p className='font-bold'>Titulo:</p> <span>{title}</span>
           <p className='font-bold'>Color:</p> <span className=''>{color?.toUpperCase()}</span>
-          {/* <p className='font-bold'>Despcripción:</p> <span className=''>{description}</span> */}
           <p className='font-bold'>Cristal:</p> <span className=''>{glass}</span>
+          <p className='font-bold'>Despcripción:</p> <span className=''>{description}</span>
         </div>
 
         <div className='py-2'>
