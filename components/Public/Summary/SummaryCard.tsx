@@ -1,5 +1,5 @@
 import WindowDraw from '@components/QuotationPDF/WindowDraw'
-import { useCartMutations } from '@context/CartContext'
+import { useCart, useCartMutations } from '@context/CartContext'
 import { CartItemI } from '@models/CartItem.model'
 import { currencyFormatter } from '@utils/currencyFormatter'
 import { getArea, getMillimeters } from '@utils/getDimensions'
@@ -9,11 +9,15 @@ import toast from 'react-hot-toast'
 
 const SummaryCard = ({ window }: { window: CartItemI }) => {
   const [openPopup, setOpenPopup] = useState<string | undefined>()
+  const {
+    handleShowPrice: { showPrice, setShowPrice },
+  } = useCart()
   const { removeFromCart } = useCartMutations()
   const deleteHandle = () => {
     toast.success('¡Producto Removido!')
     removeFromCart(window)
   }
+  console.log(showPrice)
   const { width, height, model, title, color, glass, cant, price, description } = window
   return (
     <div className='grid print:w-full print:grid-cols-2 sm:grid-cols-2 grid-cols-1 justify-center my-5 border-t p-4 break-after-auto break-before-auto  break-inside-avoid'>
@@ -70,24 +74,26 @@ const SummaryCard = ({ window }: { window: CartItemI }) => {
             </div>
           </div>
         </div>
-        <div>
-          <p className='font-bold'>Detalles:</p>
-          <div className='grid grid-cols-3'>
-            <div className='border'>
-              <div className='text-center font-bold'>Precio</div>
-              <div className='text-center border-t'>{currencyFormatter(price)}</div>
-            </div>
-            <div className='border'>
-              <div className='text-center font-bold'>Cant</div>
-              <div className='text-center border-t'>{cant}</div>
-            </div>
+        {showPrice && (
+          <div>
+            <p className='font-bold'>Detalles:</p>
+            <div className='grid grid-cols-3'>
+              <div className='border'>
+                <div className='text-center font-bold'>Precio</div>
+                <div className='text-center border-t'>{currencyFormatter(price)}</div>
+              </div>
+              <div className='border'>
+                <div className='text-center font-bold'>Cant</div>
+                <div className='text-center border-t'>{cant}</div>
+              </div>
 
-            <div className='border'>
-              <div className='text-center font-bold'>Subtotal</div>
-              <div className='text-center border-t'>{currencyFormatter(price * cant)}</div>
+              <div className='border'>
+                <div className='text-center font-bold'>Subtotal</div>
+                <div className='text-center border-t'>{currencyFormatter(price * cant)}</div>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )

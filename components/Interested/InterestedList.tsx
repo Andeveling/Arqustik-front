@@ -1,8 +1,9 @@
 import Heading from '@components/Heading'
 import { InterestedsResponseI } from '@models/Interested.model'
-import { Table } from 'flowbite-react'
+import { Button, Table } from 'flowbite-react'
 import CreateInterestedToClient from './CreateInterestedToClient'
 import DeletedInterestedModal from './DeletedInterestedModal'
+import Link from 'next/link'
 
 const InterestedList = ({ interestedList }: { interestedList: InterestedsResponseI }) => {
   return (
@@ -31,6 +32,11 @@ const InterestedList = ({ interestedList }: { interestedList: InterestedsRespons
 
                           <Table.Cell>{email}</Table.Cell>
                           <Table.Cell className='flex justify-center gap-2'>
+                            <Link href={`/private/interested/${id}`}>
+                              <Button size='sm' color='dark'>
+                                Ventanas
+                              </Button>
+                            </Link>
                             <CreateInterestedToClient interested={interested} />
                             <DeletedInterestedModal id={id} />
                           </Table.Cell>

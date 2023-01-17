@@ -17,6 +17,7 @@ export const endpoints = {
   administrative_costs: '/administrative-costs',
   window_models: '/window_models',
   interesteds: '/interesteds',
+  auth: '/auth/local',
 }
 
 export const SWRArqustikConfig: SWRConfiguration = {

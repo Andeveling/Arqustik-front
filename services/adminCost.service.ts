@@ -9,7 +9,8 @@ const { administrative_costs } = endpoints
 export const adminCostService = {
   update: async (adminCostID: AdminCostI['id'], data: any) => {
     try {
-      axios.put(`${STRAPI_SERVER}${administrative_costs}/${adminCostID}`, data)
+      const serviceResponse = await axios.put(`${STRAPI_SERVER}${administrative_costs}/${adminCostID}`, data)
+      return serviceResponse.data
     } catch (error) {}
   },
 }

@@ -1,11 +1,11 @@
 import { DocumentIcon } from '@heroicons/react/24/solid'
-import { InterestedResponseI } from '@models/Interested.model'
+import { InterestedI } from '@models/Interested.model'
 import { clientPVC } from '@services/client.service'
 import { Button, Modal } from 'flowbite-react'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 
-const CreateInterestedToClient = ({ interested }: { interested: InterestedResponseI }) => {
+const CreateInterestedToClient = ({ interested }: { interested: InterestedI }) => {
   const [openPopup, setOpenPopup] = useState<string | undefined>()
 
   const createClientHandle = () => {

@@ -16,7 +16,7 @@ const NextLink = ({ href, text }: NavItemProps) => {
       href={href}
       className={cn(
         isActive ? 'font-extrabold' : 'font-semibold',
-        'text-lg flex content-center md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 dark:text-gray-100  transition-all',
+        'text-lg flex content-center md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 text-orange-500  transition-all',
       )}>
       <span className='capsize flex content-center'>{text}</span>
     </Link>

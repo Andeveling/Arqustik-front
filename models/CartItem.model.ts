@@ -1,4 +1,4 @@
-import { WindowsModelAttributesI } from './WindowModels.model'
+import { Dispatch, SetStateAction } from 'react'
 import { WindowI } from './WindowPVC.model'
 
 export type QuantityT = number
@@ -9,4 +9,13 @@ export interface CartStateI {
 export type CartActionT = {
   type: 'add' | 'remove'
   item: CartItemI
+}
+export interface CartShowPriceT {
+  showPrice: boolean
+  setShowPrice: Dispatch<SetStateAction<boolean>>
+}
+
+export interface CartHtmlStringT {
+  html: string
+  setHtml: Dispatch<SetStateAction<string>>
 }

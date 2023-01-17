@@ -1,5 +1,6 @@
 import Container from '@components/Container'
 import Heading from '@components/Heading'
+import CarouselGlass from '@components/IndexPageComponents/CarouselGlass'
 import LoadingSpinner from '@components/LoadingSpinner'
 import ModelsList from '@components/Public/Systems/models/ModelsList'
 import { SystemResponseI } from '@models/System.model'
@@ -39,12 +40,13 @@ const Systems = () => {
 
   return (
     <Container>
-      <Heading as='h2'>Modelos disponibles</Heading>
+      <CarouselGlass />
+      <div className='mt-2'>
+        <Heading as='h2'>Modelos disponibles</Heading>
+      </div>
 
       {/* Renderizar modelos puertas y ventanas */}
       <Heading as='h3'>Ventanas</Heading>
-      <hr />
-
       {system && system.data.attributes.window_models.data && (
         <ModelsList
           models={system?.data.attributes.window_models.data.filter(
@@ -56,7 +58,7 @@ const Systems = () => {
       <div className='mt-10'>
         <Heading as='h3'>Puertas Ventanas</Heading>
       </div>
-      <hr />
+
       {system && system.data.attributes.window_models.data && (
         <ModelsList
           models={system?.data.attributes.window_models.data.filter(
@@ -68,25 +70,3 @@ const Systems = () => {
   )
 }
 export default Systems
-
-/* 
-
-<div className='flex justify-center flex-wrap'>
-        <div className='sketchfab-embed-wrapper w-80 h-80'>
-          <iframe
-            title='Bella Monorriel ventana/puerta hoja 12471'
-            allowFullScreen
-             mozallowfullscreen='true'
-              webkitallowfullscreen='true' 
-            allow='autoplay; fullscreen; xr-spatial-tracking'
-            xr-spatial-tracking
-            execution-while-out-of-viewport
-            execution-while-not-rendered
-            web-share
-            width='100%'
-            height='100%'
-            src='https://sketchfab.com/models/de2fea54091c4df39906ff60efb9b7d6/embed?autospin=1'></iframe>
-        </div>
-      </div>
-
-*/

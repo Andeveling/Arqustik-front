@@ -8,7 +8,9 @@ const { services } = endpoints
 export const arqustikService = {
   update: async (serviceID: ServiceI['id'], data: any) => {
     try {
-      axios.put(`${STRAPI_SERVER}${services}/${serviceID}`, data)
-    } catch (error) {}
+      await axios.put(`${STRAPI_SERVER}${services}/${serviceID}`, data)
+    } catch (error) {
+      console.log(error)
+    }
   },
 }

@@ -12,12 +12,12 @@ const SystemCard = ({ system }: { system: SystemResponseI['data'] }) => {
           loading='lazy'
           width={600}
           height={375}
-          src={`/img/${system.attributes.title}.jpg`}
+          src={`/img/${system.attributes.title}-3.jpg`}
           alt={system.attributes.title}
         />
       </div>
       <div className='flex justify-between flex-col '>
-        <h1 className='mb-2 font-bold text-3xl sm:text-5xl'>{system.attributes.title.toUpperCase()}</h1>
+        <h1 className='mb-2 font-bold text-2xl'>{system.attributes.title.toUpperCase()}</h1>
         <p className='text-xl text-justify'>{system.attributes.description}</p>
         <div className='flex w-full mt-4 justify-center sm:justify-end gap-4 '>
           <Tooltip content='Ver modelos disponibles'>

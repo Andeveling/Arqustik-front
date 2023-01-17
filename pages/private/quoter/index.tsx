@@ -4,9 +4,8 @@ import LoadingSpinner from '@components/LoadingSpinner'
 import { ResponseClientsI } from '@models/Client.model'
 import { fetcher } from '@services/fetcher.service'
 import { arqustikConfig, endpoints } from 'arqustik.config'
-import axios from 'axios'
 import { GetServerSideProps } from 'next'
-import { getSession, useSession } from 'next-auth/react'
+import { getSession } from 'next-auth/react'
 import useSWR from 'swr'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {

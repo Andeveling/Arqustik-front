@@ -1,18 +1,32 @@
-import { CartActionT, CartItemI, CartStateI } from '@models/CartItem.model'
-import { persistLocalStorage } from '@utils/persistLocalStorage'
-import { Dispatch, ReactNode, createContext, useContext, useReducer } from 'react'
+import { CartActionT, CartHtmlStringT, CartItemI, CartShowPriceT, CartStateI } from '@models/CartItem.model'
+import { Dispatch, ReactNode, createContext, useContext, useReducer, useState } from 'react'
 
 const initialState = {} as CartStateI
 
 export const CartItemsContext = createContext(initialState)
 export const CartDispatchContext = createContext((() => {}) as Dispatch<CartActionT>)
+export const PricesContext = createContext({} as CartShowPriceT)
+export const HtmlMailContext = createContext({} as CartHtmlStringT)
 
 const CartItemsContextProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(cartReducers, initialState)
-
+  const [showPrice, setShowPrice] = useState<boolean>(false)
+  const [html, setHtml] = useState<string>('')
   return (
     <CartItemsContext.Provider value={state}>
-      <CartDispatchContext.Provider value={dispatch}>{children}</CartDispatchContext.Provider>
+      <HtmlMailContext.Provider
+        value={{
+          html,
+          setHtml,
+        }}>
+        <PricesContext.Provider
+          value={{
+            showPrice,
+            setShowPrice,
+          }}>
+          <CartDispatchContext.Provider value={dispatch}>{children}</CartDispatchContext.Provider>
+        </PricesContext.Provider>
+      </HtmlMailContext.Provider>
     </CartItemsContext.Provider>
   )
 }
@@ -53,6 +67,8 @@ const getCartCount = (sum: number, item: CartItemI) => sum + item.cant
 
 export const useCart = () => {
   const itemsById = useContext(CartItemsContext)
+  const handleShowPrice = useContext(PricesContext)
+  const htmlString = useContext(HtmlMailContext)
   const items = Object.values(itemsById)
   const count = items.reduce(getCartCount, 0)
   const subTotal = items.reduce(getCartSubTotal, 0)
@@ -62,6 +78,8 @@ export const useCart = () => {
     itemsById,
     count,
     subTotal,
+    handleShowPrice,
+    htmlString,
   }
 }
 

@@ -63,16 +63,6 @@ const Config = () => {
                   selected ? 'bg-white shadow' : 'text-blue-100 hover:bg-white/[0.12] hover:text-white',
                 )
               }>
-              Perfil
-            </Tab>
-            <Tab
-              className={({ selected }) =>
-                cn(
-                  'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-orange-500',
-                  'ring-white ring-opacity-60 ring-offset-2 ring-offset-gray-900 focus:outline-none focus:ring-2',
-                  selected ? 'bg-white shadow' : 'text-blue-100 hover:bg-white/[0.12] hover:text-white',
-                )
-              }>
               Admin
             </Tab>
             <Tab
@@ -88,9 +78,6 @@ const Config = () => {
           </Tab.List>
 
           <Tab.Panels className='mt-2'>
-            <Tab.Panel className={cn('rounded-xl bg-gray-300 dark:bg-gray-900 p-3', 'ring-white ring-opacity-60 ')}>
-              Content 1
-            </Tab.Panel>
             <Tab.Panel className={cn('rounded-xl bg-gray-300 dark:bg-gray-900 p-3', 'ring-white ring-opacity-60 ')}>
               <AdminCost adminCost={administrative_costData} />
             </Tab.Panel>
