@@ -50,16 +50,15 @@ const Config = () => {
       </Container>
     )
   if (servicesData && administrative_costData) {
-    const dollar = administrative_costData.data.find((cost) => cost.attributes.title === 'dollar')
     return (
       <Container>
         <Tab.Group>
-          <Tab.List className='flex space-x-1 rounded-xl bg-gray-900/20 p-1'>
+          <Tab.List className='flex space-x-1 rounded-xl bg-gray-900/20 p-1 gap-4'>
             <Tab
               className={({ selected }) =>
                 cn(
                   'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-orange-500',
-                  'ring-white ring-opacity-60 ring-offset-2 ring-offset-gray-900 focus:outline-none focus:ring-2',
+                  'ring-white bg-gray-700 ring-opacity-60 ring-offset-2 ring-offset-gray-900 focus:outline-none focus:ring-2',
                   selected ? 'bg-white shadow' : 'text-blue-100 hover:bg-white/[0.12] hover:text-white',
                 )
               }>
@@ -68,8 +67,8 @@ const Config = () => {
             <Tab
               className={({ selected }) =>
                 cn(
-                  'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-orange-500',
-                  'ring-white ring-opacity-60 ring-offset-2 ring-offset-gray-900 focus:outline-none focus:ring-2',
+                  'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-orange-500 ',
+                  'ring-white bg-gray-700  ring-opacity-60  ring-offset-2 ring-offset-gray-700 focus:outline-none focus:ring-2',
                   selected ? 'bg-white shadow' : 'text-blue-100 hover:bg-white/[0.12] hover:text-white',
                 )
               }>

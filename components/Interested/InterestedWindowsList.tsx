@@ -1,11 +1,55 @@
-import { InterestedWindowI } from '@models/Interested.model'
+import { InterestedI, InterestedWindowI } from '@models/Interested.model'
 import { currencyFormatter } from '@utils/currencyFormatter'
-import { Table } from 'flowbite-react'
+import { Button, Modal, Table } from 'flowbite-react'
+import { ArrowDownCircleIcon } from '@heroicons/react/24/solid'
+import { useState } from 'react'
+import { toast } from 'react-hot-toast'
 
-const InterestedWindowsList = ({ windows }: { windows: InterestedWindowI[] }) => {
+const InterestedWindowsList = ({
+  client,
+  windows,
+}: {
+  windows: InterestedWindowI[]
+  client: InterestedI['fullName']
+}) => {
   let total = 0
+  const [openPopup, setOpenPopup] = useState<string | undefined>()
+
+  const exportData = () => {
+    setOpenPopup(undefined)
+    toast.success('Ventanas descargadas')
+    const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(JSON.stringify(windows))}`
+    const link = document.createElement('a')
+    link.href = jsonString
+    link.download = `Ventanas ${client}.json`
+    link.click()
+  }
   return (
     <div>
+      {windows && (
+        <div className='flex justify-end mb-2'>
+          <Button color='dark' onClick={() => setOpenPopup('default')}>
+            <ArrowDownCircleIcon className='w-5 h-5 mr-2' />
+            Exportar
+          </Button>
+          <Modal size='sm' popup={true} show={openPopup === 'default'} onClose={() => setOpenPopup(undefined)}>
+            <Modal.Header />
+            <Modal.Body>
+              <div className='text-center'>
+                <h3 className='mb-5 text-lg font-normal text-gray-500 dark:text-gray-400'>¿Desea hacer una copia?</h3>
+              </div>
+              <div className='flex justify-center gap-4'>
+                <Button color='success' onClick={exportData}>
+                  Descargar
+                </Button>
+                <Button color='gray' onClick={() => setOpenPopup(undefined)}>
+                  Cancelar
+                </Button>
+              </div>
+            </Modal.Body>
+          </Modal>
+        </div>
+      )}
       {windows && windows.length > 0
         ? windows.map((window) => {
             return (

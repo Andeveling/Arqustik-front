@@ -80,6 +80,7 @@ export const getPrice = async ({
   switch (system) {
     case SystemsEnum.BellaSliding:
       const bella = await getSystem(system)
+
       if (bella) {
         const {
           data: {
@@ -993,7 +994,7 @@ export const getPrice = async ({
 
   const profitWindow = costWindow / ((100 - 35) / 100) - costWindow
 
- /*  console.log(cost) */
+  /*  console.log(cost) */
 
   const newWindow = {
     title,

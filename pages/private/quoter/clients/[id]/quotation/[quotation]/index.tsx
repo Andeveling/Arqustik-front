@@ -7,13 +7,15 @@ import WindowsPVCList from '@components/WindowsPVC/WindowsPVCList'
 import { QuotationResponseI } from '@models/Quotation.model'
 import { fetcher } from '@services/fetcher.service'
 import { arqustikConfig, endpoints } from 'arqustik.config'
-import { Button } from 'flowbite-react'
+import { Button, FileInput, Label, Modal } from 'flowbite-react'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
-import { DocumentTextIcon } from '@heroicons/react/24/solid'
+import { DocumentTextIcon, ArrowUpCircleIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
+import { ChangeEvent, useState } from 'react'
+import ImportWindows from '@components/ImportWindows/ImportWindows'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getSession(ctx)
@@ -37,6 +39,7 @@ const { quotations } = endpoints
 const { STRAPI_SERVER } = arqustikConfig
 
 export default function QuotationByClientID() {
+  const [openPopup, setOpenPopup] = useState<string | undefined>()
   const router = useRouter()
 
   const { data: quotation, error } = useSWR<QuotationResponseI>(
@@ -78,7 +81,7 @@ export default function QuotationByClientID() {
 
         <QuotationHeader info={quotation?.data.attributes} />
         <WindowsPVCList windows={windows} projectData={projectData} transport_mount={transport_mount ?? 0} />
-        <div className='my-5'>
+        <div className='my-5 flex justify-between'>
           {windows.data.length > 0 && (
             <Button color='success' className='w-28 p-0'>
               <Link
@@ -90,6 +93,8 @@ export default function QuotationByClientID() {
             </Button>
           )}
         </div>
+
+        <ImportWindows />
       </Container>
     )
   } else {
@@ -100,3 +105,32 @@ export default function QuotationByClientID() {
     )
   }
 }
+
+/* 
+
+<div className='flex'>
+            <Button color='success' onClick={() => setOpenPopup('default')}>
+              <ArrowUpCircleIcon className='w-5 h-5 mr-2' />
+              Importar
+            </Button>
+            <Modal size='sm' popup={true} show={openPopup === 'default'} onClose={() => setOpenPopup(undefined)}>
+              <Modal.Header />
+              <Modal.Body>
+                <div className='text-center'>
+                  <h3 className='mb-5 text-lg font-normal text-gray-500 dark:text-gray-400'>
+                    ¿Desea importar las ventanas?
+                  </h3>
+                </div>
+                <div className='flex justify-center gap-4'>
+                  <Button color='success' onClick={() => console.log('ventanas')}>
+                    Importar
+                  </Button>
+                  <Button color='gray' onClick={() => setOpenPopup(undefined)}>
+                    Cancelar
+                  </Button>
+                </div>
+              </Modal.Body>
+            </Modal>
+          </div>
+
+*/

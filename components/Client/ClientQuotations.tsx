@@ -40,55 +40,53 @@ const ClientQuotations = ({ client }: { client: ClientByIDResponse }) => {
         </Table.Head>
         <Table.Body className='divide-y divide-gray-400 pl-10'>
           {client &&
-            client.data.attributes.quotations.data
-              ?.map((quote) => {
-                const { arqustik_id, project, address, createdAt } = quote.attributes
-                return (
-                  <Table.Row key={quote.id}>
-                    <Table.Cell className='font-bold'>{arqustik_id}</Table.Cell>
-                    <Table.Cell>{project}</Table.Cell>
-                    <Table.Cell>{address}</Table.Cell>
-                    <Table.Cell>{new Date(createdAt).toLocaleDateString()}</Table.Cell>
-                    <Table.Cell className='flex justify-center gap-2'>
-                      <Link href={`${client.data.id}/quotation/${quote.id}`}>
-                        <Button size='sm' color='dark'>
-                          <DocumentIcon className='w-4 h-4 mr-2' />
-                          Ventanas
-                        </Button>
-                      </Link>
-                      <QuotationUpdateModal quotation={quote} />
-                      <Button size='sm' color='dark' onClick={() => setOpenModal('default')}>
-                        <TrashIcon className='w-4 h-4 mr-2' />
-                        Borrar
+            client.data.attributes.quotations.data?.map((quote) => {
+              const { arqustik_id, project, address, createdAt } = quote.attributes
+              return (
+                <Table.Row key={quote.id}>
+                  <Table.Cell className='font-bold'>{arqustik_id}</Table.Cell>
+                  <Table.Cell>{project}</Table.Cell>
+                  <Table.Cell>{address}</Table.Cell>
+                  <Table.Cell>{new Date(createdAt).toLocaleDateString()}</Table.Cell>
+                  <Table.Cell className='flex justify-center gap-2'>
+                    <Link href={`${client.data.id}/quotation/${quote.id}`}>
+                      <Button size='sm' color='dark'>
+                        <DocumentIcon className='w-4 h-4 mr-2' />
+                        Ventanas
                       </Button>
+                    </Link>
+                    <QuotationUpdateModal quotation={quote} />
+                    <Button size='sm' color='dark' onClick={() => setOpenModal('default')}>
+                      <TrashIcon className='w-4 h-4 mr-2' />
+                      Borrar
+                    </Button>
 
-                      <Modal
-                        size='sm'
-                        popup={true}
-                        show={openModal === 'default'}
-                        onClose={() => setOpenModal(undefined)}>
-                        <Modal.Header />
-                        <Modal.Body>
-                          <div className='text-center'>
-                            <h3 className='mb-5 text-lg font-normal text-gray-500 dark:text-gray-400'>
-                              ¿Esta seguro que desea borrar?
-                            </h3>
-                          </div>
-                          <div className='flex justify-center gap-4'>
-                            <Button color='failure' onClick={() => deleteHandle(quote.id)}>
-                              Borrar
-                            </Button>
-                            <Button color='gray' onClick={() => setOpenModal(undefined)}>
-                              Rechazar
-                            </Button>
-                          </div>
-                        </Modal.Body>
-                      </Modal>
-                    </Table.Cell>
-                  </Table.Row>
-                )
-              })
-              .reverse()}
+                    <Modal
+                      size='sm'
+                      popup={true}
+                      show={openModal === 'default'}
+                      onClose={() => setOpenModal(undefined)}>
+                      <Modal.Header />
+                      <Modal.Body>
+                        <div className='text-center'>
+                          <h3 className='mb-5 text-lg font-normal text-gray-500 dark:text-gray-400'>
+                            ¿Esta seguro que desea borrar?
+                          </h3>
+                        </div>
+                        <div className='flex justify-center gap-4'>
+                          <Button color='failure' onClick={() => deleteHandle(quote.id)}>
+                            Borrar
+                          </Button>
+                          <Button color='gray' onClick={() => setOpenModal(undefined)}>
+                            Rechazar
+                          </Button>
+                        </div>
+                      </Modal.Body>
+                    </Modal>
+                  </Table.Cell>
+                </Table.Row>
+              )
+            })}
         </Table.Body>
       </Table>
 

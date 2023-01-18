@@ -30,8 +30,6 @@ const Index = () => {
     fetcher,
   )
 
-  console.log(Array.isArray(interested?.data.attributes.windows))
-
   if (error)
     return (
       <Container>
@@ -44,22 +42,27 @@ const Index = () => {
       <Container>
         <Heading as='h3'>Ventanas a cotizar</Heading>
 
-        <ul className='space-y-1 mb-4'>
-          <li>
+        <div className='grid grid-cols-2'>
+          <div>
             <h4 className='text-lg font-bold'>{interested.data.attributes.fullName}</h4>
-          </li>
-          <li>
+          </div>
+          <div>
             <span>{interested.data.attributes.email}</span>
-          </li>
-          <li>
-            <p>{interested.data.attributes.address}</p>
-          </li>
-          <li>
+          </div>
+          <div>
+            <span>{interested.data.attributes.address}</span>
+          </div>
+          <div>
             <span>{interested.data.attributes.cellphone}</span>
-          </li>
-        </ul>
+          </div>
+        </div>
 
-        {interested.data.attributes.windows && <InterestedWindowsList windows={interested.data.attributes.windows} />}
+        {interested.data.attributes.windows && (
+          <InterestedWindowsList
+            client={interested.data.attributes.fullName}
+            windows={interested.data.attributes.windows}
+          />
+        )}
       </Container>
     )
 }

@@ -83,7 +83,8 @@ const ModelModal = ({ model }: { model: WindowsModelResponseI }) => {
         .post(`/api/windows/create`, data)
         .then((res) => addToCart({ id: uuidv4(), ...res.data }))
         .then(() => closeModal())
-        .then(() => setIsLoading(false)),
+        .then(() => setIsLoading(false))
+        .catch((error) => console.log(error)),
       {
         loading: 'Creando...',
         success: <b>¡Ventana creada!</b>,
@@ -196,7 +197,7 @@ const ModelModal = ({ model }: { model: WindowsModelResponseI }) => {
                         {errors.cant?.message ? <p className='text-xs text-red-500'>{errors.cant.message}</p> : <></>}
                       </div>
                     </div>
-                    <Button type='submit' className='mt-2' disabled={isLoading}>
+                    <Button color='dark' type='submit' className='mt-2' disabled={isLoading}>
                       <ShoppingCartIcon className='w-4 h-4 mr-2' />
                       {isLoading ? <>Procesando..</> : <>Añadir</>}
                     </Button>

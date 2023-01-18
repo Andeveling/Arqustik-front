@@ -1,10 +1,20 @@
 import { SystemI } from '@models/System.model'
-import { systemsService } from '@services/systems.service'
+import { arqustikConfig } from 'arqustik.config'
+import axios from 'axios'
 import { Button, Card } from 'flowbite-react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useSWRConfig } from 'swr'
+
+const URL = `${arqustikConfig.NEXT_SERVER}/systems/update-system`
+
+const updateSystem = (url: string, body: any) => {
+  axios
+    .put(url, body)
+    .then((res) => res.data)
+    .catch((err) => console.log(err))
+}
 
 const SystemCard = ({ system }: { system: SystemI }) => {
   const {
@@ -16,14 +26,18 @@ const SystemCard = ({ system }: { system: SystemI }) => {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  const updateHandle = async (id: number) => {
+  const updateHandle = (id: number) => {
     setLoading(true)
-    try {
-      await systemsService.update(id)
-    } catch (error) {
-      console.log(error)
-    }
-    setLoading(false)
+    mutate(
+      URL,
+      updateSystem(URL, {
+        jwt: session.data?.user.jwt,
+        systemID: id,
+        data: {
+          update: false,
+        },
+      }),
+    ).then(() => router.reload())
   }
 
   return (

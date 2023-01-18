@@ -11,6 +11,7 @@ import toast from 'react-hot-toast'
 import { UpdateAdministrativeCostSchema } from './UpdateAdministrativeCostSchema'
 import { currencyFormatter } from '@utils/currencyFormatter'
 import { adminCostService } from '@services/adminCost.service'
+import { systemsService } from '@services/systems.service'
 
 export default function AdminCostModalR({ adminCost }: { adminCost: AdminCostI }) {
   let [isOpen, setIsOpen] = useState(false)
@@ -32,6 +33,8 @@ export default function AdminCostModalR({ adminCost }: { adminCost: AdminCostI }
           data: service,
         })
         .then(() => reset())
+        .then(() => systemsService.updateSystemChange())
+        .then(() => router.reload())
         .then((res) => console.log(res))
         .catch((err) => console.log(err)),
       {

@@ -63,6 +63,7 @@ const getCartSubTotal = (sum: number, item: CartItemI) => {
   sum += item.price * item.cant
   return sum
 }
+
 const getCartCount = (sum: number, item: CartItemI) => sum + item.cant
 
 export const useCart = () => {
@@ -105,6 +106,3 @@ export const useCartMutations = () => {
 }
 
 export default CartItemsContextProvider
-function initiate(): CartActionT {
-  throw new Error('Function not implemented.')
-}

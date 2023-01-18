@@ -9,6 +9,7 @@ import { Fragment, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { UpdateServiceSchema } from './updateService.schema'
+import { systemsService } from '@services/systems.service'
 
 interface ContractorModalProps extends Partial<ServiceIAttributes> {
   id: ServiceI['id']
@@ -37,6 +38,7 @@ export default function ContractorModalR({ id, UOM, description }: ContractorMod
           },
         })
         .then(() => reset())
+        .then(() => systemsService.updateSystemChange())
         .then(() => router.reload()),
       {
         loading: 'Actualizando...',
