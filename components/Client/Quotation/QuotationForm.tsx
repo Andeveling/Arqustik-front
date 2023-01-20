@@ -32,7 +32,7 @@ const QuotationForm = () => {
 
   useEffect(() => {
     if (getValues('transport') === false) setValue('transport_mount', 0)
-  }, [watch('transport')])
+  }, [getValues, setValue])
 
   const onSubmit: SubmitHandler<CreateQuotationI> = async (data) => {
     setIsLoading(true)

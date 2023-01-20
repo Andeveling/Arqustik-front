@@ -2,7 +2,6 @@ import QuotationHeader from '@components/Client/Quotation/QuotationHeader'
 import Container from '@components/Container'
 import Heading from '@components/Heading'
 import ImportWindows from '@components/ImportWindows/ImportWindows'
-import ImportWindowsLocal from '@components/ImportWindows/ImportWindowsLocal'
 import ModalR from '@components/ModalR'
 import WindowsPVCForm, { ProjectDataProps } from '@components/WindowsPVC/WindowsPVCForm'
 import WindowsPVCList from '@components/WindowsPVC/WindowsPVCList'
@@ -104,32 +103,3 @@ export default function QuotationByClientID() {
     )
   }
 }
-
-/* 
-
-<div className='flex'>
-            <Button color='success' onClick={() => setOpenPopup('default')}>
-              <ArrowUpCircleIcon className='w-5 h-5 mr-2' />
-              Importar
-            </Button>
-            <Modal size='sm' popup={true} show={openPopup === 'default'} onClose={() => setOpenPopup(undefined)}>
-              <Modal.Header />
-              <Modal.Body>
-                <div className='text-center'>
-                  <h3 className='mb-5 text-lg font-normal text-gray-500 dark:text-gray-400'>
-                    ¿Desea importar las ventanas?
-                  </h3>
-                </div>
-                <div className='flex justify-center gap-4'>
-                  <Button color='success' onClick={() => console.log('ventanas')}>
-                    Importar
-                  </Button>
-                  <Button color='gray' onClick={() => setOpenPopup(undefined)}>
-                    Cancelar
-                  </Button>
-                </div>
-              </Modal.Body>
-            </Modal>
-          </div>
-
-*/
