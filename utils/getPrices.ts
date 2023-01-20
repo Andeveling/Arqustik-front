@@ -13,11 +13,10 @@ export const getPrice = async ({
   glass,
   cant,
   color,
-  jwt,
+
   projectData,
   quotationID,
   dismount,
-  windowID,
 }: CreateWindowFormPVCI) => {
   const widthM = width / 1000
   const heightM = height / 1000
@@ -81,6 +80,7 @@ export const getPrice = async ({
   switch (system) {
     case SystemsEnum.BellaSliding:
       const bella = await getSystem(system)
+
       if (bella) {
         const {
           data: {
@@ -939,7 +939,7 @@ export const getPrice = async ({
             if (protection === 'one') {
               if (service.attributes.title === 'protection1')
                 cost.services.protection = (service.attributes.price + service.attributes.material) * area
-            } else if (silicone === 'two') {
+            } else if (protection === 'two') {
               if (service.attributes.title === 'protection2')
                 cost.services.protection = (service.attributes.price + service.attributes.material) * area
             }
@@ -993,6 +993,8 @@ export const getPrice = async ({
   const costWindow = cost.price * cost.dollar + cost.COP
 
   const profitWindow = costWindow / ((100 - 35) / 100) - costWindow
+
+  /*  console.log(cost) */
 
   const newWindow = {
     title,

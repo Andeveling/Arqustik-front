@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { PropsWithChildren } from "react"
+import Link from 'next/link'
+import { PropsWithChildren } from 'react'
 
 interface ExternalLinkProps extends PropsWithChildren {
   href: string
@@ -24,9 +24,6 @@ export default function Footer() {
         <div className='flex flex-col space-y-4'>
           <Link href='/' className='text-gray-200 hover:text-gray-600 font-bold transition'>
             Home
-          </Link>
-          <Link href='/about' className='text-gray-200 hover:text-gray-600  font-bold transition'>
-            Nosotros
           </Link>
           <Link href='/quote' className='text-gray-200 hover:text-gray-600 font-bold transition'>
             Cotizar

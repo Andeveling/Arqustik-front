@@ -8,7 +8,8 @@ export interface WindowI {
   title: string
   system: SystemsEnum
   model: WindowModelsEnum
-  location: string
+  description: string
+  location?: string
   width: number
   height: number
   price: number

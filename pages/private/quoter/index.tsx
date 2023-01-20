@@ -1,13 +1,12 @@
-import ClientList from "@components/Client/ClientList"
-import Container from "@components/Container"
-import LoadingSpinner from "@components/LoadingSpinner"
-import { ResponseClientsI } from "@models/Client.model"
-import { fetcher } from "@services/fetcher.service"
-import { arqustikConfig, endpoints } from "arqustik.config"
-import axios from "axios"
-import { GetServerSideProps } from "next"
-import { getSession, useSession } from "next-auth/react"
-import useSWR from "swr"
+import ClientList from '@components/Client/ClientList'
+import Container from '@components/Container'
+import LoadingSpinner from '@components/LoadingSpinner'
+import { ResponseClientsI } from '@models/Client.model'
+import { fetcher } from '@services/fetcher.service'
+import { arqustikConfig, endpoints } from 'arqustik.config'
+import { GetServerSideProps } from 'next'
+import { getSession } from 'next-auth/react'
+import useSWR from 'swr'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getSession(ctx)
@@ -15,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     // redirect
     return {
       redirect: {
-        destination: "/api/auth/signin",
+        destination: '/api/auth/signin',
         permanent: false,
       },
     }
@@ -27,16 +26,16 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 }
 
-const { quotations } = endpoints
+const { clients } = endpoints
 const { STRAPI_SERVER } = arqustikConfig
 
 export default function Quoter() {
-  const { data: clients, error } = useSWR<ResponseClientsI>(
-    `${STRAPI_SERVER}${endpoints.clients}?sort=createdAt:desc`,
-    fetcher
+  const { data: clientsList, error } = useSWR<ResponseClientsI>(
+    `${STRAPI_SERVER}${clients}?sort=createdAt:desc`,
+    fetcher,
   )
 
-  if (!clients)
+  if (!clientsList)
     return (
       <Container>
         <LoadingSpinner />
@@ -52,7 +51,7 @@ export default function Quoter() {
 
   return (
     <Container>
-      <ClientList clients={clients} />
+      <ClientList clients={clientsList} />
     </Container>
   )
 }

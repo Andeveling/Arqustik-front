@@ -1,7 +1,8 @@
 import { getJWT } from '@services/getJWT.service'
 import { arqustikConfig } from 'arqustik.config'
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-import { getValidationError } from 'utils/get-validation-error'
+import axios, { AxiosRequestConfig } from 'axios'
+
+import { endpoints } from 'arqustik.config'
 
 export const AxiosInterceptor = () => {
   const updateHeader = async (request: AxiosRequestConfig) => {
@@ -20,8 +21,13 @@ export const AxiosInterceptor = () => {
   }
 
   axios.interceptors.request.use((request) => {
-    if (request.url?.includes(arqustikConfig.STRAPI_SERVER)) return updateHeader(request)
-    return request
+    if (request.url?.includes(arqustikConfig.STRAPI_SERVER)) {
+      if (request.url.includes(endpoints.interesteds) && request.method == 'POST') return request
+      if (request.url.includes('/auth/local')) return request
+      return updateHeader(request)
+    } else {
+      return request
+    }
   })
 
   /* axios.interceptors.response.use(

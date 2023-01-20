@@ -17,12 +17,12 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         if (credentials === null || credentials === undefined) return null
-
         try {
           const { username, password } = credentials as CredentialsI
           const { user, jwt } = await signIn({ username, password })
           return { ...user, jwt }
         } catch (error) {
+          console.log(error)
           return null
         }
       },

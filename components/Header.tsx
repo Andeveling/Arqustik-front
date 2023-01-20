@@ -5,6 +5,11 @@ import MenuLinks from './MenuLinks'
 import NextLink from './NextLink'
 import ThemeHandled from './ThemeHandled'
 import TopArea from './TopArea'
+import { useCart } from '@context/CartContext'
+import Link from 'next/link'
+import { ShoppingBagIcon } from '@heroicons/react/24/solid'
+import { Badge } from 'flowbite-react'
+import { count } from 'console'
 
 const navigation = [
   { name: 'Inicio', href: '/', current: false },
@@ -17,6 +22,7 @@ function classNames(...classes: string[]) {
 }
 
 export default function Header() {
+  const { count: cartCount } = useCart()
   const [mounted, setMounted] = useState<boolean>(false)
   useEffect(() => setMounted(true), [])
   if (!mounted) return null
@@ -37,8 +43,19 @@ export default function Header() {
                     </div>
                   </div>
                 </div>
-                <div className='flex justify-end w-full py-10 mr-4 sm:mr-8'>
-                  <ThemeHandled />
+
+                <div className='flex justify-end flex-row w-full py-10 mr-4 sm:mr-8 gap-4'>
+                  <div className='flex justify-end flex-row'>
+                    <Link href='/cart' className='flex justify-end flex-row'>
+                      <ShoppingBagIcon className='w-10 h-10' />
+                    </Link>
+                    <div className='bg-red-600 rounded-full p-1 w-6 h-6 flex justify-center items-center -ml-4'>
+                      <span className='text-gray-0 font-bold'>{cartCount}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <ThemeHandled />
+                  </div>
                 </div>
                 <div className='hidden md:block'>
                   <div className='ml-4 w-40 items-center  space-x-4 md:ml-6'>{open ? <></> : <TopArea />}</div>

@@ -5,14 +5,8 @@ import { XMarkIcon, PlusIcon } from '@heroicons/react/24/outline'
 
 export default function ClientModal() {
   let [isOpen, setIsOpen] = useState(false)
-
-  function closeModal() {
-    setIsOpen(false)
-  }
-
-  function openModal() {
-    setIsOpen(true)
-  }
+  const closeModal = () => setIsOpen(false)
+  const openModal = () => setIsOpen(true)
 
   return (
     <>
@@ -20,7 +14,7 @@ export default function ClientModal() {
         <button
           type='button'
           onClick={openModal}
-          className='h-10 rounded-md bg-black bg-opacity-50 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
+          className='h-10 rounded-md bg-black dark:bg-gray-700 bg-opacity-50 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
           <PlusIcon className='h-6 w-6' />
         </button>
       </div>

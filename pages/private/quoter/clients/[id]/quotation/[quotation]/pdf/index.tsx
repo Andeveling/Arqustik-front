@@ -21,13 +21,13 @@ export default function Pdf() {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   })
-  const router = useRouter()
   const componentRef = useRef(null)
+  const router = useRouter()
   const { data: quotation, error } = useSWR<QuotationResponseI>(
     `${STRAPI_SERVER}${quotations}/${router.query.quotation}?populate=*`,
     fetcher,
   )
-  console.log(quotation)
+
   if (!quotation) return <LoadingSpinner />
   if (error) return <p>{error.message}</p>
 
@@ -56,10 +56,10 @@ export default function Pdf() {
         {/* PARRAFO */}
         <div className='text-base print:text-xs px-2'>
           <p className='text-justify'>
-            De acuerdo a sus indicaciones, le presentamos la oferta que solicitó; suministro, instalación y transporte
-            de ventanas en PVC color blanco. Agradecemos la confianza depositada en nuestra compañía y le invitamos a
-            leer el contenido de esta propuesta. Quedamos a su disposición para aclarar cualquier inquietud y a la
-            espera de una respuesta positiva que nos convierta en su aliado en el proceso.
+            De acuerdo a sus indicaciones, le presentamos la oferta de productos que solicitó. Agradecemos la confianza
+            depositada en nuestra compañía y le invitamos a leer el contenido de esta propuesta. Quedamos a su
+            disposición para aclarar cualquier inquietud y a la espera de una respuesta positiva que nos convierta en su
+            aliado en el proceso.
           </p>
         </div>
         {/* PRODUCTOS */}

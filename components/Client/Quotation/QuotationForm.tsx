@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { QuotationSchema } from './QuotationSchema'
+import { useEffect } from 'react'
 
 const QuotationForm = () => {
   const router = useRouter()
@@ -29,8 +30,9 @@ const QuotationForm = () => {
     mode: 'onChange',
   })
 
-  const watchTransport = watch('transport')
-  if (!watchTransport) setValue('transport_mount', 0)
+  useEffect(() => {
+    if (getValues('transport') === false) setValue('transport_mount', 0)
+  }, [getValues, setValue])
 
   const onSubmit: SubmitHandler<CreateQuotationI> = async (data) => {
     setIsLoading(true)
@@ -111,7 +113,7 @@ const QuotationForm = () => {
 
       <Transition
         as='div'
-        show={watchTransport}
+        show={watch('transport')}
         enter='transition-opacity duration-375'
         enterFrom='opacity-0'
         enterTo='opacity-100'

@@ -1,8 +1,6 @@
-import Heading from '@components/Heading'
 import { QuotationResponseI } from '@models/Quotation.model'
-import { ClientQuotationResponseI } from '@models/WindowPVC.model'
-import Image from 'next/image'
 import logo from '@public/img/logo.png'
+import Image from 'next/image'
 
 const QuotationHeaderPDF = ({ quotation }: { quotation: QuotationResponseI }) => {
   const {
