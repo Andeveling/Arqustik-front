@@ -29,10 +29,10 @@ export interface ProjectDataProps {
 
 const WindowsPVCForm = ({ projectData }: { projectData: ProjectDataProps }) => {
   const [loading, setLoading] = useState(false)
-  const router = useRouter()
   const methods = useForm<CreateWindowFormPVCI>({
     resolver: yupResolver(WindowsPVCSchema),
   })
+  const router = useRouter()
   const quotationID: QuotationI['id'] = typeof router.query.quotation === 'string' ? router.query.quotation : ''
 
   const { handleSubmit, register } = methods

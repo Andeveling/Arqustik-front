@@ -1,21 +1,21 @@
 import QuotationHeader from '@components/Client/Quotation/QuotationHeader'
 import Container from '@components/Container'
 import Heading from '@components/Heading'
+import ImportWindows from '@components/ImportWindows/ImportWindows'
+import ImportWindowsLocal from '@components/ImportWindows/ImportWindowsLocal'
 import ModalR from '@components/ModalR'
 import WindowsPVCForm, { ProjectDataProps } from '@components/WindowsPVC/WindowsPVCForm'
 import WindowsPVCList from '@components/WindowsPVC/WindowsPVCList'
+import { DocumentTextIcon } from '@heroicons/react/24/solid'
 import { QuotationResponseI } from '@models/Quotation.model'
 import { fetcher } from '@services/fetcher.service'
 import { arqustikConfig, endpoints } from 'arqustik.config'
-import { Button, FileInput, Label, Modal } from 'flowbite-react'
+import { Button } from 'flowbite-react'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
-import { DocumentTextIcon, ArrowUpCircleIcon } from '@heroicons/react/24/solid'
-import Link from 'next/link'
-import { ChangeEvent, useState } from 'react'
-import ImportWindows from '@components/ImportWindows/ImportWindows'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session = await getSession(ctx)
@@ -39,7 +39,6 @@ const { quotations } = endpoints
 const { STRAPI_SERVER } = arqustikConfig
 
 export default function QuotationByClientID() {
-  const [openPopup, setOpenPopup] = useState<string | undefined>()
   const router = useRouter()
 
   const { data: quotation, error } = useSWR<QuotationResponseI>(
