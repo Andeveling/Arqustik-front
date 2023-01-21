@@ -5,21 +5,18 @@ import CartPrintHeader from '@components/Public/Summary/CartPrintHeader'
 import SummaryList from '@components/Public/Summary/SummaryList'
 import SummaryModal from '@components/Public/Summary/SummaryModal'
 import { useCart } from '@context/CartContext'
-import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { toast } from 'react-hot-toast'
 import { useReactToPrint } from 'react-to-print'
 
 const CartPage = () => {
-  const router = useRouter()
   const { items } = useCart()
   const componentRef = useRef(null)
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
     documentTitle: `Cotización-Arqustik`,
     onAfterPrint: () => {
-      toast('Presupuesto generado correctamente.')
-      setTimeout(() => router.reload(), 2000)
+      toast.success('Presupuesto generado correctamente.')
     },
   })
 
