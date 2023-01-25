@@ -92,7 +92,7 @@ export default function QuotationByClientID() {
           )}
         </div>
 
-        <ImportWindows />
+        <ImportWindows projectData={projectData} />
       </Container>
     )
   } else {

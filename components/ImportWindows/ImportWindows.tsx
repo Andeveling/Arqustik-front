@@ -1,7 +1,10 @@
+import { ProjectDataProps } from '@components/WindowsPVC/WindowsPVCForm'
 import { ArrowUpCircleIcon } from '@heroicons/react/24/solid'
 import { QuotationI } from '@models/Quotation.model'
+import { getJWT } from '@services/getJWT.service'
 import { windowPVC } from '@services/window.service'
 import { currencyFormatter } from '@utils/currencyFormatter'
+import { getGlass } from '@utils/getGlass'
 import axios from 'axios'
 import { Button, FileInput, Label, Table } from 'flowbite-react'
 import { useRouter } from 'next/router'
@@ -9,7 +12,7 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 
-const ImportWindows = () => {
+const ImportWindows = ({ projectData }: { projectData: ProjectDataProps }) => {
   const [windows, setWindows] = useState<any[]>([])
   const [loading, setIsLoading] = useState<boolean>(false)
   const router = useRouter()
@@ -24,26 +27,79 @@ const ImportWindows = () => {
     formState: { errors },
   } = useForm()
 
+  /**
+     *  
+  title: string OK
+  system: SystemsEnum X
+  model: WindowModelsEnum OK
+  description: string OK
+  location?: string X
+  width: number OK
+  height: number OK
+  glass: string X
+  type: WindowTypeEnum OK
+  color: string
+  cant: number
+   *  */
+
   const onSubmit: SubmitHandler<any> = async (data) => {
     setIsLoading(true)
+    const jwt = await getJWT()
     try {
-      await axios
-        .all(
-          windows.map(({ id, ...data }) =>
-            windowPVC
-              .create({ quotation: quotationID, ...data })
-              .then(() => toast.success('Ventana creada'))
-              .catch(() => toast.error('Algo salio mal, intenta de nuevo')),
-          ),
-        )
-        .then(() => toast.success('Cargadas'))
-        .then(() => reset())
-        .then(() => router.reload())
-      setIsLoading(false)
+      await axios.all(
+        windows.map(({ id, ...data }) => {
+          toast.promise(
+            axios
+              .post(`/api/windows/create`, {
+                title: data.title,
+                location: data.title,
+                width: data.width,
+                height: data.height,
+                cant: data.cant,
+                color: data.color,
+                glass: getGlass(data.glass),
+                system: data.system,
+                model: data.model,
+                type: data.type,
+                projectData,
+              })
+              .then((res) =>
+                windowPVC
+                  .create({ quotation: quotationID, ...res.data })
+                  .then(() => toast.success('Ventana creada'))
+                  .catch(() => toast.error('Algo salio mal, intenta de nuevo')),
+              )
+              .then(() => setIsLoading(false))
+              .catch((error) => console.log(error)),
+            {
+              loading: 'Creando...',
+              success: <b>¡Ventana creada!</b>,
+              error: <b>Algo salio mal</b>,
+            },
+          )
+        }),
+      )
     } catch (error) {
       console.log(error)
-      setIsLoading(false)
     }
+    // try {
+    //   await axios
+    //     .all(
+    //       windows.map(({ id, ...data }) =>
+    //         windowPVC
+    //           .create({ quotation: quotationID, ...data })
+    //           .then(() => toast.success('Ventana creada'))
+    //           .catch(() => toast.error('Algo salio mal, intenta de nuevo')),
+    //       ),
+    //     )
+    //     .then(() => toast.success('Cargadas'))
+    //     .then(() => reset())
+    //     .then(() => router.reload())
+    //   setIsLoading(false)
+    // } catch (error) {
+    //   console.log(error)
+    //   setIsLoading(false)
+    // }
   }
 
   return (

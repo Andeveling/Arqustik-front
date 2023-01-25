@@ -5,6 +5,8 @@ import { SystemsEnum } from './System.model'
 
 export interface WindowI {
   id: number | string
+  price: number
+
   title: string
   system: SystemsEnum
   model: WindowModelsEnum
@@ -12,7 +14,6 @@ export interface WindowI {
   location?: string
   width: number
   height: number
-  price: number
   glass: string
   type: WindowTypeEnum
   color: string

@@ -72,11 +72,10 @@ const SummaryModal = ({ handlePrint, windows }: { handlePrint: () => void; windo
           },
         })
         .then(() => {
-          reset()
-          setIsLoading(false)
           closeModal()
           setShowPrice(true)
-          handlePrint()
+          reset()
+          setIsLoading(false)
         })
         .catch(() => setIsLoading(false))
         .catch((err) => console.error(err)),
