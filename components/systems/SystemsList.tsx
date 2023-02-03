@@ -1,13 +1,13 @@
-import { SystemsResponseI } from "@models/System.model"
+import { SystemsResponseI } from '@models/System.model'
 
-import SystemCard from "./SystemCard"
+import SystemCard from './SystemCard'
 
 const SystemsList = ({ systems }: { systems: SystemsResponseI }) => {
   return (
     <div>
       {systems && systems.data.length ? (
         systems.data.map((system) => (
-          <div key={system.id}>
+          <div key={system.id} className='py-2'>
             <SystemCard system={system} />
           </div>
         ))

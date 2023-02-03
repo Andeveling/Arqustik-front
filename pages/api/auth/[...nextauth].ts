@@ -6,7 +6,7 @@ import { signIn } from '@services/auth.service'
 
 export const authOptions: NextAuthOptions = {
   debug: false,
-  secret: process.env.NEXT_AUTH_SECRET ?? 'secret',
+  secret: process.env.NEXT_AUTH_SECRET ?? '12as12sd312dfa123',
   session: { strategy: 'jwt' },
   providers: [
     CredentialsProvider({

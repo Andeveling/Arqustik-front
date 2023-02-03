@@ -15,7 +15,7 @@ export interface SystemsResponseI {
 }
 
 export interface SystemI {
-  id: number
+  id: string
   attributes: SystemAttributesI
 }
 

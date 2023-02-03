@@ -1,9 +1,10 @@
 import axios from 'axios'
-import { arqustikConfig } from 'arqustik.config'
+import { arqustikConfig, endpoints } from 'arqustik.config'
 import { SystemsResponseI } from '@models/System.model'
 import { getJWT } from './getJWT.service'
 
 const { STRAPI_SERVER } = arqustikConfig
+const { systems } = endpoints
 
 export const systemsService = {
   updateSystemChange: async () => {
@@ -18,6 +19,14 @@ export const systemsService = {
           ),
         )
       }
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  getAllSystems: async () => {
+    try {
+      const response = await axios.get<SystemsResponseI>(`${STRAPI_SERVER}${systems}`)
+      if (response.data) return response.data
     } catch (error) {
       console.log(error)
     }

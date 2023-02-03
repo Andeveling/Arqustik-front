@@ -16,6 +16,7 @@ const PublicAppContext = createContext<PublicAppContextI | null>(null)
 
 export const PublicAppProvider = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
   const { data: systems_pvc } = useSWR<SystemsResponseI>(`${STRAPI_SERVER}${systems}`, fetcher)
+  console.log(systems_pvc)
   const value = useMemo(() => ({ systems_pvc } as PublicAppContextI), [systems_pvc])
   return <PublicAppContext.Provider value={value}>{children}</PublicAppContext.Provider>
 }

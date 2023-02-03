@@ -1,15 +1,15 @@
+import { useCart } from '@context/CartContext'
 import { Disclosure, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { ShoppingBagIcon } from '@heroicons/react/24/solid'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import MenuLinks from './MenuLinks'
 import NextLink from './NextLink'
 import ThemeHandled from './ThemeHandled'
 import TopArea from './TopArea'
-import { useCart } from '@context/CartContext'
-import Link from 'next/link'
-import { ShoppingBagIcon } from '@heroicons/react/24/solid'
-import { Badge } from 'flowbite-react'
-import { count } from 'console'
+import Image from 'next/image'
+import logo from '@public/img/logo.png'
 
 const navigation = [
   { name: 'Inicio', href: '/', current: false },
@@ -35,7 +35,8 @@ export default function Header() {
               <div className='flex h-16 items-center justify-between'>
                 <div className='flex items-center'>
                   <div className='flex-shrink-0'>
-                    <h1 className='text-4xl font-bold'>Arqustik</h1>
+                    <p className='text-4xl font-bold text-gray-500'>Arqustik</p>
+                    {/*  <Image src={logo} width={100} alt='logo corporativo' /> */}
                   </div>
                   <div className='hidden md:block'>
                     <div className='ml-10 flex items-baseline space-x-4'>
