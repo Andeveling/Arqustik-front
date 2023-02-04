@@ -8,6 +8,9 @@ const ModelsCard = ({ model }: { model: WindowsModelResponseI }) => {
   return (
     <div className='w-96'>
       <Card className='min-w-lg' color='black'>
+        <div className='text-center'>
+          <span className='font-bold'>{model.attributes.title}</span>
+        </div>
         <div className='flex justify-center'>
           <WindowDraw model={model.attributes.opening} height={0} width={0} />
         </div>

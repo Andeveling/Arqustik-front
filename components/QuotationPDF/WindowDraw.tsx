@@ -6,6 +6,10 @@ import ModelXO from './Windows/ModelXO'
 import ModelXX from './Windows/ModelXX'
 import ModelXXO from './Windows/ModelXXO'
 import ModelXXX from './Windows/ModelXXX'
+import ModelO from './Windows/ModelO'
+import ModelVLeft from './Windows/ModelVLeft'
+import ModelVRight from './Windows/ModelVRight'
+import ModelV from './Windows/ModelV'
 
 const WindowDraw = ({
   height,
@@ -31,6 +35,14 @@ const WindowDraw = ({
       return <ModelOXXO width={width} height={height} />
     case WindowModelsEnum.XXX:
       return <ModelXXX width={width} height={height} />
+    case WindowModelsEnum['[O]']:
+      return <ModelO width={width} height={height} />
+    case WindowModelsEnum['[>]']:
+      return <ModelVLeft width={width} height={height} />
+    case WindowModelsEnum['[<]']:
+      return <ModelVRight width={width} height={height} />
+    case WindowModelsEnum['[V]']:
+      return <ModelV width={width} height={height} />
     default:
       return <div className='h-44 w-56 bg-gray-600'></div>
   }

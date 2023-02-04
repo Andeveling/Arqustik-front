@@ -25,7 +25,7 @@ const SystemCard = ({ system }: { system: SystemResponseI['data'] }) => {
               <Button
                 size='xl'
                 color='dark'
-                className='transition ease-in-out delay-150  hover:scale-110  duration-150'>
+                className='transition ease-in-out delay-150  hover:scale-110  duration-150 shadow-sm'>
                 Ver modelos
               </Button>
             </Link>

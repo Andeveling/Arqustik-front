@@ -4,6 +4,7 @@ import { Button, Table } from 'flowbite-react'
 import CreateInterestedToClient from './CreateInterestedToClient'
 import DeletedInterestedModal from './DeletedInterestedModal'
 import Link from 'next/link'
+import { PrivateRoutes } from 'routes'
 
 const InterestedList = ({ interestedList }: { interestedList: InterestedsResponseI }) => {
   return (
@@ -32,7 +33,7 @@ const InterestedList = ({ interestedList }: { interestedList: InterestedsRespons
 
                           <Table.Cell>{email}</Table.Cell>
                           <Table.Cell className='flex justify-center gap-2'>
-                            <Link href={`/private/interested/${id}`}>
+                            <Link href={`${PrivateRoutes.INTERESTED}/${id}`}>
                               <Button size='sm' color='dark'>
                                 Ventanas
                               </Button>

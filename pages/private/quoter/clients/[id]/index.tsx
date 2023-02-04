@@ -1,30 +1,11 @@
-import ClientQuotations from "@components/Client/ClientQuotations"
-import Container from "@components/Container"
-import LoadingSpinner from "@components/LoadingSpinner"
-import { fetcher } from "@services/fetcher.service"
-import { arqustikConfig, endpoints } from "arqustik.config"
-import { GetServerSideProps } from "next"
-import { getSession } from "next-auth/react"
-import { useRouter } from "next/router"
-import useSWR from "swr"
+import ClientQuotations from '@components/Client/ClientQuotations'
+import Container from '@components/Container'
+import LoadingSpinner from '@components/LoadingSpinner'
+import { fetcher } from '@services/fetcher.service'
+import { arqustikConfig, endpoints } from 'arqustik.config'
+import { useRouter } from 'next/router'
+import useSWR from 'swr'
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await getSession(ctx)
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    }
-  }
-
-  return {
-    props: {
-      session,
-    },
-  }
-}
 const { STRAPI_SERVER } = arqustikConfig
 const { clients } = endpoints
 

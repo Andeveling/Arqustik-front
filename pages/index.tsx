@@ -11,8 +11,8 @@ export default function Home() {
         <CarouselGlass />
         <div className='mt-8'>
           <Heading>¿Como usar esta aplicación?</Heading>
-          <div className='grid grid-cols-2 gap-10'>
-            <div>
+          <div className='grid grid-cols-1 gap-10'>
+            <div className='hidden md:block'>
               <Heading as='h3'>Desde un Computador</Heading>
               <ul className='list-decimal'>
                 <li>
@@ -43,8 +43,8 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-            <div>
-              <Heading as='h3'>Desde un Celular</Heading>
+            <div className='block md:hidden'>
+              <Heading as='h3'>Desde un Dispositivo Movil</Heading>
 
               <ul className='list-decimal'>
                 <li>

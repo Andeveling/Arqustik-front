@@ -36,6 +36,11 @@ export enum WindowModelsEnum {
   '[>]' = '[>]',
   '[<]' = '[<]',
   '[O]' = '[O]',
+  // TODO: añadir modelos
+  '[V]' = '[V]',
+  '[O<]' = '[O<]',
+  '[>O]' = '[>O]',
+  '[>O<]' = '[>O<]',
 }
 
 export interface CreateWindowFormPVCI extends Omit<WindowI, 'id' | 'price'> {

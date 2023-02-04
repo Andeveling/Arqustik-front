@@ -10,29 +10,10 @@ import { QuotationResponseI } from '@models/Quotation.model'
 import { fetcher } from '@services/fetcher.service'
 import { arqustikConfig, endpoints } from 'arqustik.config'
 import { Button } from 'flowbite-react'
-import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { PrivateRoutes } from 'routes'
 import useSWR from 'swr'
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await getSession(ctx)
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
-  }
-
-  return {
-    props: {
-      session,
-    },
-  }
-}
 
 const { quotations } = endpoints
 const { STRAPI_SERVER } = arqustikConfig
@@ -84,7 +65,7 @@ export default function QuotationByClientID() {
             <Button color='success' className='w-28 p-0'>
               <Link
                 className='flex  justify-center items-center w-full h-full'
-                href={`/private/quoter/clients/${router.query.id}/quotation/${router.query.quotation}/pdf`}>
+                href={`${PrivateRoutes.QUOTER_CLIENT}/${router.query.id}/quotation/${router.query.quotation}/pdf`}>
                 <DocumentTextIcon className='w-6 h-6' />
                 <span className='ml-2'>Resumén</span>
               </Link>

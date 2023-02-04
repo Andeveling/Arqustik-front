@@ -13,7 +13,6 @@ import logo from '@public/img/logo.png'
 
 const navigation = [
   { name: 'Inicio', href: '/', current: false },
-  { name: 'Nosotros', href: '/about', current: false },
   { name: 'Cotizar', href: '/quote', current: false },
 ]
 
@@ -27,7 +26,7 @@ export default function Header() {
   useEffect(() => setMounted(true), [])
   if (!mounted) return null
   return (
-    <header className='min-h-full bg-gray-200 dark:bg-gray-900'>
+    <header className='fixed top-0 left-0 right-0 z-50 min-h-20 items-center bg-gray-200 dark:bg-gray-900 border-b border-gray-400'>
       <Disclosure as='nav'>
         {({ open }) => (
           <>
@@ -35,7 +34,7 @@ export default function Header() {
               <div className='flex h-16 items-center justify-between'>
                 <div className='flex items-center'>
                   <div className='flex-shrink-0'>
-                    <p className='text-4xl font-bold text-gray-500'>Arqustik</p>
+                    <p className='text-4xl font-bold text-black dark:text-white'>Arqustik</p>
                     {/*  <Image src={logo} width={100} alt='logo corporativo' /> */}
                   </div>
                   <div className='hidden md:block'>

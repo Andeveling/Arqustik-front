@@ -3,8 +3,6 @@ import Heading from '@components/Heading'
 import LoadingSpinner from '@components/LoadingSpinner'
 import SystemsList from '@components/systems/SystemsList'
 import { usePublicAppStore } from 'context/PublicAppContext'
-import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/react'
 
 export default function Systems() {
   const { systems_pvc, error } = usePublicAppStore()
@@ -30,21 +28,4 @@ export default function Systems() {
       <SystemsList systems={systems_pvc} />
     </Container>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await getSession(ctx)
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
-  }
-  return {
-    props: {
-      session,
-    },
-  }
 }

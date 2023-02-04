@@ -2,6 +2,7 @@ import { ArrowLeftIcon, BuildingOffice2Icon, Cog6ToothIcon, WrenchIcon, UserIcon
 import { Avatar, Dropdown } from 'flowbite-react'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { PrivateRoutes } from 'routes'
 
 export default function QuoterMenu() {
   const { data: session, status } = useSession()
@@ -17,16 +18,16 @@ export default function QuoterMenu() {
           <span className='block text-sm text-blue-500 font-bold'>{session.user?.username}</span>
         </Dropdown.Header>
         <Dropdown.Item icon={WrenchIcon}>
-          <Link href='/private/quoter'>Cotizador V-1.0</Link>
+          <Link href={PrivateRoutes.QUOTER}>Cotizador V-1.0</Link>
         </Dropdown.Item>
         <Dropdown.Item icon={UserIcon}>
-          <Link href='/private/interested'>Interesados</Link>
+          <Link href={PrivateRoutes.INTERESTED}>Interesados</Link>
         </Dropdown.Item>
         <Dropdown.Item icon={BuildingOffice2Icon}>
-          <Link href='/private/systems'>Sistemas PVC</Link>
+          <Link href={PrivateRoutes.SYSTEMS}>Sistemas PVC</Link>
         </Dropdown.Item>
         <Dropdown.Item icon={Cog6ToothIcon}>
-          <Link href='/private/config'>Configuraciones</Link>
+          <Link href={PrivateRoutes.CONFIG}>Configuraciones</Link>
         </Dropdown.Item>
         <Dropdown.Divider />
         <Dropdown.Item icon={ArrowLeftIcon} onClick={() => signOut()}>

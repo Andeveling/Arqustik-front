@@ -11,6 +11,7 @@ export interface WindowsModelResponseI {
 }
 
 export interface WindowsModelAttributesI {
+  title: string
   type: WindowType
   opening: WindowModelsEnum
   createdAt: Date
