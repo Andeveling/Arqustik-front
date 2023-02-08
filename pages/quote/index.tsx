@@ -22,7 +22,7 @@ export default function Quote() {
     </Container>
   ) : (
     <Container>
-      <h1 className='text-4xl font-bold mb-6'>Sistemas</h1>
+      <h1 className='text-4xl font-bold '>Sistemas</h1>
       {systems_pvc && systems_pvc ? <SystemList systems={systems_pvc} /> : <></>}
     </Container>
   )

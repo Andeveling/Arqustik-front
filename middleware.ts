@@ -7,7 +7,6 @@ import { PublicRoutes } from 'routes'
 // This function can be marked `async` if using `await` inside
 export async function middleware(req: NextRequest) {
   const session = await getToken({ req, secret: process.env.NEXT_AUTH_SECRET })
-  console.log({ session: session })
   if (session === null) return NextResponse.redirect(new URL(PublicRoutes.SIGNIN, req.url))
   else return NextResponse.next()
 }
@@ -15,3 +14,14 @@ export async function middleware(req: NextRequest) {
 export const config = {
   matcher: '/private/:path*',
 }
+// Poder Cambiar los headers
+/* 
+const requestHeaders = new Headers(req.headers)
+  requestHeaders.set('next', 'tuti')
+
+  const response = NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  })
+*/

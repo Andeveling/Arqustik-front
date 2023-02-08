@@ -38,4 +38,5 @@ export interface Meta {}
 
 export enum SystemsEnum {
   BellaSliding = 'bella-sliding',
+  EverestMax = 'everestmax',
 }

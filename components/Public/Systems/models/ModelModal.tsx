@@ -25,6 +25,7 @@ interface CreateWindowPublicI {
   cant: number
   glass: string
   color: string
+  hours: number
   projectData: ProjectDataProps
 }
 
@@ -67,6 +68,7 @@ const ModelModal = ({ model }: { model: WindowsModelResponseI }) => {
     resolver: yupResolver(CreateModelWindowSchema),
     defaultValues: {
       id: model.id,
+      hours: model.attributes.hours,
       system: systemName as string,
       model: model.attributes.opening,
       type: model.attributes.windowdoor,

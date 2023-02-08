@@ -36,11 +36,12 @@ export enum WindowModelsEnum {
   '[>]' = '[>]',
   '[<]' = '[<]',
   '[O]' = '[O]',
-  // TODO: añadir modelos
   '[V]' = '[V]',
   '[O<]' = '[O<]',
   '[>O]' = '[>O]',
+  // TODO: añadir modelos
   '[>O<]' = '[>O<]',
+  '[><]' = '[><]',
 }
 
 export interface CreateWindowFormPVCI extends Omit<WindowI, 'id' | 'price'> {
@@ -49,6 +50,7 @@ export interface CreateWindowFormPVCI extends Omit<WindowI, 'id' | 'price'> {
   quotationID: number | string
   windowID?: number | string
   dismount: boolean
+  hours: number
 }
 
 export interface CreateWindowPVCI extends Pick<WindowI, 'title' | 'location' | 'width' | 'height' | 'price'> {

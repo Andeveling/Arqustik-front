@@ -2,7 +2,7 @@ import { SystemsEnum } from '@models/System.model'
 import { CreateWindowFormPVCI, WindowModelsEnum, WindowTypeEnum } from '@models/WindowPVC.model'
 import { getSystem } from './getSystem'
 
-export const getPrice = async ({
+export const getPriceBellaSliding = async ({
   title,
   location,
   width,
@@ -13,7 +13,7 @@ export const getPrice = async ({
   glass,
   cant,
   color,
-
+  hours,
   projectData,
   quotationID,
   dismount,
@@ -154,6 +154,7 @@ export const getPrice = async ({
                     monorailCost.rTransom += price
                   }
                 }
+
                 for (const accessory of accessories.data) {
                   // Haladera
                   if (accessory.attributes.id_provider === '13119') monorailCost.e_handle += accessory.attributes.price
@@ -162,6 +163,7 @@ export const getPrice = async ({
                   // rueda
                   if (accessory.attributes.id_provider === '13189') monorailCost.roller += accessory.attributes.price
                 }
+
                 for (const glassA of glasses.data) {
                   if (glassA.attributes.id_arqustik === glass) monorailCost.glass += glassA.attributes.price
                 }
