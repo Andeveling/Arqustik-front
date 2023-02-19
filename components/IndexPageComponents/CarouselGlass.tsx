@@ -1,30 +1,33 @@
 import { Carousel } from 'flowbite-react'
+import Image from 'next/image'
+import arqustikImage_1 from '@public/img/arqustik-1.jpg'
+import arqustikImage_2 from '@public/img/arqustik-2.jpeg'
+import arqustikImage_3 from '@public/img/arqustik-3.jpg'
 
 const CarouselGlass = () => {
   return (
-    <div className='h-56 w-full mt-2 sm:h-64 xl:h-80 2xl:h-96'>
+    <div className='h-56 -z-10 w-full mt-2 sm:h-64 xl:h-80 2xl:h-96'>
       <Carousel slideInterval={5000}>
         <div
           className='grid h-full w-full items-center justify-center
-        bg-[url(https://deceuninck-iq.com/wp-content/uploads/2021/02/Gallery-3.jpg)]
-        bg-origin-border 
+               bg-origin-border 
         bg-center 
         bg-cover
         bg-no-repeat
-        bg-transparent      
+        bg-transparent
+        relative      
         '>
+          <Image
+            src={arqustikImage_1}
+            width={1300}
+            height={580}
+            alt='photo'
+            className='absolute top-0 left-0 bottom-0 right-0'
+          />
           <div className='grid items-center w-full h-full text-center space-x-2 space-y-2'>
             <div className='bg-gray-900 p-4 rounded-lg text-gray-0 opacity-80'>
               <h3 className='text-4xl font-bold'>Vidrio 4 mm Crudo</h3>
               <div className='grid gap-5 text-left'>
-                {/* <div>
-                  <span className='font-bold'>Pros</span>
-                  <ul>
-                    <li>Economico</li>
-                    <li>Liviano</li>
-                    <li>Ventanas pequeñas</li>
-                  </ul>
-                </div> */}
                 <div>
                   <ul>
                     <li>
@@ -52,13 +55,21 @@ const CarouselGlass = () => {
         {/* 2 */}
         <div
           className='grid h-full w-full items-center justify-center
-        bg-[url(https://deceuninck-iq.com/wp-content/uploads/2021/02/Gallery-13.jpg)]
+        
         bg-origin-border 
         bg-center 
          bg-cover
         bg-no-repeat
-        bg-transparent      
+        bg-transparent
+        relative      
         '>
+          <Image
+            src={arqustikImage_2}
+            width={1300}
+            height={580}
+            alt='photo'
+            className='absolute top-0 left-0 bottom-0 right-0'
+          />
           <div className='grid items-center w-full h-full text-center space-x-2 space-y-2'>
             <div className='bg-gray-900 p-4 rounded-lg text-gray-0 opacity-80'>
               <h3 className='text-4xl font-bold'>Vidrio 5mm Templado</h3>
@@ -88,13 +99,20 @@ const CarouselGlass = () => {
 
         <div
           className='grid h-full w-full items-center justify-center
-        bg-[url(http://deceuninck-iq.com/wp-content/uploads/2021/02/Gallery-12.jpg)]
-        bg-origin-border 
+        
         bg-center 
          bg-cover
         bg-no-repeat
-        bg-transparent      
+        bg-transparent    
+        relative  
         '>
+          <Image
+            src={arqustikImage_3}
+            width={1300}
+            height={580}
+            alt='photo'
+            className='absolute top-0 left-0 bottom-0 right-0'
+          />
           <div className='grid items-center w-full h-full text-center space-x-2 space-y-2'>
             <div className='bg-gray-900 p-4 rounded-lg text-gray-0 opacity-80'>
               <h3 className='text-4xl font-bold'>Vidrio 8 mm Laminado</h3>

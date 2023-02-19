@@ -12,7 +12,7 @@ export const getPricesEverestMax = async ({
   glass,
   cant,
   color,
-  hours,
+  hours = 1,
 
   projectData,
   quotationID,
@@ -82,8 +82,17 @@ export const getPricesEverestMax = async ({
         attributes: { profiles, accessories, glasses, administrative_costs, services },
       },
     } = everest
-    const dollar = administrative_costs.data.find((cost) => cost.attributes.title === 'dollar')
-    if (dollar?.attributes.value) cost.dollar = dollar?.attributes.value
+
+    for (const adminCost of administrative_costs.data) {
+      const {
+        attributes: { title, value },
+      } = adminCost
+      if (title === 'MOD') cost.adminCost.MOD = value * hours
+      if (title === 'CIF') cost.adminCost.CIF = value * hours
+      if (title === 'dollar') cost.dollar = value
+      if (title === 'profit') cost.adminCost.profit = value
+    }
+
     switch (type) {
       case WindowTypeEnum.WINDOW:
         switch (model) {
@@ -150,7 +159,7 @@ export const getPricesEverestMax = async ({
             // Refuerzos
             cost.ref = {
               frame: costModel.rFrame * ((widthM + heightM) * 2),
-              sash: costModel.rSash * (widthM + heightM * 2),
+              sash: costModel.rSash * ((widthM + heightM) * 2),
               transom: 0,
             }
             // Accesorios
@@ -238,7 +247,7 @@ export const getPricesEverestMax = async ({
             // Refuerzos
             cost.ref = {
               frame: costModelOV.rFrame * ((widthM + heightM) * 2),
-              sash: costModelOV.rSash * (widthM + heightM * 2),
+              sash: costModelOV.rSash * ((widthM + heightM) * 2),
               transom: costModelOV.rTransom * heightM,
             }
             // Accesorios
@@ -250,8 +259,8 @@ export const getPricesEverestMax = async ({
             }
             // Vidrios
             cost.glasses = {
-              sash: (widthM - 0.194) * (heightM - 0.194) * costModelOV.glass,
-              frame: 0,
+              sash: (widthM / 2 - 0.194) * (heightM - 0.194) * costModelOV.glass,
+              frame: (widthM / 2 - 0.124) * (heightM - 0.194) * costModelOV.glass,
             }
 
             break
@@ -316,7 +325,6 @@ export const getPricesEverestMax = async ({
               frame: (widthM - 0.194) * (heightM - 0.194) * costModelO.glass,
             }
             break
-
           case WindowModelsEnum['[V]']:
             const costModelV = {
               // Profiles
@@ -391,7 +399,7 @@ export const getPricesEverestMax = async ({
             // Refuerzos
             cost.ref = {
               frame: costModelV.rFrame * ((widthM + heightM) * 2),
-              sash: costModelV.rSash * (widthM + heightM * 2),
+              sash: costModelV.rSash * ((widthM + heightM) * 2),
               transom: 0,
             }
             // Accesorios
@@ -410,7 +418,6 @@ export const getPricesEverestMax = async ({
             console.log({ cost: cost })
 
             break
-          /* TODO: aca */
           case WindowModelsEnum['[>O<]']:
             const costModelVOV = {
               // Profiles
@@ -430,6 +437,154 @@ export const getPricesEverestMax = async ({
               hinge: 0,
               // Glass
               glass: 0,
+            }
+
+            for (const profile of profiles.data) {
+              const {
+                attributes: { id_provider, price },
+              } = profile
+              // Perfiles pricipales
+              // Marco >>
+              if (id_provider === '12301') costModelVOV.frame += price
+              // Divisor
+              if (id_provider === '12320') costModelVOV.transom += price
+              // Hoja
+              if (id_provider === '12310') costModelVOV.sash += price
+              // pisavidrio
+              if (id_provider === '12342') costModelVOV.glazing_bead += price
+              // Ref Marco
+              if (id_provider === '12070') costModelVOV.rFrame += price
+              // Ref Hoja
+              if (id_provider === '13088') costModelVOV.rSash += price
+              // Ref Divisor
+              if (id_provider === '13088') costModelVOV.rTransom += price
+            }
+
+            for (const accessory of accessories.data) {
+              // Manija
+              if (accessory.attributes.id_provider === '12873') costModelVOV.handle += accessory.attributes.price
+              // Cremona
+              if (accessory.attributes.id_provider === '13383') costModelVOV.cremone += accessory.attributes.price
+              // Cerraderos
+              if (accessory.attributes.id_provider === '12813') costModelVOV.striker += accessory.attributes.price
+              // Bisagras
+              if (accessory.attributes.id_provider === '13180') costModelVOV.hinge += accessory.attributes.price
+            }
+
+            for (const glassData of glasses.data) {
+              if (glassData.attributes.id_arqustik === glass) costModelVOV.glass += glassData.attributes.price
+            }
+
+            /*  console.log({ model: costModelVOV }) */
+
+            // PVC
+            cost.pvc = {
+              frame: costModelVOV.frame * ((widthM + heightM) * 2),
+              sash: costModelVOV.sash * ((widthM / 3 - 0.062 + heightM - 0.062) * 2),
+              glazing_bead: costModelVOV.glazing_bead * (((widthM - 0.194) / 3) * 6 + (heightM - 0.194) * 6),
+              transom: costModelVOV.transom * ((heightM - 0.12) * 2),
+            }
+            // Refuerzos
+            cost.ref = {
+              frame: costModelVOV.rFrame * ((widthM + heightM) * 2),
+              sash: costModelVOV.rSash * ((widthM / 3 + heightM) * 2),
+              transom: costModelVOV.rTransom * ((heightM - 0.194) * 2),
+            }
+            // Accesorios
+            cost.accessories = {
+              handle: costModelVOV.handle,
+              cremone: costModelVOV.cremone,
+              striker: costModelVOV.striker * 3,
+              hinge: costModelVOV.hinge * 2,
+            }
+            // Vidrios
+            cost.glasses = {
+              sash: ((widthM - 0.194) / 3) * (heightM - 0.194) * costModelVOV.glass,
+              frame: ((widthM - 0.194) / 3) * (heightM - 0.194) * costModelVOV.glass * 2,
+            }
+
+            break
+          case WindowModelsEnum['[><]']:
+            const costModelVV = {
+              // Profiles
+              frame: 0,
+              rFrame: 0,
+              sash: 0,
+              rSash: 0,
+              transom: 0,
+              rTransom: 0,
+
+              glazing_bead: 0,
+
+              // Accesories
+              handle: 0,
+              cremone: 0,
+              striker: 0,
+              hinge: 0,
+              // Glass
+              glass: 0,
+            }
+
+            for (const profile of profiles.data) {
+              const {
+                attributes: { id_provider, price },
+              } = profile
+              // Perfiles pricipales
+              // Marco
+              if (id_provider === '12301') costModelVV.frame += price
+              // Divisor
+              if (id_provider === '12320') costModelVV.transom += price
+              // Hoja
+              if (id_provider === '12310') costModelVV.sash += price
+              // pisavidrio
+              if (id_provider === '12342') costModelVV.glazing_bead += price
+              // Ref Marco
+              if (id_provider === '12070') costModelVV.rFrame += price
+              // Ref Hoja
+              if (id_provider === '13088') costModelVV.rSash += price
+              // Ref Divisor
+              if (id_provider === '13088') costModelVV.rTransom += price
+            }
+
+            for (const accessory of accessories.data) {
+              // Manija
+              if (accessory.attributes.id_provider === '12873') costModelVV.handle += accessory.attributes.price
+              // Cremona
+              if (accessory.attributes.id_provider === '13383') costModelVV.cremone += accessory.attributes.price
+              // Cerraderos
+              if (accessory.attributes.id_provider === '12813') costModelVV.striker += accessory.attributes.price
+              // Bisagras
+              if (accessory.attributes.id_provider === '13180') costModelVV.hinge += accessory.attributes.price
+            }
+
+            for (const glassData of glasses.data) {
+              if (glassData.attributes.id_arqustik === glass) costModelVV.glass += glassData.attributes.price
+            }
+
+            // PVC
+            cost.pvc = {
+              frame: costModelVV.frame * ((widthM + heightM) * 2),
+              sash: costModelVV.sash * ((widthM / 2 - 0.062 + heightM - 0.062) * 4),
+              glazing_bead: costModelVV.glazing_bead * ((widthM - 0.194 + (heightM - 0.194) * 2) * 2),
+              transom: costModelVV.transom * heightM - 0.12,
+            }
+            // Refuerzos
+            cost.ref = {
+              frame: costModelVV.rFrame * ((widthM - 0.12 + heightM - 0.12) * 2),
+              sash: costModelVV.rSash * ((widthM / 2 - 0.062 + heightM - 0.062) * 4),
+              transom: costModelVV.rTransom * heightM,
+            }
+            // Accesorios
+            cost.accessories = {
+              handle: costModelVV.handle,
+              cremone: costModelVV.cremone,
+              striker: costModelVV.striker * 3,
+              hinge: costModelVV.hinge * 4,
+            }
+            // Vidrios
+            cost.glasses = {
+              sash: (widthM / 2 - 0.194) * (heightM - 0.194) * costModelVV.glass * 2,
+              frame: 0,
             }
             break
         }
@@ -455,6 +610,8 @@ export const getPricesEverestMax = async ({
               // Door
               striker2: 0,
               adjustable_striker: 0,
+              corner: 0,
+              addExt: 0,
 
               cylinder: 0,
 
@@ -490,9 +647,12 @@ export const getPricesEverestMax = async ({
               // Cerraderos ajustable
               if (accessory.attributes.id_provider === '12906')
                 costModel.adjustable_striker += accessory.attributes.price
-
               // Bisagras
               if (accessory.attributes.id_provider === '12920') costModel.hinge += accessory.attributes.price
+              // Corner
+              if (accessory.attributes.id_provider === '13577') costModel.corner += accessory.attributes.price
+              // Add
+              if (accessory.attributes.id_provider === '13426') costModel.addExt += accessory.attributes.price
             }
 
             for (const glassData of glasses.data) {
@@ -517,7 +677,12 @@ export const getPricesEverestMax = async ({
               handle: costModel.handle,
               cremone: costModel.cremone,
               striker:
-                costModel.striker * 2 + costModel.adjustable_striker + costModel.striker2 * 4 + costModel.cylinder,
+                costModel.striker * 2 +
+                costModel.adjustable_striker +
+                costModel.striker2 * 4 +
+                costModel.cylinder +
+                costModel.addExt * 2 +
+                costModel.corner * 2,
               hinge: costModel.hinge * 3,
             }
             // Vidrios
@@ -526,15 +691,109 @@ export const getPricesEverestMax = async ({
               frame: 0,
             }
             break
-        }
-    }
+          case WindowModelsEnum['[><]']:
+            const costModelVV = {
+              // Profiles
+              frame: 0,
+              rFrame: 0,
+              sash: 0,
+              rSash: 0,
+              glazing_bead: 0,
+              rTransom: 0,
 
-    for (const adminCost of administrative_costs.data) {
-      const {
-        attributes: { title, value },
-      } = adminCost
-      if (title === 'MOD') cost.adminCost.MOD = value * hours
-      if (title === 'CIF') cost.adminCost.CIF = value * hours
+              // Accesories
+              handle: 0,
+              cremone: 0,
+              cremone2: 0,
+              striker: 0,
+              hinge: 0,
+              // Door
+              corner: 0,
+              addExt: 0,
+              striker2: 0,
+              adjustable_striker: 0,
+
+              cylinder: 0,
+
+              // Glass
+              glass: 0,
+            }
+            for (const profile of profiles.data) {
+              const {
+                attributes: { id_provider, price },
+              } = profile
+              // Perfiles pricipales
+              // Marco >>
+              if (id_provider === '12301') costModelVV.frame += price
+              // Hoja
+              if (id_provider === '12311') costModelVV.sash += price
+              // pisavidrio
+              if (id_provider === '12342') costModelVV.glazing_bead += price
+              // Ref Marco
+              if (id_provider === '12070') costModelVV.rFrame += price
+              // Ref Hoja
+              if (id_provider === '13080') costModelVV.rSash += price
+            }
+
+            for (const accessory of accessories.data) {
+              // Manija
+              if (accessory.attributes.id_provider === '12873') costModelVV.handle += accessory.attributes.price
+              // Cremona
+              if (accessory.attributes.id_provider === '13340') costModelVV.cremone += accessory.attributes.price
+              // Cremona2
+              if (accessory.attributes.id_provider === '13555') costModelVV.cremone2 += accessory.attributes.price
+              // Cerraderos 1
+              if (accessory.attributes.id_provider === '12813') costModelVV.striker += accessory.attributes.price
+              // Cerraderos 2
+              if (accessory.attributes.id_provider === '12897') costModelVV.striker2 += accessory.attributes.price
+              // Corner
+              if (accessory.attributes.id_provider === '13577') costModelVV.corner += accessory.attributes.price
+              // Add
+              if (accessory.attributes.id_provider === '13426') costModelVV.addExt += accessory.attributes.price
+
+              // Cerraderos ajustable
+              if (accessory.attributes.id_provider === '12906')
+                costModelVV.adjustable_striker += accessory.attributes.price
+
+              // Bisagras
+              if (accessory.attributes.id_provider === '12920') costModelVV.hinge += accessory.attributes.price
+            }
+
+            for (const glassData of glasses.data) {
+              if (glassData.attributes.id_arqustik === glass) costModelVV.glass += glassData.attributes.price
+            }
+
+            // PVC
+            cost.pvc = {
+              frame: costModelVV.frame * ((widthM + heightM) * 2),
+              sash: costModelVV.sash * ((widthM - 0.062 + heightM - 0.062) * 2),
+              glazing_bead: costModelVV.glazing_bead * ((widthM - 0.194 + heightM - 0.194) * 2),
+              transom: 0,
+            }
+            // Refuerzos
+            cost.ref = {
+              frame: costModelVV.rFrame * ((widthM + heightM) * 2),
+              sash: costModelVV.rSash * ((widthM + heightM) * 2),
+              transom: 0,
+            }
+            // Accesorios
+            cost.accessories = {
+              handle: costModelVV.handle,
+              cremone: costModelVV.cremone + costModelVV.cremone2 + costModelVV.corner * 4 + costModelVV.addExt * 4,
+              striker:
+                costModelVV.striker * 4 +
+                costModelVV.adjustable_striker +
+                costModelVV.striker2 * 6 +
+                costModelVV.cylinder,
+              hinge: costModelVV.hinge * 6,
+            }
+            // Vidrios
+            cost.glasses = {
+              sash: (widthM / 2 - 0.194) * (heightM - 0.194) * costModelVV.glass * 2,
+              frame: 0,
+            }
+            break
+        }
     }
 
     for (const service of services.data) {
@@ -599,7 +858,7 @@ export const getPricesEverestMax = async ({
   }
   // pesos
   const costWindow = cost.price * cost.dollar + cost.COP
-  const profitWindow = costWindow / ((100 - 35) / 100) - costWindow
+  const profitWindow = costWindow / ((100 - cost.adminCost.profit) / 100) - costWindow
 
   const newWindow = {
     title,
@@ -620,7 +879,7 @@ export const getPricesEverestMax = async ({
     description: cost.description,
   }
 
-  console.log(newWindow)
+  /* console.log(newWindow) */
 
   return newWindow
 }

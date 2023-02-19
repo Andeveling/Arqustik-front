@@ -1,12 +1,12 @@
 import { NextApiHandler } from 'next'
-import { getPrice } from '@utils/getPricesBellaSliding'
+import { getPriceBellaSliding } from '@utils/getPricesBellaSliding'
 
 const updateWindow: NextApiHandler = async (req, res) => {
   const { method, body } = req
   switch (method) {
     case 'PUT':
       try {
-        const window = await getPrice(body)
+        const window = await getPriceBellaSliding(body)
         res.status(200).json(window)
       } catch (e) {
         console.error('Request error', e)

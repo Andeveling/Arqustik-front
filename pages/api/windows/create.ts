@@ -9,7 +9,7 @@ const createWindow: NextApiHandler = async (req, res) => {
     case 'POST':
       try {
         const { body } = req
-
+        console.log(body)
         switch (body.system) {
           case SystemsEnum.BellaSliding:
             const windowBella = await getPriceBellaSliding(body)

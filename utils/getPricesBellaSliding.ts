@@ -170,9 +170,9 @@ export const getPriceBellaSliding = async ({
                 // PVC
                 cost.pvc = {
                   frame: monorailCost.frame * ((widthM + heightM) * 2),
-                  sash: monorailCost.sash * (widthM + heightM * 2),
+                  sash: monorailCost.sash * ((widthM + heightM) * 2),
                   transom: monorailCost.transom * heightM,
-                  glazing_bead: monorailCost.glazing_bead * (widthM + heightM * 2) * 2,
+                  glazing_bead: monorailCost.glazing_bead * ((widthM + heightM) * 2) * 2,
                   closing: monorailCost.closing * (widthM + heightM),
                   interlock: monorailCost.interlock * heightM,
                   frontal: 0,
@@ -180,7 +180,7 @@ export const getPriceBellaSliding = async ({
                 // Refuerzos
                 cost.ref = {
                   frame: monorailCost.rFrame * ((widthM + heightM) * 2),
-                  sash: monorailCost.rSash * (widthM + heightM * 2),
+                  sash: monorailCost.rSash * ((widthM + heightM) * 2),
                   transom: monorailCost.rTransom * heightM,
                 }
                 // Accesorios
@@ -274,7 +274,7 @@ export const getPriceBellaSliding = async ({
                 // Refuerzos XX
                 cost.ref = {
                   frame: doubleRailCost.rFrame * ((widthM + heightM) * 2),
-                  sash: doubleRailCost.rSash * (widthM + heightM * 2) * 2,
+                  sash: doubleRailCost.rSash * ((widthM + heightM) * 2) * 2,
                   transom: 0,
                 }
                 // Accesorios XX
@@ -480,7 +480,7 @@ export const getPriceBellaSliding = async ({
                   frame: monorailDoubleCost.frame * ((widthM + heightM) * 2),
                   sash: monorailDoubleCost.sash * ((widthM / 4 - 0.022) * 4 + (heightM - 0.064) * 4),
                   transom: monorailDoubleCost.transom * (heightM - 0.064) * 2,
-                  closing: monorailDoubleCost.closing * (widthM + heightM * 2),
+                  closing: monorailDoubleCost.closing * ((widthM + heightM) * 2),
                   interlock: monorailDoubleCost.interlock * (heightM - 0.064) * 2,
                   frontal: monorailDoubleCost.frontal * (heightM - 0.064),
                   glazing_bead:
@@ -582,8 +582,8 @@ export const getPriceBellaSliding = async ({
                 // PVC XO
                 cost.pvc = {
                   frame: monorailCost.frame * ((widthM + heightM) * 2),
-                  sash: monorailCost.sash * (widthM + heightM * 2),
-                  glazing_bead: monorailCost.glazing_bead * (widthM + heightM * 2) * 2,
+                  sash: monorailCost.sash * ((widthM + heightM) * 2),
+                  glazing_bead: monorailCost.glazing_bead * ((widthM + heightM) * 2) * 2,
                   transom: monorailCost.transom * heightM,
                   closing: monorailCost.closing * (widthM + heightM),
                   interlock: monorailCost.interlock * heightM,
@@ -592,7 +592,7 @@ export const getPriceBellaSliding = async ({
                 // Refuerzos XO
                 cost.ref = {
                   frame: monorailCost.rFrame * ((widthM + heightM) * 2),
-                  sash: monorailCost.rSash * (widthM + heightM * 2),
+                  sash: monorailCost.rSash * ((widthM + heightM) * 2),
                   transom: monorailCost.rTransom * heightM,
                 }
                 // Accesorios XO
@@ -675,9 +675,9 @@ export const getPriceBellaSliding = async ({
                 // PVC XX
                 cost.pvc = {
                   frame: doubleRailCost.frame * ((widthM + heightM) * 2),
-                  sash: doubleRailCost.sash * (widthM + heightM * 2) * 2,
+                  sash: doubleRailCost.sash * ((widthM + heightM) * 2) * 2,
                   interlock: doubleRailCost.interlock * heightM * 2,
-                  glazing_bead: doubleRailCost.glazing_bead * (widthM + heightM * 2) * 2,
+                  glazing_bead: doubleRailCost.glazing_bead * ((widthM + heightM) * 2) * 2,
                   transom: 0,
                   closing: 0,
                   frontal: 0,
@@ -685,7 +685,7 @@ export const getPriceBellaSliding = async ({
                 // Refuerzos XX
                 cost.ref = {
                   frame: doubleRailCost.rFrame * ((widthM + heightM) * 2),
-                  sash: doubleRailCost.rSash * (widthM + heightM * 2) * 2,
+                  sash: doubleRailCost.rSash * ((widthM + heightM) * 2) * 2,
                   transom: 0,
                 }
                 // Accesorios XX
@@ -896,7 +896,7 @@ export const getPriceBellaSliding = async ({
                   frame: monorailDoubleCost.frame * ((widthM + heightM) * 2),
                   sash: monorailDoubleCost.sash * ((widthM / 4 - 0.022) * 4 + (heightM - 0.064) * 4),
                   transom: monorailDoubleCost.transom * (heightM - 0.064) * 2,
-                  closing: monorailDoubleCost.closing * (widthM + heightM * 2),
+                  closing: monorailDoubleCost.closing * ((widthM + heightM) * 2),
                   interlock: monorailDoubleCost.interlock * (heightM - 0.064) * 2,
                   frontal: monorailDoubleCost.frontal * (heightM - 0.064),
                   glazing_bead:

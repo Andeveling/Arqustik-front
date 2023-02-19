@@ -1,5 +1,4 @@
-import LoadingSpinner from '@components/LoadingSpinner'
-import { SystemResponseI } from '@models/System.model'
+import { SystemResponseI, SystemsEnum } from '@models/System.model'
 import { Button, Tooltip } from 'flowbite-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -17,11 +16,11 @@ const SystemCard = ({ system }: { system: SystemResponseI['data'] }) => {
         />
       </div>
       <div className='flex justify-between flex-col '>
-        <h1 className='mb-2 font-bold text-2xl'>{system.attributes.title.toUpperCase()}</h1>
+        <h1 className='mb-2 font-bold text-2xl'>{convertName(system.attributes.title)}</h1>
         <p className='text-xl text-justify'>{system.attributes.description}</p>
         <div className='flex w-full mt-4 justify-center sm:justify-end gap-4 '>
           <Tooltip content='Ver modelos disponibles'>
-            <Link href={`quote/systems/${system.attributes.title.toLowerCase()}`}>
+            <Link href={`systems/${system.attributes.title.toLowerCase()}`}>
               <Button
                 size='xl'
                 color='dark'
@@ -36,3 +35,11 @@ const SystemCard = ({ system }: { system: SystemResponseI['data'] }) => {
   )
 }
 export default SystemCard
+
+const convertName = (name: SystemsEnum) => {
+  const systems = {
+    [SystemsEnum.BellaSliding]: 'Ventanas, Puertas Ventanas, Correderas',
+    [SystemsEnum.EverestMax]: 'Batientes, Proyectantes, Oscilobatientes',
+  }
+  return systems[name]
+}

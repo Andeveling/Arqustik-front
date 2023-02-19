@@ -1,18 +1,33 @@
+import { Switch } from '@headlessui/react'
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline'
 import { useTheme } from 'next-themes'
 
 export default function ThemeHandled() {
   const { theme, setTheme, resolvedTheme } = useTheme()
+
   return (
-    <button
-      type='button'
-      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-      className='rounded-full bg-gray-900 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-0 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 dark:bg-gray-600'>
-      {theme === 'dark' ? (
-        <SunIcon className='h-6 w-6 text-orange-400' aria-hidden='true' />
-      ) : (
-        <MoonIcon className='h-6 w-6 text-blue-700' aria-hidden='true' />
-      )}
-    </button>
+    <Switch
+      checked={theme === 'light'}
+      onChange={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+      className={`${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-600'}
+          relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}>
+      <span className='sr-only'>Dark Mode</span>
+      <span
+        aria-hidden='true'
+        className={`${theme === 'dark' ? 'translate-x-9 bg-white' : 'translate-x-0 bg-black'}
+              pointer-events-none flex justify-center items-center h-[36px] w-[36px] transform rounded-full  shadow-lg ring-0 transition duration-200 ease-in-out`}>
+        {theme === 'dark' ? (
+          <>
+            <SunIcon className='h-5 w-5 text-black' aria-hidden='true' />
+            <span className='sr-only'>Light Mode</span>
+          </>
+        ) : (
+          <>
+            <MoonIcon className='h-5 w-5 text-white' aria-hidden='true' />
+            <span className='sr-only'>Dark Mode</span>
+          </>
+        )}
+      </span>
+    </Switch>
   )
 }

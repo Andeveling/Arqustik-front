@@ -13,12 +13,14 @@ export default function QuoterMenu() {
         arrowIcon={false}
         placement='bottom'
         label={<Avatar alt='User settings' bordered={true} status='online' />}
+        aria-labelledby='Vendor Button Options'
         inline>
+        <span className='sr-only'>Menu de vendedor</span>
         <Dropdown.Header>
           <span className='block text-sm text-blue-500 font-bold'>{session.user?.username}</span>
         </Dropdown.Header>
         <Dropdown.Item icon={WrenchIcon}>
-          <Link href={PrivateRoutes.QUOTER}>Cotizador V-1.0</Link>
+          <Link href={PrivateRoutes.QUOTER}>Clientes</Link>
         </Dropdown.Item>
         <Dropdown.Item icon={UserIcon}>
           <Link href={PrivateRoutes.INTERESTED}>Interesados</Link>

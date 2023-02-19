@@ -39,7 +39,6 @@ const Systems = () => {
 
   return (
     <Container>
-      <CarouselGlass />
       <div className='mt-2'>
         <Heading as='h2'>Modelos disponibles</Heading>
       </div>
@@ -65,6 +64,7 @@ const Systems = () => {
           )}
         />
       )}
+      <CarouselGlass />
     </Container>
   )
 }
