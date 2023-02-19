@@ -1,6 +1,7 @@
-import { Console } from 'console'
+import { SystemsEnum } from '@models/System.model'
+import { getPriceBellaSliding } from '@utils/getPricesBellaSliding'
+import { getPricesEverestMax } from '@utils/getPricesEverestMax'
 import { NextApiHandler } from 'next'
-import { getPrice } from 'utils/getPrices'
 
 const createWindow: NextApiHandler = async (req, res) => {
   const { method } = req
@@ -8,8 +9,17 @@ const createWindow: NextApiHandler = async (req, res) => {
     case 'POST':
       try {
         const { body } = req
-        const window = await getPrice(body)
-        res.json(window)
+        console.log(body)
+        switch (body.system) {
+          case SystemsEnum.BellaSliding:
+            const windowBella = await getPriceBellaSliding(body)
+            return res.json(windowBella)
+
+          case SystemsEnum.EverestMax:
+            const windowEverest = await getPricesEverestMax(body)
+            console.log(windowEverest)
+            return res.json(windowEverest)
+        }
       } catch (error) {
         res.json(error)
       }

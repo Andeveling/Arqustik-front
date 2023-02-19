@@ -12,7 +12,7 @@ const Model3D = ({ url }: { url: string }) => {
 
   return (
     <div>
-      <Button onClick={openModal} size='xs' color='dark'>
+      <Button onClick={openModal} size='sm' color='dark'>
         Modelo 3D
       </Button>
       <Transition appear show={isOpen} as={Fragment}>

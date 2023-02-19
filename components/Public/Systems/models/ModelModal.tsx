@@ -1,7 +1,7 @@
 import { ProjectDataProps } from '@components/WindowsPVC/WindowsPVCForm'
 import { useCartMutations } from '@context/CartContext'
 import { Dialog, Transition } from '@headlessui/react'
-import { ArrowsRightLeftIcon, ArrowsUpDownIcon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import { ArrowsRightLeftIcon, ArrowsUpDownIcon, ShoppingCartIcon, XMarkIcon, PlusIcon } from '@heroicons/react/24/solid'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { WindowDoor, WindowsModelResponseI } from '@models/WindowModels.model'
 import { WindowModelsEnum } from '@models/WindowPVC.model'
@@ -25,6 +25,7 @@ interface CreateWindowPublicI {
   cant: number
   glass: string
   color: string
+  hours: number
   projectData: ProjectDataProps
 }
 
@@ -67,6 +68,7 @@ const ModelModal = ({ model }: { model: WindowsModelResponseI }) => {
     resolver: yupResolver(CreateModelWindowSchema),
     defaultValues: {
       id: model.id,
+      hours: model.attributes.hours,
       system: systemName as string,
       model: model.attributes.opening,
       type: model.attributes.windowdoor,
@@ -100,8 +102,8 @@ const ModelModal = ({ model }: { model: WindowsModelResponseI }) => {
 
   return (
     <div>
-      <Button onClick={openModal} size='xs' color='dark'>
-        <ShoppingCartIcon className='w-4 h-4 mr-2' /> Añadir
+      <Button onClick={openModal} size='sm' color='dark'>
+        <PlusIcon className='w-5 h-5 mr-2' /> Añadir
       </Button>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as='div' className='relative z-10' onClose={() => {}}>
@@ -203,7 +205,7 @@ const ModelModal = ({ model }: { model: WindowsModelResponseI }) => {
                       </div>
                     </div>
                     <Button color='dark' type='submit' className='mt-2' disabled={isLoading}>
-                      <ShoppingCartIcon className='w-4 h-4 mr-2' />
+                      <PlusIcon className='w-5 h-5 mr-2' />
                       {isLoading ? <>Procesando..</> : <>Añadir</>}
                     </Button>
                   </form>

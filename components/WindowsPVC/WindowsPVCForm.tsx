@@ -1,7 +1,7 @@
 import SubmitInput from '@components/SubmitInput'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { QuotationI } from '@models/Quotation.model'
-import { CreateWindowFormPVCI } from '@models/WindowPVC.model'
+import { CreateWindowFormPVCI, WindowTypeEnum } from '@models/WindowPVC.model'
 import { getJWT } from '@services/getJWT.service'
 import { windowPVC } from '@services/window.service'
 import axios from 'axios'
@@ -18,6 +18,7 @@ import SelectType from './SelectType'
 import SelectWindowsDetails from './SelectWindowsDetails'
 import TitleLocation from './TitleLocation'
 import { WindowsPVCSchema } from './WindowsPVCSchema'
+import { SystemsEnum } from '@models/System.model'
 
 export interface ProjectDataProps {
   installation: boolean
@@ -31,6 +32,10 @@ const WindowsPVCForm = ({ projectData }: { projectData: ProjectDataProps }) => {
   const [loading, setLoading] = useState(false)
   const methods = useForm<CreateWindowFormPVCI>({
     resolver: yupResolver(WindowsPVCSchema),
+    defaultValues: {
+      system: SystemsEnum.BellaSliding,
+      type: WindowTypeEnum.WINDOW,
+    },
   })
   const router = useRouter()
   const quotationID: QuotationI['id'] = typeof router.query.quotation === 'string' ? router.query.quotation : ''
@@ -51,11 +56,11 @@ const WindowsPVCForm = ({ projectData }: { projectData: ProjectDataProps }) => {
           .then((res) =>
             windowPVC
               .create(res.data)
-              .then((res) => res)
+              .then((res) => console.log(res))
               .then(() => methods.reset())
-              .then(() => router.reload())
-              .catch((err) => err),
-          ),
+              .catch((err) => console.log(err)),
+          )
+          .catch((err) => console.log(err)),
         {
           loading: 'Creando...',
           success: <b>¡Ventana creada!</b>,
@@ -109,3 +114,48 @@ const WindowsPVCForm = ({ projectData }: { projectData: ProjectDataProps }) => {
   )
 }
 export default WindowsPVCForm
+
+/* 
+{
+  title: 'V5',
+   width: 1200,
+  height: 1200,
+  location: 'Alcoba 1',
+  cant: '1',
+  quotation: '38',
+  cost: 541087.0880940001,
+  profit: 278741.8332605455,
+  price: 819828.9213545456,
+  glass: 'Crudo Simple 4 mm',
+  system: 'everestmax',
+  type: 'window',
+ 
+  model: '[>]',
+  color: 'blanco',
+  description: 'Ventana Europea EVERESTMAX'
+}
+
+{
+  title: 'V6',
+  height: 1200,
+  width: 1200,
+  location: 'Alcoba 1',
+  cant: '1',
+  dismount: false,
+  system: 'bella-sliding',
+  type: 'window',
+  model: 'OX',
+  glass: '4mmCI',
+  color: 'blanco',
+  projectData: {
+    installation: true,
+    polyurethane: true,
+    silicone: 'one',
+    transport: true,
+    protection: 'one'
+  },
+  jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjc1NDM3MzM1LCJleHAiOjE2NzgwMjkzMzV9.andik53osbuOMjuuLxlvAg2a_jb_1LxoyZIUd4v-P4U',
+  quotationID: '38'
+}
+
+*/
