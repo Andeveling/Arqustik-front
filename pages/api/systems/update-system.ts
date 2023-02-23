@@ -29,7 +29,7 @@ const updateSystem: NextApiHandler = async (req, res) => {
     })
 
     // TODO: Aca debemos pasar el systema que se desea instlar '/bella-sliding.json'
-    await fs.writeFile(jsonDirectory + `/${system.data.attributes.title}.json`, JSON.stringify(system), 'utf8')
+    await fs.writeFile(jsonDirectory + `/${system.data.attributes.title.toLowerCase()}.json`, JSON.stringify(system), 'utf8')
     // DO:
     res.status(200).json('Actualizacion Realizada con Exito')
   } catch (error) {
