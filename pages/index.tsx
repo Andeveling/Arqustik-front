@@ -10,9 +10,9 @@ export default function Home() {
   return (
     <Suspense fallback={null}>
       <Container>
+        <CarouselGlass />
         <h1 className='text-4xl font-bold '>Sistemas</h1>
         {systems_pvc && systems_pvc ? <SystemList systems={systems_pvc} /> : <></>}
-        <CarouselGlass />
       </Container>
     </Suspense>
   )

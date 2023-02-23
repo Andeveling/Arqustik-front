@@ -19,10 +19,6 @@ const Systems = () => {
   // aca se hace un call al back solicitando los modelos disponibles.
   // el Link se genera de manera dinamica en la tarjeta
   const { data: system, error, isValidating } = useSWR<SystemResponseI>(`${NEXT_SERVER}/systems/${systemName}`, fetcher)
-  const [items, setItems] = useState({
-    windows: [],
-    doors: [],
-  })
 
   if (!system && !error)
     return (
@@ -33,7 +29,7 @@ const Systems = () => {
   if (error)
     return (
       <Container>
-        <p>Error</p>
+        <p>{error.message}</p>
       </Container>
     )
 
