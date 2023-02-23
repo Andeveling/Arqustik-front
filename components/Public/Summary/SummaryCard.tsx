@@ -17,7 +17,7 @@ const SummaryCard = ({ window }: { window: CartItemI }) => {
     toast.success('¡Producto Removido!')
     removeFromCart(window)
   }
-  console.log(showPrice)
+
   const { width, height, model, title, color, glass, cant, price, description } = window
   return (
     <div className='grid print:w-full print:grid-cols-2 sm:grid-cols-2 grid-cols-1 justify-center my-5 border-t p-4 break-after-auto break-before-auto  break-inside-avoid'>

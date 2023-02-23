@@ -2,7 +2,7 @@ import { SystemsEnum } from '@models/System.model'
 import { CreateWindowFormPVCI, WindowModelsEnum, WindowTypeEnum } from '@models/WindowPVC.model'
 import { getSystem } from './getSystem'
 
-export const getPrice = async ({
+export const getPriceBellaSliding = async ({
   title,
   location,
   width,
@@ -13,7 +13,7 @@ export const getPrice = async ({
   glass,
   cant,
   color,
-
+  hours,
   projectData,
   quotationID,
   dismount,
@@ -154,6 +154,7 @@ export const getPrice = async ({
                     monorailCost.rTransom += price
                   }
                 }
+
                 for (const accessory of accessories.data) {
                   // Haladera
                   if (accessory.attributes.id_provider === '13119') monorailCost.e_handle += accessory.attributes.price
@@ -162,15 +163,16 @@ export const getPrice = async ({
                   // rueda
                   if (accessory.attributes.id_provider === '13189') monorailCost.roller += accessory.attributes.price
                 }
+
                 for (const glassA of glasses.data) {
                   if (glassA.attributes.id_arqustik === glass) monorailCost.glass += glassA.attributes.price
                 }
                 // PVC
                 cost.pvc = {
                   frame: monorailCost.frame * ((widthM + heightM) * 2),
-                  sash: monorailCost.sash * (widthM + heightM * 2),
+                  sash: monorailCost.sash * ((widthM + heightM) * 2),
                   transom: monorailCost.transom * heightM,
-                  glazing_bead: monorailCost.glazing_bead * (widthM + heightM * 2) * 2,
+                  glazing_bead: monorailCost.glazing_bead * ((widthM + heightM) * 2) * 2,
                   closing: monorailCost.closing * (widthM + heightM),
                   interlock: monorailCost.interlock * heightM,
                   frontal: 0,
@@ -178,7 +180,7 @@ export const getPrice = async ({
                 // Refuerzos
                 cost.ref = {
                   frame: monorailCost.rFrame * ((widthM + heightM) * 2),
-                  sash: monorailCost.rSash * (widthM + heightM * 2),
+                  sash: monorailCost.rSash * ((widthM + heightM) * 2),
                   transom: monorailCost.rTransom * heightM,
                 }
                 // Accesorios
@@ -272,7 +274,7 @@ export const getPrice = async ({
                 // Refuerzos XX
                 cost.ref = {
                   frame: doubleRailCost.rFrame * ((widthM + heightM) * 2),
-                  sash: doubleRailCost.rSash * (widthM + heightM * 2) * 2,
+                  sash: doubleRailCost.rSash * ((widthM + heightM) * 2) * 2,
                   transom: 0,
                 }
                 // Accesorios XX
@@ -478,7 +480,7 @@ export const getPrice = async ({
                   frame: monorailDoubleCost.frame * ((widthM + heightM) * 2),
                   sash: monorailDoubleCost.sash * ((widthM / 4 - 0.022) * 4 + (heightM - 0.064) * 4),
                   transom: monorailDoubleCost.transom * (heightM - 0.064) * 2,
-                  closing: monorailDoubleCost.closing * (widthM + heightM * 2),
+                  closing: monorailDoubleCost.closing * ((widthM + heightM) * 2),
                   interlock: monorailDoubleCost.interlock * (heightM - 0.064) * 2,
                   frontal: monorailDoubleCost.frontal * (heightM - 0.064),
                   glazing_bead:
@@ -580,8 +582,8 @@ export const getPrice = async ({
                 // PVC XO
                 cost.pvc = {
                   frame: monorailCost.frame * ((widthM + heightM) * 2),
-                  sash: monorailCost.sash * (widthM + heightM * 2),
-                  glazing_bead: monorailCost.glazing_bead * (widthM + heightM * 2) * 2,
+                  sash: monorailCost.sash * ((widthM + heightM) * 2),
+                  glazing_bead: monorailCost.glazing_bead * ((widthM + heightM) * 2) * 2,
                   transom: monorailCost.transom * heightM,
                   closing: monorailCost.closing * (widthM + heightM),
                   interlock: monorailCost.interlock * heightM,
@@ -590,7 +592,7 @@ export const getPrice = async ({
                 // Refuerzos XO
                 cost.ref = {
                   frame: monorailCost.rFrame * ((widthM + heightM) * 2),
-                  sash: monorailCost.rSash * (widthM + heightM * 2),
+                  sash: monorailCost.rSash * ((widthM + heightM) * 2),
                   transom: monorailCost.rTransom * heightM,
                 }
                 // Accesorios XO
@@ -673,9 +675,9 @@ export const getPrice = async ({
                 // PVC XX
                 cost.pvc = {
                   frame: doubleRailCost.frame * ((widthM + heightM) * 2),
-                  sash: doubleRailCost.sash * (widthM + heightM * 2) * 2,
+                  sash: doubleRailCost.sash * ((widthM + heightM) * 2) * 2,
                   interlock: doubleRailCost.interlock * heightM * 2,
-                  glazing_bead: doubleRailCost.glazing_bead * (widthM + heightM * 2) * 2,
+                  glazing_bead: doubleRailCost.glazing_bead * ((widthM + heightM) * 2) * 2,
                   transom: 0,
                   closing: 0,
                   frontal: 0,
@@ -683,7 +685,7 @@ export const getPrice = async ({
                 // Refuerzos XX
                 cost.ref = {
                   frame: doubleRailCost.rFrame * ((widthM + heightM) * 2),
-                  sash: doubleRailCost.rSash * (widthM + heightM * 2) * 2,
+                  sash: doubleRailCost.rSash * ((widthM + heightM) * 2) * 2,
                   transom: 0,
                 }
                 // Accesorios XX
@@ -894,7 +896,7 @@ export const getPrice = async ({
                   frame: monorailDoubleCost.frame * ((widthM + heightM) * 2),
                   sash: monorailDoubleCost.sash * ((widthM / 4 - 0.022) * 4 + (heightM - 0.064) * 4),
                   transom: monorailDoubleCost.transom * (heightM - 0.064) * 2,
-                  closing: monorailDoubleCost.closing * (widthM + heightM * 2),
+                  closing: monorailDoubleCost.closing * ((widthM + heightM) * 2),
                   interlock: monorailDoubleCost.interlock * (heightM - 0.064) * 2,
                   frontal: monorailDoubleCost.frontal * (heightM - 0.064),
                   glazing_bead:

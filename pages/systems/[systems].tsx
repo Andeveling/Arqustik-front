@@ -6,13 +6,12 @@ import ModelsList from '@components/Public/Systems/models/ModelsList'
 import { SystemResponseI } from '@models/System.model'
 import { WindowDoor } from '@models/WindowModels.model'
 import { fetcher } from '@services/fetcher.service'
-import { arqustikConfig, endpoints } from 'arqustik.config'
+import { arqustikConfig } from 'arqustik.config'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import useSWR from 'swr'
 
 const { NEXT_SERVER } = arqustikConfig
-const { systems, window_models } = endpoints
 
 const Systems = () => {
   const router = useRouter()
@@ -41,6 +40,7 @@ const Systems = () => {
   return (
     <Container>
       <CarouselGlass />
+
       <div className='mt-2'>
         <Heading as='h2'>Modelos disponibles</Heading>
       </div>

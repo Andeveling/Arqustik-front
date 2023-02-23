@@ -1,21 +1,17 @@
+import { useCart } from '@context/CartContext'
 import { Disclosure, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { ShoppingBagIcon, DocumentTextIcon } from '@heroicons/react/24/solid'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import MenuLinks from './MenuLinks'
 import NextLink from './NextLink'
 import ThemeHandled from './ThemeHandled'
 import TopArea from './TopArea'
-import { useCart } from '@context/CartContext'
-import Link from 'next/link'
-import { ShoppingBagIcon } from '@heroicons/react/24/solid'
-import { Badge } from 'flowbite-react'
-import { count } from 'console'
+import { Tooltip } from 'flowbite-react'
+import { PublicRoutes } from 'routes'
 
-const navigation = [
-  { name: 'Inicio', href: '/', current: false },
-  { name: 'Nosotros', href: '/about', current: false },
-  { name: 'Cotizar', href: '/quote', current: false },
-]
+const navigation = [{ name: 'Cotizar', href: '/', current: false }]
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -27,7 +23,7 @@ export default function Header() {
   useEffect(() => setMounted(true), [])
   if (!mounted) return null
   return (
-    <header className='min-h-full bg-gray-200 dark:bg-gray-900'>
+    <header className='min-h-20 items-center bg-gray-200 dark:bg-gray-900 border-b border-gray-400'>
       <Disclosure as='nav'>
         {({ open }) => (
           <>
@@ -35,7 +31,9 @@ export default function Header() {
               <div className='flex h-16 items-center justify-between'>
                 <div className='flex items-center'>
                   <div className='flex-shrink-0'>
-                    <h1 className='text-4xl font-bold'>Arqustik</h1>
+                    <Link href={PublicRoutes.HOME} className='text-4xl font-bold text-black dark:text-white'>
+                      Arqustik
+                    </Link>
                   </div>
                   <div className='hidden md:block'>
                     <div className='ml-10 flex items-baseline space-x-4'>
@@ -46,9 +44,12 @@ export default function Header() {
 
                 <div className='flex justify-end flex-row w-full py-10 mr-4 sm:mr-8 gap-4'>
                   <div className='flex justify-end flex-row'>
-                    <Link href='/cart' className='flex justify-end flex-row'>
-                      <ShoppingBagIcon className='w-10 h-10' />
-                    </Link>
+                    <Tooltip content='Documento de cotización' style='light'>
+                      <Link href='/summary' className='flex justify-end flex-row'>
+                        <DocumentTextIcon className='w-10 h-10' />
+                        <span className='sr-only'>Cart Page</span>
+                      </Link>
+                    </Tooltip>
                     <div className='bg-red-600 rounded-full p-1 w-6 h-6 flex justify-center items-center -ml-4'>
                       <span className='text-gray-0 font-bold'>{cartCount}</span>
                     </div>
@@ -58,7 +59,7 @@ export default function Header() {
                   </div>
                 </div>
                 <div className='hidden md:block'>
-                  <div className='ml-4 w-40 items-center  space-x-4 md:ml-6'>{open ? <></> : <TopArea />}</div>
+                  <div className='ml-2 w-40 items-center  space-x-4 md:ml-6'>{open ? <></> : <TopArea />}</div>
                 </div>
                 <div className='-mr-2 flex md:hidden'>
                   {/* Mobile menu button */}

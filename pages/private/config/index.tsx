@@ -7,26 +7,8 @@ import { ServicesResponseI } from '@models/Service.model'
 import { fetcher } from '@services/fetcher.service'
 import { arqustikConfig, endpoints } from 'arqustik.config'
 import cn from 'classnames'
-import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/react'
 import useSWR from 'swr'
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await getSession(ctx)
-  if (session === null) {
-    return {
-      redirect: {
-        destination: '/api/auth/signin',
-        permanent: false,
-      },
-    }
-  }
-  return {
-    props: {
-      session,
-    },
-  }
-}
 const { STRAPI_SERVER } = arqustikConfig
 const { services, administrative_costs } = endpoints
 

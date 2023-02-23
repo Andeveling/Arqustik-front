@@ -27,21 +27,6 @@ const ImportWindows = ({ projectData }: { projectData: ProjectDataProps }) => {
     formState: { errors },
   } = useForm()
 
-  /**
-     *  
-  title: string OK
-  system: SystemsEnum X
-  model: WindowModelsEnum OK
-  description: string OK
-  location?: string X
-  width: number OK
-  height: number OK
-  glass: string X
-  type: WindowTypeEnum OK
-  color: string
-  cant: number
-   *  */
-
   const onSubmit: SubmitHandler<any> = async (data) => {
     setIsLoading(true)
     const jwt = await getJWT()
@@ -67,9 +52,11 @@ const ImportWindows = ({ projectData }: { projectData: ProjectDataProps }) => {
                 windowPVC
                   .create({ quotation: quotationID, ...res.data })
                   .then(() => toast.success('Ventana creada'))
+                  .then(() => router.reload())
                   .catch(() => toast.error('Algo salio mal, intenta de nuevo')),
               )
               .then(() => setIsLoading(false))
+              .then(() => router.reload())
               .catch((error) => console.log(error)),
             {
               loading: 'Creando...',
@@ -82,24 +69,6 @@ const ImportWindows = ({ projectData }: { projectData: ProjectDataProps }) => {
     } catch (error) {
       console.log(error)
     }
-    // try {
-    //   await axios
-    //     .all(
-    //       windows.map(({ id, ...data }) =>
-    //         windowPVC
-    //           .create({ quotation: quotationID, ...data })
-    //           .then(() => toast.success('Ventana creada'))
-    //           .catch(() => toast.error('Algo salio mal, intenta de nuevo')),
-    //       ),
-    //     )
-    //     .then(() => toast.success('Cargadas'))
-    //     .then(() => reset())
-    //     .then(() => router.reload())
-    //   setIsLoading(false)
-    // } catch (error) {
-    //   console.log(error)
-    //   setIsLoading(false)
-    // }
   }
 
   return (

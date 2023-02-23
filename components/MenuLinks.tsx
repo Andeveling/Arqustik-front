@@ -3,8 +3,7 @@ import NextLink from './NextLink'
 const MenuLinks = () => {
   return (
     <>
-      <NextLink href='/' text='Inicio' />
-      <NextLink href='/quote' text='Cotizar' />
+      <NextLink href='/' text='Cotizar' />
     </>
   )
 }

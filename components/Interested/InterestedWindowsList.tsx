@@ -38,7 +38,7 @@ const InterestedWindowsList = ({
               <h3 className='mb-5 text-lg font-normal text-gray-500 dark:text-gray-400'>¿Desea hacer una copia?</h3>
             </div>
             <div className='flex justify-center gap-4'>
-              <Button color='success' onClick={exportData}>
+              <Button color='success' fullSized onClick={exportData}>
                 Descargar
               </Button>
               <Button color='gray' onClick={() => setOpenPopup(undefined)}>

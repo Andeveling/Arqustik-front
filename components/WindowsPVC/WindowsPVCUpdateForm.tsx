@@ -43,6 +43,7 @@ const WindowsPVCUpdateForm = ({
         axios
           .put(`/api/windows/update`, {
             ...data,
+            jwt,
             projectData,
             quotationID,
             windowID,

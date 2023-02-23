@@ -26,7 +26,7 @@ const SystemCard = ({ system }: { system: SystemI }) => {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  const updateHandle = (id: number) => {
+  const updateHandle = (id: string) => {
     setLoading(true)
     mutate(
       URL,

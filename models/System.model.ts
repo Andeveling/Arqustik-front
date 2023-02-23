@@ -15,7 +15,7 @@ export interface SystemsResponseI {
 }
 
 export interface SystemI {
-  id: number
+  id: string
   attributes: SystemAttributesI
 }
 
@@ -38,4 +38,5 @@ export interface Meta {}
 
 export enum SystemsEnum {
   BellaSliding = 'bella-sliding',
+  EverestMax = 'everestmax',
 }

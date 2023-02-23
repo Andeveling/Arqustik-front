@@ -24,7 +24,7 @@ const CartPage = () => {
     <Container>
       <div ref={componentRef}>
         <div className='flex justify-between print:hidden'>
-          <Heading as='h3'>Resumén de compra</Heading>
+          <Heading as='h3'>Resumén</Heading>
           {/* <Button onClick={handlePrint}>Print</Button> */}
         </div>
         <CartPrintHeader />

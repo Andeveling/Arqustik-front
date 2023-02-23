@@ -1,30 +1,12 @@
-import ClientQuotations from "@components/Client/ClientQuotations"
-import Container from "@components/Container"
-import LoadingSpinner from "@components/LoadingSpinner"
-import { fetcher } from "@services/fetcher.service"
-import { arqustikConfig, endpoints } from "arqustik.config"
-import { GetServerSideProps } from "next"
-import { getSession } from "next-auth/react"
-import { useRouter } from "next/router"
-import useSWR from "swr"
+import ClientQuotations from '@components/Client/ClientQuotations'
+import Container from '@components/Container'
+import LoadingSpinner from '@components/LoadingSpinner'
+import { fetcher } from '@services/fetcher.service'
+import { arqustikConfig, endpoints } from 'arqustik.config'
+import { useRouter } from 'next/router'
+import useSWR from 'swr'
+import { Suspense } from 'react'
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const session = await getSession(ctx)
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    }
-  }
-
-  return {
-    props: {
-      session,
-    },
-  }
-}
 const { STRAPI_SERVER } = arqustikConfig
 const { clients } = endpoints
 
@@ -33,19 +15,23 @@ export default function ClientByID() {
   const clientID = router.query?.id
   const { data, error, isValidating } = useSWR(`${STRAPI_SERVER}${clients}/${clientID}?populate=quotations`, fetcher)
 
-  if (error) {
-    return <Container>{JSON.stringify(error)}</Container>
-  } else if (isValidating) {
+  if (error) return <Container>{<p>Algo salio mal</p>}</Container>
+
+  if (isValidating || !data)
     return (
-      <Container>
-        <LoadingSpinner />
-      </Container>
+      <Suspense fallback={null}>
+        <Container>
+          <LoadingSpinner />
+        </Container>
+      </Suspense>
     )
-  } else {
+
+  if (data)
     return (
-      <Container>
-        <ClientQuotations client={data} />
-      </Container>
+      <Suspense fallback={null}>
+        <Container>
+          <ClientQuotations client={data} />
+        </Container>
+      </Suspense>
     )
-  }
 }

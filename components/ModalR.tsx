@@ -1,8 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment, ReactNode, useState } from 'react'
 import { XMarkIcon, PlusIcon } from '@heroicons/react/24/outline'
 
-export default function ModalR({ form, title }: any) {
+export default function ModalR({ form, title }: { form: ReactNode; title: string }) {
   let [isOpen, setIsOpen] = useState(false)
   const closeModal = () => setIsOpen(false)
   const openModal = () => setIsOpen(true)
