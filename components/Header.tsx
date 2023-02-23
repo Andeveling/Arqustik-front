@@ -9,6 +9,7 @@ import NextLink from './NextLink'
 import ThemeHandled from './ThemeHandled'
 import TopArea from './TopArea'
 import { Tooltip } from 'flowbite-react'
+import { PublicRoutes } from 'routes'
 
 const navigation = [{ name: 'Cotizar', href: '/', current: false }]
 
@@ -30,8 +31,9 @@ export default function Header() {
               <div className='flex h-16 items-center justify-between'>
                 <div className='flex items-center'>
                   <div className='flex-shrink-0'>
-                    <p className='text-4xl font-bold text-black dark:text-white'>Arqustik</p>
-                    {/*  <Image src={logo} width={100} alt='logo corporativo' /> */}
+                    <Link href={PublicRoutes.HOME} className='text-4xl font-bold text-black dark:text-white'>
+                      Arqustik
+                    </Link>
                   </div>
                   <div className='hidden md:block'>
                     <div className='ml-10 flex items-baseline space-x-4'>

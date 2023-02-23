@@ -5,6 +5,8 @@ import { CreateWindowFormPVCI, WindowTypeEnum } from '@models/WindowPVC.model'
 import { getJWT } from '@services/getJWT.service'
 import { windowPVC } from '@services/window.service'
 import axios from 'axios'
+
+import { SystemsEnum } from '@models/System.model'
 import { Checkbox, Label, TextInput } from 'flowbite-react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -18,7 +20,6 @@ import SelectType from './SelectType'
 import SelectWindowsDetails from './SelectWindowsDetails'
 import TitleLocation from './TitleLocation'
 import { WindowsPVCSchema } from './WindowsPVCSchema'
-import { SystemsEnum } from '@models/System.model'
 
 export interface ProjectDataProps {
   installation: boolean
@@ -43,6 +44,8 @@ const WindowsPVCForm = ({ projectData }: { projectData: ProjectDataProps }) => {
   const { handleSubmit, register } = methods
   const onSubmit: SubmitHandler<CreateWindowFormPVCI> = async (data) => {
     setLoading(true)
+    /*  console.log({ data: data })
+    setLoading(false) */
     const jwt = await getJWT()
     toast
       .promise(
@@ -56,7 +59,7 @@ const WindowsPVCForm = ({ projectData }: { projectData: ProjectDataProps }) => {
           .then((res) =>
             windowPVC
               .create(res.data)
-              .then((res) => console.log(res))
+              .then(() => router.reload())
               .then(() => methods.reset())
               .catch((err) => console.log(err)),
           )

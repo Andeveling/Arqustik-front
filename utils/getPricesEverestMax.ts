@@ -12,7 +12,7 @@ export const getPricesEverestMax = async ({
   glass,
   cant,
   color,
-  hours = 1,
+  hours,
 
   projectData,
   quotationID,
@@ -67,6 +67,7 @@ export const getPricesEverestMax = async ({
     COP: 0,
     priceWithProfit: 0,
     dollar: 0,
+
     description: (() => {
       return type === 'window' ? `Ventana Europea ${system?.toUpperCase()}` : `Puerta Ventana ${system?.toUpperCase()}`
     })(),
@@ -79,14 +80,18 @@ export const getPricesEverestMax = async ({
   if (everest) {
     const {
       data: {
-        attributes: { profiles, accessories, glasses, administrative_costs, services },
+        attributes: { profiles, accessories, glasses, administrative_costs, services, window_models },
       },
     } = everest
 
+    for (const modelW of window_models.data) {
+      if (modelW.attributes.opening === model) hours = modelW.attributes.hours
+    }
     for (const adminCost of administrative_costs.data) {
       const {
         attributes: { title, value },
       } = adminCost
+
       if (title === 'MOD') cost.adminCost.MOD = value * hours
       if (title === 'CIF') cost.adminCost.CIF = value * hours
       if (title === 'dollar') cost.dollar = value

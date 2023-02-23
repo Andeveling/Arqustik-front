@@ -31,7 +31,6 @@ export default function ClientByID() {
       <Suspense fallback={null}>
         <Container>
           <ClientQuotations client={data} />
-          <p>Algo</p>
         </Container>
       </Suspense>
     )

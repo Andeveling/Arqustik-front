@@ -14,6 +14,7 @@ export const endpoints = {
   windows: '/windows',
   services: '/services',
   systems: '/system-pvcs',
+  models: '/window-models',
   administrative_costs: '/administrative-costs',
   window_models: '/window_models',
   interesteds: '/interesteds',

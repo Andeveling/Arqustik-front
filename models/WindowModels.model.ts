@@ -1,3 +1,4 @@
+import { SystemsEnum } from './System.model'
 import { WindowModelsEnum } from './WindowPVC.model'
 
 export interface WindowModelsResponseI {
@@ -19,6 +20,7 @@ export interface WindowsModelAttributesI {
   publishedAt: Date
   windowdoor: WindowDoor
   model3D: string
+  system: SystemsEnum
   hours: number
   minW: number
   maxW: number
