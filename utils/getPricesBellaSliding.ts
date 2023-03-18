@@ -16,7 +16,7 @@ export const getPriceBellaSliding = async ({
   hours,
   projectData,
   quotationID,
-  dismount,
+  unmount,
 }: CreateWindowFormPVCI) => {
   const widthM = width / 1000;
   const heightM = height / 1000;
@@ -58,7 +58,7 @@ export const getPriceBellaSliding = async ({
       silicone: 0,
       polyurethane: 0,
       transport: 0,
-      dismount: 0,
+      unmount: 0,
     },
     material: {
       installation: 0,
@@ -937,8 +937,8 @@ export const getPriceBellaSliding = async ({
             if (service.attributes.title === 'installation')
               cost.services.installation = (service.attributes.price + service.attributes.material) * area;
           }
-          if (dismount) {
-            if (service.attributes.title === 'unmount') cost.services.dismount = service.attributes.price * area;
+          if (unmount) {
+            if (service.attributes.title === 'unmount') cost.services.unmount = service.attributes.price * area;
           }
           if (transport) {
             if (service.attributes.title === 'transport') cost.services.transport = service.attributes.price;
