@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { ServiceI, ServiceIAttributes } from '@models/Service.model'
+import { ServiceI, ServiceAttributes } from '@models/Service.model'
 import { arqustikService } from '@services/arqustikservices.service'
 import { Button, Label, TextInput } from 'flowbite-react'
 import { useRouter } from 'next/router'
@@ -11,7 +11,7 @@ import toast from 'react-hot-toast'
 import { UpdateServiceSchema } from './updateService.schema'
 import { systemsService } from '@services/systems.service'
 
-interface ContractorModalProps extends Partial<ServiceIAttributes> {
+interface ContractorModalProps extends Partial<ServiceAttributes> {
   id: ServiceI['id']
 }
 
@@ -25,10 +25,10 @@ export default function ContractorModalR({ id, UOM, description }: ContractorMod
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Partial<ServiceIAttributes>>({
+  } = useForm<Partial<ServiceAttributes>>({
     resolver: yupResolver(UpdateServiceSchema),
   })
-  const onSubmit: SubmitHandler<Partial<ServiceIAttributes>> = async (service) => {
+  const onSubmit: SubmitHandler<Partial<ServiceAttributes>> = async (service) => {
     toast.promise(
       arqustikService
         .update(id, {

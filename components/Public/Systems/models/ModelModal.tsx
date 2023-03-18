@@ -1,43 +1,44 @@
-import { ProjectDataProps } from '@components/WindowsPVC/WindowsPVCForm'
-import { useCartMutations } from '@context/CartContext'
-import { Dialog, Transition } from '@headlessui/react'
-import { ArrowsRightLeftIcon, ArrowsUpDownIcon, ShoppingCartIcon, XMarkIcon, PlusIcon } from '@heroicons/react/24/solid'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { WindowDoor, WindowsModelResponseI } from '@models/WindowModels.model'
-import { WindowModelsEnum } from '@models/WindowPVC.model'
-import axios from 'axios'
-import { Button, Label, Select, TextInput } from 'flowbite-react'
-import { useRouter } from 'next/router'
-import { Fragment, useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
-import * as yup from 'yup'
-import { v4 as uuidv4 } from 'uuid'
+import { ProjectDataProps } from '@components/WindowsPVC/WindowsPVCForm';
+import { useCartMutations } from '@context/CartContext';
+import { Dialog, Transition } from '@headlessui/react';
+import { ArrowsRightLeftIcon, ArrowsUpDownIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { ProtectionEnum, SiliconeEnum } from '@models/Quotation.model';
+import { WindowDoor, WindowsModelResponseI } from '@models/WindowModels.model';
+import { WindowModelsEnum } from '@models/WindowPVC.model';
+import axios from 'axios';
+import { Button, Label, Select, TextInput } from 'flowbite-react';
+import { useRouter } from 'next/router';
+import { Fragment, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { v4 as uuidv4 } from 'uuid';
+import * as yup from 'yup';
 
 interface CreateWindowPublicI {
-  id: number | string
-  title: string
-  type: WindowDoor
-  model: WindowModelsEnum
-  width: number
-  height: number
-  system: string
-  cant: number
-  glass: string
-  color: string
-  hours: number
-  projectData: ProjectDataProps
+  id: number | string;
+  title: string;
+  type: WindowDoor;
+  model: WindowModelsEnum;
+  width: number;
+  height: number;
+  system: string;
+  cant: number;
+  glass: string;
+  color: string;
+  hours: number;
+  projectData: ProjectDataProps;
 }
 
 const ModelModal = ({ model }: { model: WindowsModelResponseI }) => {
-  const router = useRouter()
-  const systemName = router.query?.systems
-  let [isOpen, setIsOpen] = useState(false)
-  const closeModal = () => setIsOpen(false)
-  const openModal = () => setIsOpen(true)
-  const { addToCart } = useCartMutations()
+  const router = useRouter();
+  const systemName = router.query?.systems;
+  let [isOpen, setIsOpen] = useState(false);
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
+  const { addToCart } = useCartMutations();
 
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const CreateModelWindowSchema = yup.object().shape({
     title: yup.string().required('Este campo es requerido'),
     width: yup
@@ -58,7 +59,7 @@ const ModelModal = ({ model }: { model: WindowsModelResponseI }) => {
       .positive()
       .required()
       .typeError('El valor debe ser un numero'),
-  })
+  });
   const {
     register,
     handleSubmit,
@@ -77,14 +78,14 @@ const ModelModal = ({ model }: { model: WindowsModelResponseI }) => {
         installation: false,
         polyurethane: false,
         transport: false,
-        protection: 'zero',
-        silicone: 'zero',
+        protection: ProtectionEnum.zero,
+        silicone: SiliconeEnum.zero,
       },
     },
-  })
+  });
 
   const onSubmit: SubmitHandler<CreateWindowPublicI> = async (data) => {
-    setIsLoading(true)
+    setIsLoading(true);
     toast.promise(
       axios
         .post(`/api/windows/create`, data)
@@ -97,8 +98,8 @@ const ModelModal = ({ model }: { model: WindowsModelResponseI }) => {
         success: <b>¡Ventana creada!</b>,
         error: <b>Algo salio mal</b>,
       },
-    )
-  }
+    );
+  };
 
   return (
     <div>
@@ -216,9 +217,9 @@ const ModelModal = ({ model }: { model: WindowsModelResponseI }) => {
         </Dialog>
       </Transition>
     </div>
-  )
-}
-export default ModelModal
+  );
+};
+export default ModelModal;
 
 /* 
  Response Example

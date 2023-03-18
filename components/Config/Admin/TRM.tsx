@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { AdminCostI, AdminCostIAttributesI } from '@models/AdminCost.model'
+import { AdminCostAttributesI, AdminCostI } from '@models/AdminCost.model'
 import { currencyFormatter } from '@utils/currencyFormatter'
 import { Button, Label, TextInput } from 'flowbite-react'
 import { useRouter } from 'next/router'
@@ -19,11 +19,11 @@ const TRM = ({ dollar }: { dollar: AdminCostI }) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Partial<AdminCostIAttributesI>>({
+  } = useForm<Partial<AdminCostAttributesI>>({
     resolver: yupResolver(UpdateAdministrativeCostSchema),
   })
 
-  const onSubmit: SubmitHandler<Partial<AdminCostIAttributesI>> = async (adminCost) => {
+  const onSubmit: SubmitHandler<Partial<AdminCostAttributesI>> = async (adminCost) => {
     toast.promise(
       adminCostService
         .update(dollar.id, {

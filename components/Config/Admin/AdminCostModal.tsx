@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { AdminCostI, AdminCostIAttributesI } from '@models/AdminCost.model'
+import { AdminCostI, AdminCostAttributesI } from '@models/AdminCost.model'
 import { adminCostService } from '@services/adminCost.service'
 import { systemsService } from '@services/systems.service'
 import { currencyFormatter } from '@utils/currencyFormatter'
@@ -22,10 +22,10 @@ export default function AdminCostModalR({ adminCost }: { adminCost: AdminCostI }
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Partial<AdminCostIAttributesI>>({
+  } = useForm<Partial<AdminCostAttributesI>>({
     resolver: yupResolver(UpdateAdministrativeCostSchema),
   })
-  const onSubmit: SubmitHandler<Partial<AdminCostIAttributesI>> = async (service) => {
+  const onSubmit: SubmitHandler<Partial<AdminCostAttributesI>> = async (service) => {
     toast.promise(
       adminCostService
         .update(adminCost.id, {

@@ -1,52 +1,52 @@
-import SubmitInput from '@components/SubmitInput'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { QuotationI } from '@models/Quotation.model'
-import { CreateWindowFormPVCI, WindowTypeEnum } from '@models/WindowPVC.model'
-import { getJWT } from '@services/getJWT.service'
-import { windowPVC } from '@services/window.service'
-import axios from 'axios'
+import SubmitInput from '@components/SubmitInput';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { ProtectionEnum, QuotationI, SiliconeEnum } from '@models/Quotation.model';
+import { CreateWindowFormPVCI, WindowTypeEnum } from '@models/WindowPVC.model';
+import { getJWT } from '@services/getJWT.service';
+import { windowPVC } from '@services/window.service';
+import axios from 'axios';
 
-import { SystemsEnum } from '@models/System.model'
-import { Checkbox, Label, TextInput } from 'flowbite-react'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import { toast } from 'react-hot-toast'
-import SelectColorPVC from './SelectColorPVC'
-import SelectGlass from './SelectGlass'
-import SelectModel from './SelectModel'
-import SelectSystem from './SelectSystem'
-import SelectType from './SelectType'
-import SelectWindowsDetails from './SelectWindowsDetails'
-import TitleLocation from './TitleLocation'
-import { WindowsPVCSchema } from './WindowsPVCSchema'
+import { SystemsEnum } from '@models/System.model';
+import { Checkbox, Label, TextInput } from 'flowbite-react';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
+import SelectColorPVC from './SelectColorPVC';
+import SelectGlass from './SelectGlass';
+import SelectModel from './SelectModel';
+import SelectSystem from './SelectSystem';
+import SelectType from './SelectType';
+import SelectWindowsDetails from './SelectWindowsDetails';
+import TitleLocation from './TitleLocation';
+import { WindowsPVCSchema } from './WindowsPVCSchema';
 
 export interface ProjectDataProps {
-  installation: boolean
-  polyurethane: boolean
-  transport: boolean
-  protection: string
-  silicone: string
+  installation: boolean;
+  polyurethane: boolean;
+  transport: boolean;
+  protection: ProtectionEnum;
+  silicone: SiliconeEnum;
 }
 
 const WindowsPVCForm = ({ projectData }: { projectData: ProjectDataProps }) => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const methods = useForm<CreateWindowFormPVCI>({
     resolver: yupResolver(WindowsPVCSchema),
     defaultValues: {
       system: SystemsEnum.BellaSliding,
       type: WindowTypeEnum.WINDOW,
     },
-  })
-  const router = useRouter()
-  const quotationID: QuotationI['id'] = typeof router.query.quotation === 'string' ? router.query.quotation : ''
+  });
+  const router = useRouter();
+  const quotationID: QuotationI['id'] = typeof router.query.quotation === 'string' ? router.query.quotation : '';
 
-  const { handleSubmit, register } = methods
+  const { handleSubmit, register } = methods;
   const onSubmit: SubmitHandler<CreateWindowFormPVCI> = async (data) => {
-    setLoading(true)
+    setLoading(true);
     /*  console.log({ data: data })
     setLoading(false) */
-    const jwt = await getJWT()
+    const jwt = await getJWT();
     toast
       .promise(
         axios
@@ -70,8 +70,8 @@ const WindowsPVCForm = ({ projectData }: { projectData: ProjectDataProps }) => {
           error: <b>Algo salio mal</b>,
         },
       )
-      .then(() => setLoading(false))
-  }
+      .then(() => setLoading(false));
+  };
 
   return (
     <FormProvider {...methods}>
@@ -82,7 +82,7 @@ const WindowsPVCForm = ({ projectData }: { projectData: ProjectDataProps }) => {
         <SelectSystem />
         {/* 2. seleccionar el tipo, ventana, puerta ventana */}
         <SelectType />
-        {/* 3. Seleccionar modelos */}
+        {/* 3. Seleccionar modelos */}F
         <SelectModel />
         {/* 4. Detalles de la ventana */}
         <SelectWindowsDetails />
@@ -90,7 +90,6 @@ const WindowsPVCForm = ({ projectData }: { projectData: ProjectDataProps }) => {
         <SelectGlass />
         {/* 6. Color PVC */}
         <SelectColorPVC />
-
         {/* Cant */}
         <div className='mb-4'>
           <Label htmlFor='cant'>Cantidad</Label>
@@ -101,22 +100,20 @@ const WindowsPVCForm = ({ projectData }: { projectData: ProjectDataProps }) => {
             <></>
           )}
         </div>
-
         <div className='mb-4'>
           <Label
             htmlFor='dismount'
             className='flex items-center pl-4 p-4 rounded border border-gray-200 dark:border-gray-700'>
-            <Checkbox id='dismount' {...register('dismount')} />
+            <Checkbox id='dismount' {...register('unmount')} />
             <span className='ml-4'>Desmonte</span>
           </Label>
         </div>
-
         <SubmitInput isLoading={methods.formState.isSubmitting || loading} value={'CREAR'} />
       </form>
     </FormProvider>
-  )
-}
-export default WindowsPVCForm
+  );
+};
+export default WindowsPVCForm;
 
 /* 
 {

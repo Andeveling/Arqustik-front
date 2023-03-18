@@ -1,23 +1,23 @@
-import { ProjectDataProps } from '@components/WindowsPVC/WindowsPVCForm'
-import { ArrowUpCircleIcon } from '@heroicons/react/24/solid'
-import { QuotationI } from '@models/Quotation.model'
-import { getJWT } from '@services/getJWT.service'
-import { windowPVC } from '@services/window.service'
-import { currencyFormatter } from '@utils/currencyFormatter'
-import { getGlass } from '@utils/getGlass'
-import axios from 'axios'
-import { Button, FileInput, Label, Table } from 'flowbite-react'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { toast } from 'react-hot-toast'
+import { ProjectDataProps } from '@components/WindowsPVC/WindowsPVCForm';
+import { ArrowUpCircleIcon } from '@heroicons/react/24/solid';
+import { QuotationI } from '@models/Quotation.model';
+import { getJWT } from '@services/getJWT.service';
+import { windowPVC } from '@services/window.service';
+import { currencyFormatter } from '@utils/currencyFormatter';
+import { getGlass } from '@utils/getGlass';
+import axios from 'axios';
+import { Button, FileInput, Label, Table } from 'flowbite-react';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 
 const ImportWindows = ({ projectData }: { projectData: ProjectDataProps }) => {
-  const [windows, setWindows] = useState<any[]>([])
-  const [loading, setIsLoading] = useState<boolean>(false)
-  const router = useRouter()
-  const quotationID: QuotationI['id'] = typeof router.query.quotation === 'string' ? router.query.quotation : ''
-  let total = 0
+  const [windows, setWindows] = useState<any[]>([]);
+  const [loading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
+  const quotationID: QuotationI['id'] = typeof router.query.quotation === 'string' ? router.query.quotation : '';
+  let total = 0;
   const {
     register,
     handleSubmit,
@@ -25,11 +25,11 @@ const ImportWindows = ({ projectData }: { projectData: ProjectDataProps }) => {
     getValues,
     reset,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
   const onSubmit: SubmitHandler<any> = async (data) => {
-    setIsLoading(true)
-    const jwt = await getJWT()
+    setIsLoading(true);
+    const jwt = await getJWT();
     try {
       await axios.all(
         windows.map(({ id, ...data }) => {
@@ -63,13 +63,13 @@ const ImportWindows = ({ projectData }: { projectData: ProjectDataProps }) => {
               success: <b>¡Ventana creada!</b>,
               error: <b>Algo salio mal</b>,
             },
-          )
+          );
         }),
-      )
+      );
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <>
@@ -84,13 +84,13 @@ const ImportWindows = ({ projectData }: { projectData: ProjectDataProps }) => {
             {...(register('file'),
             {
               onChange: (e) => {
-                const fileReader = new FileReader()
+                const fileReader = new FileReader();
                 if (e.target.files !== null) {
-                  fileReader.readAsText(e.target.files[0], 'UTF-8')
+                  fileReader.readAsText(e.target.files[0], 'UTF-8');
                 }
                 fileReader.onload = async (e) => {
-                  if (typeof fileReader.result === 'string') setWindows(JSON.parse(fileReader.result))
-                }
+                  if (typeof fileReader.result === 'string') setWindows(JSON.parse(fileReader.result));
+                };
               },
             })}
           />
@@ -116,8 +116,8 @@ const ImportWindows = ({ projectData }: { projectData: ProjectDataProps }) => {
               </Table.Head>
               <Table.Body className='divide-y'>
                 {windows.map((window, i) => {
-                  const { title, width, height, price, cant, model } = window
-                  total += price * cant
+                  const { title, width, height, price, cant, model } = window;
+                  total += price * cant;
                   return (
                     <Table.Row key={i}>
                       <Table.Cell>{title}</Table.Cell>
@@ -128,7 +128,7 @@ const ImportWindows = ({ projectData }: { projectData: ProjectDataProps }) => {
                       <Table.Cell>{cant} unds</Table.Cell>
                       <Table.Cell className='text-right'>{currencyFormatter(cant * price)}</Table.Cell>
                     </Table.Row>
-                  )
+                  );
                 })}
               </Table.Body>
             </Table>
@@ -144,6 +144,6 @@ const ImportWindows = ({ projectData }: { projectData: ProjectDataProps }) => {
         )}
       </div>
     </>
-  )
-}
-export default ImportWindows
+  );
+};
+export default ImportWindows;
