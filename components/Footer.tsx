@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import { PropsWithChildren } from 'react'
+import Link from 'next/link';
+import { PropsWithChildren } from 'react';
 
 interface ExternalLinkProps extends PropsWithChildren {
   href: string
@@ -13,7 +13,7 @@ const ExternalLink = ({ href, children }: ExternalLinkProps) => (
     href={href}>
     {children}
   </a>
-)
+);
 
 export default function Footer() {
   return (
@@ -41,5 +41,5 @@ export default function Footer() {
         </span>
       </div>
     </footer>
-  )
+  );
 }

@@ -37,6 +37,6 @@ const CartPrintFooter = () => {
         </ul>
       </div>
     </div>
-  )
-}
-export default CartPrintFooter
+  );
+};
+export default CartPrintFooter;

@@ -1,8 +1,8 @@
-import { Button, Modal } from "flowbite-react"
-import { useState } from "react"
+import { Button, Modal } from "flowbite-react";
+import { useState } from "react";
 
 const ModalF = () => {
-  const [openModal, setOpenModal] = useState<string | undefined>()
+  const [openModal, setOpenModal] = useState<string | undefined>();
   return (
     <>
       <Button onClick={() => setOpenModal("default")}>Toggle modal</Button>
@@ -23,6 +23,6 @@ const ModalF = () => {
         </Modal.Footer>
       </Modal>
     </>
-  )
-}
-export default ModalF
+  );
+};
+export default ModalF;

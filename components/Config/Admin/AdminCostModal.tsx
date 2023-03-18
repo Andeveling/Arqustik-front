@@ -1,22 +1,22 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { AdminCostI, AdminCostAttributesI } from '@models/AdminCost.model'
-import { adminCostService } from '@services/adminCost.service'
-import { systemsService } from '@services/systems.service'
-import { currencyFormatter } from '@utils/currencyFormatter'
-import { Button, Label, TextInput } from 'flowbite-react'
-import { useRouter } from 'next/router'
-import { Fragment, useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
-import { UpdateAdministrativeCostSchema } from './UpdateAdministrativeCostSchema'
+import { Dialog, Transition } from '@headlessui/react';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { AdminCostI, AdminCostAttributesI } from '@models/AdminCost.model';
+import { adminCostService } from '@services/adminCost.service';
+import { systemsService } from '@services/systems.service';
+import { currencyFormatter } from '@utils/currencyFormatter';
+import { Button, Label, TextInput } from 'flowbite-react';
+import { useRouter } from 'next/router';
+import { Fragment, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { UpdateAdministrativeCostSchema } from './UpdateAdministrativeCostSchema';
 
 export default function AdminCostModalR({ adminCost }: { adminCost: AdminCostI }) {
-  let [isOpen, setIsOpen] = useState(false)
-  const closeModal = () => setIsOpen(false)
-  const openModal = () => setIsOpen(true)
-  const router = useRouter()
+  let [isOpen, setIsOpen] = useState(false);
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -24,7 +24,7 @@ export default function AdminCostModalR({ adminCost }: { adminCost: AdminCostI }
     formState: { errors },
   } = useForm<Partial<AdminCostAttributesI>>({
     resolver: yupResolver(UpdateAdministrativeCostSchema),
-  })
+  });
   const onSubmit: SubmitHandler<Partial<AdminCostAttributesI>> = async (service) => {
     toast.promise(
       adminCostService
@@ -41,8 +41,8 @@ export default function AdminCostModalR({ adminCost }: { adminCost: AdminCostI }
         success: <b>¡Valor actualizado!</b>,
         error: <b>No se pudo actualizar el Valor</b>,
       },
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -113,5 +113,5 @@ export default function AdminCostModalR({ adminCost }: { adminCost: AdminCostI }
         </Dialog>
       </Transition>
     </>
-  )
+  );
 }

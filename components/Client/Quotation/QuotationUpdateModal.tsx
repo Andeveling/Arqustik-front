@@ -1,15 +1,15 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { XMarkIcon, PlusIcon, PencilIcon } from '@heroicons/react/24/outline'
-import { QuotationI } from '@models/Quotation.model'
-import { Button } from 'flowbite-react'
-import { Fragment, useState } from 'react'
-import QuotationForm from './QuotationForm'
-import QuotationUpdateForm from './QuotationUpdateForm'
+import { Dialog, Transition } from '@headlessui/react';
+import { XMarkIcon, PlusIcon, PencilIcon } from '@heroicons/react/24/outline';
+import { QuotationI } from '@models/Quotation.model';
+import { Button } from 'flowbite-react';
+import { Fragment, useState } from 'react';
+import QuotationForm from './QuotationForm';
+import QuotationUpdateForm from './QuotationUpdateForm';
 
 export default function QuotationUpdateModal({ quotation }: { quotation: QuotationI }) {
-  let [isOpen, setIsOpen] = useState(false)
-  const closeModal = () => setIsOpen(false)
-  const openModal = () => setIsOpen(true)
+  let [isOpen, setIsOpen] = useState(false);
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
 
   return (
     <>
@@ -63,5 +63,5 @@ export default function QuotationUpdateModal({ quotation }: { quotation: Quotati
         </Dialog>
       </Transition>
     </>
-  )
+  );
 }

@@ -3,9 +3,9 @@ export const currencyFormatter = (value: string | number) => {
     const format = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-    }).format(Number(value))
-    return format
+    }).format(Number(value));
+    return format;
   } else {
-    return value
+    return value;
   }
-}
+};

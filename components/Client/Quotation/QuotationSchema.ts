@@ -1,4 +1,4 @@
-import * as yup from "yup"
+import * as yup from "yup";
 
 export const QuotationSchema = yup.object().shape({
   project: yup.string().required(),
@@ -10,7 +10,7 @@ export const QuotationSchema = yup.object().shape({
   transport: yup.bool().required(),
   polyurethane: yup.bool().required(),
   transport_mount: yup.number(),
-})
+});
 
 export const QuotationUpdateSchema = yup.object().shape({
   project: yup.string(),
@@ -22,4 +22,4 @@ export const QuotationUpdateSchema = yup.object().shape({
   transport: yup.bool(),
   polyurethane: yup.bool(),
   transport_mount: yup.number(),
-})
+});

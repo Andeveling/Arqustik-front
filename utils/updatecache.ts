@@ -1,9 +1,9 @@
-import { SystemsResponseI } from "@models/System.model"
-import { arqustikConfig } from "arqustik.config"
-import axios from "axios"
-import fs from "fs"
+import { SystemsResponseI } from "@models/System.model";
+import { arqustikConfig } from "arqustik.config";
+import axios from "axios";
+import fs from "fs";
 
-const { STRAPI_SERVER } = arqustikConfig
+const { STRAPI_SERVER } = arqustikConfig;
 
 export const updateCache = async (jwt: string) => {
   try {
@@ -11,15 +11,15 @@ export const updateCache = async (jwt: string) => {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
-    })
+    });
     if (data) {
-      const cache = JSON.stringify(data)
+      const cache = JSON.stringify(data);
       fs.writeFile(`systemsCache.json`, cache, (err) => {
-        if (err) throw err
-        console.log("The file has been saved!")
-      })
+        if (err) throw err;
+        console.log("The file has been saved!");
+      });
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};

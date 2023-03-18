@@ -1,5 +1,5 @@
-import { QuotationResponseI } from '@models/Quotation.model'
-import { currencyFormatter } from '@utils/currencyFormatter'
+import { QuotationResponseI } from '@models/Quotation.model';
+import { currencyFormatter } from '@utils/currencyFormatter';
 
 const QuotationFooter = ({
   quotation,
@@ -14,15 +14,15 @@ const QuotationFooter = ({
     data: {
       attributes: { polyurethane, protection, silicone, installation },
     },
-  } = quotation
+  } = quotation;
   const getDescription = (item: string) => {
     if (item === 'one') {
-      return 'Una sola cara'
+      return 'Una sola cara';
     }
     if (item === 'two') {
-      return 'Ambas caras'
+      return 'Ambas caras';
     }
-  }
+  };
 
   return (
     <section className='text-base p-2 px-4'>
@@ -120,6 +120,6 @@ const QuotationFooter = ({
         </ul>
       </div>
     </section>
-  )
-}
-export default QuotationFooter
+  );
+};
+export default QuotationFooter;

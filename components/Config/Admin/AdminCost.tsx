@@ -1,6 +1,6 @@
-import { AdminCostResponseI } from '@models/AdminCost.model'
-import { currencyFormatter } from '@utils/currencyFormatter'
-import AdminCostModalR from './AdminCostModal'
+import { AdminCostResponseI } from '@models/AdminCost.model';
+import { currencyFormatter } from '@utils/currencyFormatter';
+import AdminCostModalR from './AdminCostModal';
 
 const AdminCost = ({ adminCost }: { adminCost: AdminCostResponseI }) => {
   return (
@@ -22,7 +22,7 @@ const AdminCost = ({ adminCost }: { adminCost: AdminCostResponseI }) => {
                 </p>
               </div>
             </div>
-          )
+          );
         } else {
           return (
             <div key={cost.id} className='p-2 border border-gray-600'>
@@ -39,10 +39,10 @@ const AdminCost = ({ adminCost }: { adminCost: AdminCostResponseI }) => {
                 </p>
               </div>
             </div>
-          )
+          );
         }
       })}
     </div>
-  )
-}
-export default AdminCost
+  );
+};
+export default AdminCost;

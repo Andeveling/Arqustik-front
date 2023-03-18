@@ -1,4 +1,4 @@
-import * as yup from 'yup'
+import * as yup from 'yup';
 
 export const UpdateServiceSchema = yup.object().shape({
   price: yup
@@ -11,4 +11,4 @@ export const UpdateServiceSchema = yup.object().shape({
     .min(0, 'No puede ser negativo')
     .typeError('El precio de materiales debe ser un numero')
     .required(),
-})
+});

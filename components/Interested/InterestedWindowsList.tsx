@@ -1,9 +1,9 @@
-import { InterestedI, InterestedWindowI } from '@models/Interested.model'
-import { currencyFormatter } from '@utils/currencyFormatter'
-import { Button, Modal, Table } from 'flowbite-react'
-import { ArrowDownCircleIcon } from '@heroicons/react/24/solid'
-import { useState } from 'react'
-import { toast } from 'react-hot-toast'
+import { InterestedI, InterestedWindowI } from '@models/Interested.model';
+import { currencyFormatter } from '@utils/currencyFormatter';
+import { Button, Modal, Table } from 'flowbite-react';
+import { ArrowDownCircleIcon } from '@heroicons/react/24/solid';
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 const InterestedWindowsList = ({
   client,
@@ -12,18 +12,18 @@ const InterestedWindowsList = ({
   windows: InterestedWindowI[]
   client: InterestedI['fullName']
 }) => {
-  let total = 0
-  const [openPopup, setOpenPopup] = useState<string | undefined>()
+  let total = 0;
+  const [openPopup, setOpenPopup] = useState<string | undefined>();
 
   const exportData = () => {
-    setOpenPopup(undefined)
-    const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(JSON.stringify(windows))}`
-    const link = document.createElement('a')
-    link.href = jsonString
-    link.download = `Ventanas ${client}.json`
-    link.click()
-    toast.success('Ventanas descargadas')
-  }
+    setOpenPopup(undefined);
+    const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(JSON.stringify(windows))}`;
+    const link = document.createElement('a');
+    link.href = jsonString;
+    link.download = `Ventanas ${client}.json`;
+    link.click();
+    toast.success('Ventanas descargadas');
+  };
   return (
     <div>
       <div className='flex justify-end mb-2'>
@@ -62,7 +62,7 @@ const InterestedWindowsList = ({
             </Table.Head>
             <Table.Body className='divide-y'>
               {windows.map(({ id, title, width, height, price, cant, model }) => {
-                total += price * cant
+                total += price * cant;
                 return (
                   <Table.Row key={id}>
                     <Table.Cell>{title}</Table.Cell>
@@ -73,7 +73,7 @@ const InterestedWindowsList = ({
                     <Table.Cell>{cant} unds</Table.Cell>
                     <Table.Cell className='text-right'>{currencyFormatter(cant * price)}</Table.Cell>
                   </Table.Row>
-                )
+                );
               })}
             </Table.Body>
           </Table>
@@ -94,6 +94,6 @@ const InterestedWindowsList = ({
         </div>
       ) : null}
     </div>
-  )
-}
-export default InterestedWindowsList
+  );
+};
+export default InterestedWindowsList;

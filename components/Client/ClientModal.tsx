@@ -1,12 +1,12 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
-import ClientForm from './ClientForm'
-import { XMarkIcon, PlusIcon } from '@heroicons/react/24/outline'
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useState } from 'react';
+import ClientForm from './ClientForm';
+import { XMarkIcon, PlusIcon } from '@heroicons/react/24/outline';
 
 export default function ClientModal() {
-  let [isOpen, setIsOpen] = useState(false)
-  const closeModal = () => setIsOpen(false)
-  const openModal = () => setIsOpen(true)
+  let [isOpen, setIsOpen] = useState(false);
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
 
   return (
     <>
@@ -64,5 +64,5 @@ export default function ClientModal() {
         </Dialog>
       </Transition>
     </>
-  )
+  );
 }

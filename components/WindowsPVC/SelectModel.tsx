@@ -1,15 +1,15 @@
-import { SystemsEnum } from '@models/System.model'
-import { WindowModelsEnum, WindowTypeEnum } from '@models/WindowPVC.model'
-import { Label, Select } from 'flowbite-react'
-import { useEffect } from 'react'
-import { useFormContext } from 'react-hook-form'
+import { SystemsEnum } from '@models/System.model';
+import { WindowModelsEnum, WindowTypeEnum } from '@models/WindowPVC.model';
+import { Label, Select } from 'flowbite-react';
+import { useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 export default function SelectModel() {
-  const { register, watch, setValue } = useFormContext()
+  const { register, watch, setValue } = useFormContext();
   // console.log({ value: getValues('system') })
   // console.log({ watch: watch('system') })
-  const systemSelect = watch('system')
-  const typeSelect = watch('type')
+  const systemSelect = watch('system');
+  const typeSelect = watch('type');
 
   /*  switch (systemSelect) {
     case SystemsEnum.BellaSliding:
@@ -84,5 +84,5 @@ export default function SelectModel() {
         </Select>
       )}
     </div>
-  )
+  );
 }

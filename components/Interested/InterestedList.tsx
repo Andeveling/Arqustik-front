@@ -1,10 +1,10 @@
-import Heading from '@components/Heading'
-import { InterestedsResponseI } from '@models/Interested.model'
-import { Button, Table } from 'flowbite-react'
-import CreateInterestedToClient from './CreateInterestedToClient'
-import DeletedInterestedModal from './DeletedInterestedModal'
-import Link from 'next/link'
-import { PrivateRoutes } from 'routes'
+import Heading from '@components/Heading';
+import { InterestedsResponseI } from '@models/Interested.model';
+import { Button, Table } from 'flowbite-react';
+import CreateInterestedToClient from './CreateInterestedToClient';
+import DeletedInterestedModal from './DeletedInterestedModal';
+import Link from 'next/link';
+import { PrivateRoutes } from 'routes';
 
 const InterestedList = ({ interestedList }: { interestedList: InterestedsResponseI }) => {
   return (
@@ -24,8 +24,8 @@ const InterestedList = ({ interestedList }: { interestedList: InterestedsRespons
                 <Table.Body className='divide-y divide-gray-400'>
                   {interestedList &&
                     interestedList.data.map((interested) => {
-                      const id = interested.id
-                      const { fullName, cellphone, address, email } = interested.attributes
+                      const id = interested.id;
+                      const { fullName, cellphone, address, email } = interested.attributes;
                       return (
                         <Table.Row className="pl-10'" key={id}>
                           <Table.Cell className='font-bold'>{fullName}</Table.Cell>
@@ -42,7 +42,7 @@ const InterestedList = ({ interestedList }: { interestedList: InterestedsRespons
                             <DeletedInterestedModal id={id} />
                           </Table.Cell>
                         </Table.Row>
-                      )
+                      );
                     })}
                 </Table.Body>
               </Table>
@@ -53,6 +53,6 @@ const InterestedList = ({ interestedList }: { interestedList: InterestedsRespons
         <></>
       )}
     </div>
-  )
-}
-export default InterestedList
+  );
+};
+export default InterestedList;

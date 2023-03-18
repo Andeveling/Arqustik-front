@@ -1,33 +1,33 @@
-import { SystemI } from '@models/System.model'
-import { arqustikConfig } from 'arqustik.config'
-import axios from 'axios'
-import { Button, Card } from 'flowbite-react'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { useSWRConfig } from 'swr'
+import { SystemI } from '@models/System.model';
+import { arqustikConfig } from 'arqustik.config';
+import axios from 'axios';
+import { Button, Card } from 'flowbite-react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { useSWRConfig } from 'swr';
 
-const URL = `${arqustikConfig.NEXT_SERVER}/systems/update-system`
+const URL = `${arqustikConfig.NEXT_SERVER}/systems/update-system`;
 
 const updateSystem = (url: string, body: any) => {
   axios
     .put(url, body)
     .then((res) => res.data)
-    .catch((err) => console.log(err))
-}
+    .catch((err) => console.log(err));
+};
 
 const SystemCard = ({ system }: { system: SystemI }) => {
   const {
     id,
     attributes: { title, update, description, updatedAt },
-  } = system
-  const session = useSession()
-  const { mutate } = useSWRConfig()
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
+  } = system;
+  const session = useSession();
+  const { mutate } = useSWRConfig();
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const updateHandle = (id: string) => {
-    setLoading(true)
+    setLoading(true);
     mutate(
       URL,
       updateSystem(URL, {
@@ -37,8 +37,8 @@ const SystemCard = ({ system }: { system: SystemI }) => {
           update: false,
         },
       }),
-    ).then(() => router.reload())
-  }
+    ).then(() => router.reload());
+  };
 
   return (
     <Card>
@@ -51,6 +51,6 @@ const SystemCard = ({ system }: { system: SystemI }) => {
         {update ? <Button onClick={() => updateHandle(id)}>{loading ? 'loading' : 'Actualizar'}</Button> : <></>}
       </div>
     </Card>
-  )
-}
-export default SystemCard
+  );
+};
+export default SystemCard;

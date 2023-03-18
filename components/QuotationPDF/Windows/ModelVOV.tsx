@@ -1,4 +1,4 @@
-import { WindowI } from '@models/WindowPVC.model'
+import { WindowI } from '@models/WindowPVC.model';
 
 const ModelVOV = ({ width, height }: { width: WindowI['width']; height: WindowI['height'] }) => {
   return (
@@ -42,7 +42,7 @@ const ModelVOV = ({ width, height }: { width: WindowI['width']; height: WindowI[
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ModelVOV
+export default ModelVOV;

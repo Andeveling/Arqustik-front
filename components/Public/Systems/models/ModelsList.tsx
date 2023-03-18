@@ -1,6 +1,6 @@
-import { WindowsModelResponseI } from '@models/WindowModels.model'
-import ModelsCard from './ModelsCard'
-import {} from '@heroicons/react/24/solid'
+import { WindowsModelResponseI } from '@models/WindowModels.model';
+import ModelsCard from './ModelsCard';
+import {} from '@heroicons/react/24/solid';
 
 const ModelsList = ({ models }: { models: WindowsModelResponseI[] }) => {
   return (
@@ -9,6 +9,6 @@ const ModelsList = ({ models }: { models: WindowsModelResponseI[] }) => {
         <ModelsCard key={item.id} model={item} />
       ))}
     </div>
-  )
-}
-export default ModelsList
+  );
+};
+export default ModelsList;

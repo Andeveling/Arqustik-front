@@ -1,9 +1,9 @@
-import { SystemsEnum } from '@models/System.model'
-import { Label, Select } from 'flowbite-react'
-import { useFormContext } from 'react-hook-form'
+import { SystemsEnum } from '@models/System.model';
+import { Label, Select } from 'flowbite-react';
+import { useFormContext } from 'react-hook-form';
 
 export default function SelectSystem() {
-  const { register } = useFormContext()
+  const { register } = useFormContext();
   return (
     <div className='mb-6'>
       <Label htmlFor='select-system-windows'>Seleccionar sistema</Label>
@@ -12,5 +12,5 @@ export default function SelectSystem() {
         <option value={SystemsEnum.EverestMax}>Everest Max</option>
       </Select>
     </div>
-  )
+  );
 }

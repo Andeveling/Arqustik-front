@@ -1,14 +1,14 @@
-import { CartItemI } from '@models/CartItem.model'
-import SummaryCard from './SummaryCard'
-import Link from 'next/link'
-import { PublicRoutes } from 'routes'
+import { CartItemI } from '@models/CartItem.model';
+import SummaryCard from './SummaryCard';
+import Link from 'next/link';
+import { PublicRoutes } from 'routes';
 
 const SummaryList = ({ windows }: { windows: CartItemI[] }) => {
   return (
     <>
       {windows && windows.length ? (
         windows.map((item) => {
-          return <SummaryCard key={item.id} window={item} />
+          return <SummaryCard key={item.id} window={item} />;
         })
       ) : (
         <p className='text-lg mt-4'>
@@ -20,6 +20,6 @@ const SummaryList = ({ windows }: { windows: CartItemI[] }) => {
         </p>
       )}
     </>
-  )
-}
-export default SummaryList
+  );
+};
+export default SummaryList;

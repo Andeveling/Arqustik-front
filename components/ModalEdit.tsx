@@ -1,12 +1,12 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { PencilSquareIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Button } from 'flowbite-react'
-import { Fragment, useState } from 'react'
+import { Dialog, Transition } from '@headlessui/react';
+import { PencilSquareIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Button } from 'flowbite-react';
+import { Fragment, useState } from 'react';
 
 export default function ModalEdit({ form, title }: any) {
-  let [isOpen, setIsOpen] = useState(false)
-  const closeModal = () => setIsOpen(false)
-  const openModal = () => setIsOpen(true)
+  let [isOpen, setIsOpen] = useState(false);
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
 
   return (
     <>
@@ -58,5 +58,5 @@ export default function ModalEdit({ form, title }: any) {
         </Dialog>
       </Transition>
     </>
-  )
+  );
 }

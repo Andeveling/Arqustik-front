@@ -1,24 +1,24 @@
-import SubmitInput from '@components/SubmitInput'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { QuotationI } from '@models/Quotation.model'
-import { CreateWindowFormPVCI, WindowI } from '@models/WindowPVC.model'
-import { getJWT } from '@services/getJWT.service'
-import { windowPVC } from '@services/window.service'
-import axios from 'axios'
-import { Label, TextInput } from 'flowbite-react'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import { toast } from 'react-hot-toast'
-import SelectColorPVC from './SelectColorPVC'
-import SelectGlass from './SelectGlass'
-import SelectModel from './SelectModel'
-import SelectSystem from './SelectSystem'
-import SelectType from './SelectType'
-import SelectWindowsDetails from './SelectWindowsDetails'
-import TitleLocation from './TitleLocation'
-import { ProjectDataProps } from './WindowsPVCForm'
-import { WindowsPVCSchema } from './WindowsPVCSchema'
+import SubmitInput from '@components/SubmitInput';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { QuotationI } from '@models/Quotation.model';
+import { CreateWindowFormPVCI, WindowI } from '@models/WindowPVC.model';
+import { getJWT } from '@services/getJWT.service';
+import { windowPVC } from '@services/window.service';
+import axios from 'axios';
+import { Label, TextInput } from 'flowbite-react';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
+import SelectColorPVC from './SelectColorPVC';
+import SelectGlass from './SelectGlass';
+import SelectModel from './SelectModel';
+import SelectSystem from './SelectSystem';
+import SelectType from './SelectType';
+import SelectWindowsDetails from './SelectWindowsDetails';
+import TitleLocation from './TitleLocation';
+import { ProjectDataProps } from './WindowsPVCForm';
+import { WindowsPVCSchema } from './WindowsPVCSchema';
 
 const WindowsPVCUpdateForm = ({
   projectData,
@@ -27,17 +27,17 @@ const WindowsPVCUpdateForm = ({
   projectData: ProjectDataProps
   windowID: WindowI['id']
 }) => {
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const methods = useForm<CreateWindowFormPVCI>({
     resolver: yupResolver(WindowsPVCSchema),
-  })
-  const quotationID: QuotationI['id'] = typeof router.query.quotation === 'string' ? router.query.quotation : ''
+  });
+  const quotationID: QuotationI['id'] = typeof router.query.quotation === 'string' ? router.query.quotation : '';
 
-  const { handleSubmit } = methods
+  const { handleSubmit } = methods;
   const onSubmit: SubmitHandler<CreateWindowFormPVCI> = async (data) => {
-    setLoading(true)
-    const jwt = await getJWT()
+    setLoading(true);
+    const jwt = await getJWT();
     toast
       .promise(
         axios
@@ -62,8 +62,8 @@ const WindowsPVCUpdateForm = ({
           error: <b>Algo salio mal</b>,
         },
       )
-      .then(() => setLoading(false))
-  }
+      .then(() => setLoading(false));
+  };
 
   return (
     <FormProvider {...methods}>
@@ -96,6 +96,6 @@ const WindowsPVCUpdateForm = ({
         <SubmitInput isLoading={methods.formState.isSubmitting || loading} value={'Actualizar'} />
       </form>
     </FormProvider>
-  )
-}
-export default WindowsPVCUpdateForm
+  );
+};
+export default WindowsPVCUpdateForm;

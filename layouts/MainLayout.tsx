@@ -1,5 +1,5 @@
-import Footer from "@components/Footer"
-import Header from "@components/Header"
+import Footer from "@components/Footer";
+import Header from "@components/Header";
 
 const MainLayout = () => {
   return (
@@ -8,6 +8,6 @@ const MainLayout = () => {
 
       <Footer />
     </>
-  )
-}
-export default MainLayout
+  );
+};
+export default MainLayout;

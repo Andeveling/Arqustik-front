@@ -1,8 +1,8 @@
-import WindowDraw from '@components/QuotationPDF/WindowDraw'
-import { WindowsModelResponseI } from '@models/WindowModels.model'
-import { Card } from 'flowbite-react'
-import Model3D from './Model3D'
-import ModelModal from './ModelModal'
+import WindowDraw from '@components/QuotationPDF/WindowDraw';
+import { WindowsModelResponseI } from '@models/WindowModels.model';
+import { Card } from 'flowbite-react';
+import Model3D from './Model3D';
+import ModelModal from './ModelModal';
 
 const ModelsCard = ({ model }: { model: WindowsModelResponseI }) => {
   return (
@@ -35,6 +35,6 @@ const ModelsCard = ({ model }: { model: WindowsModelResponseI }) => {
         </div>
       </div>
     </Card>
-  )
-}
-export default ModelsCard
+  );
+};
+export default ModelsCard;

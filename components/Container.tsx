@@ -1,17 +1,17 @@
-import Head from 'next/head'
-import React, { ReactNode, Suspense } from 'react'
-import Footer from './Footer'
-import Header from './Header'
+import Head from 'next/head';
+import React, { ReactNode, Suspense } from 'react';
+import Footer from './Footer';
+import Header from './Header';
 
 export default function Container(props: { [x: string]: any; children: ReactNode }) {
-  const { children, ...customMeta } = props
+  const { children, ...customMeta } = props;
   const meta = {
     title: 'Arqustik PVC Quoter',
     description: `Empresa dedicada a la fabricación de ventanas y puertaventanas en PVC`,
     keyWords: 'Arqustik, deceuninck, colombia, ventanas, puertas, pvc, instalación',
     type: 'website',
     ...customMeta,
-  }
+  };
 
   return (
     <Suspense fallback={null}>
@@ -29,7 +29,7 @@ export default function Container(props: { [x: string]: any; children: ReactNode
       </main>
       <Footer />
     </Suspense>
-  )
+  );
 }
 
 /* 

@@ -1,4 +1,4 @@
-const { spacing, fontFamily } = require('tailwindcss/defaultTheme')
+const { spacing, fontFamily } = require('tailwindcss/defaultTheme');
 
 module.exports = {
   content: ['./node_modules/flowbite-react/**/*.js', './pages/**/*.tsx', './components/**/*.tsx', './layouts/**/*.tsx'],
@@ -99,4 +99,4 @@ module.exports = {
     typography: ['dark'],
   },
   plugins: [require('@tailwindcss/typography'), require('flowbite/plugin')],
-}
+};

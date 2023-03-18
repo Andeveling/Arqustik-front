@@ -1,24 +1,24 @@
-import Container from '@components/Container'
-import Heading from '@components/Heading'
-import CartPrintFooter from '@components/Public/Summary/CartPrintFooter'
-import CartPrintHeader from '@components/Public/Summary/CartPrintHeader'
-import SummaryList from '@components/Public/Summary/SummaryList'
-import SummaryModal from '@components/Public/Summary/SummaryModal'
-import { useCart } from '@context/CartContext'
-import { useRef } from 'react'
-import { toast } from 'react-hot-toast'
-import { useReactToPrint } from 'react-to-print'
+import Container from '@components/Container';
+import Heading from '@components/Heading';
+import CartPrintFooter from '@components/Public/Summary/CartPrintFooter';
+import CartPrintHeader from '@components/Public/Summary/CartPrintHeader';
+import SummaryList from '@components/Public/Summary/SummaryList';
+import SummaryModal from '@components/Public/Summary/SummaryModal';
+import { useCart } from '@context/CartContext';
+import { useRef } from 'react';
+import { toast } from 'react-hot-toast';
+import { useReactToPrint } from 'react-to-print';
 
 const CartPage = () => {
-  const { items } = useCart()
-  const componentRef = useRef(null)
+  const { items } = useCart();
+  const componentRef = useRef(null);
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
     documentTitle: `Cotización-Arqustik`,
     onAfterPrint: () => {
-      toast.success('Presupuesto generado correctamente.')
+      toast.success('Presupuesto generado correctamente.');
     },
-  })
+  });
 
   return (
     <Container>
@@ -40,7 +40,7 @@ const CartPage = () => {
         <CartPrintFooter />
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default CartPage
+export default CartPage;

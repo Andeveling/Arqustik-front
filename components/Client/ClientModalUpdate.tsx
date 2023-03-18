@@ -1,14 +1,14 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { PencilIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { ClientDataI } from '@models/Client.model'
-import { Button } from 'flowbite-react'
-import { Fragment, useState } from 'react'
-import ClientUpdateForm from './ClientUpdateForm'
+import { Dialog, Transition } from '@headlessui/react';
+import { PencilIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ClientDataI } from '@models/Client.model';
+import { Button } from 'flowbite-react';
+import { Fragment, useState } from 'react';
+import ClientUpdateForm from './ClientUpdateForm';
 
 export default function ClientUpdateModal({ client }: { client: ClientDataI }) {
-  let [isOpen, setIsOpen] = useState(false)
-  const closeModal = () => setIsOpen(false)
-  const openModal = () => setIsOpen(true)
+  let [isOpen, setIsOpen] = useState(false);
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
 
   return (
     <>
@@ -62,5 +62,5 @@ export default function ClientUpdateModal({ client }: { client: ClientDataI }) {
         </Dialog>
       </Transition>
     </>
-  )
+  );
 }

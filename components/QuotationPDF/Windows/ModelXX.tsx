@@ -1,5 +1,5 @@
-import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
-import { WindowI } from '@models/WindowPVC.model'
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
+import { WindowI } from '@models/WindowPVC.model';
 
 const ModelXX = ({ width, height }: { width: WindowI['width']; height: WindowI['height'] }) => {
   return (
@@ -19,6 +19,6 @@ const ModelXX = ({ width, height }: { width: WindowI['width']; height: WindowI['
         </div>
       </div>
     </div>
-  )
-}
-export default ModelXX
+  );
+};
+export default ModelXX;

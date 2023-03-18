@@ -1,37 +1,37 @@
-import Container from '@components/Container'
-import Heading from '@components/Heading'
-import CarouselGlass from '@components/IndexPageComponents/CarouselGlass'
-import LoadingSpinner from '@components/LoadingSpinner'
-import ModelsList from '@components/Public/Systems/models/ModelsList'
-import { SystemResponseI } from '@models/System.model'
-import { WindowDoor } from '@models/WindowModels.model'
-import { fetcher } from '@services/fetcher.service'
-import { arqustikConfig } from 'arqustik.config'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import useSWR from 'swr'
+import Container from '@components/Container';
+import Heading from '@components/Heading';
+import CarouselGlass from '@components/IndexPageComponents/CarouselGlass';
+import LoadingSpinner from '@components/LoadingSpinner';
+import ModelsList from '@components/Public/Systems/models/ModelsList';
+import { SystemResponseI } from '@models/System.model';
+import { WindowDoor } from '@models/WindowModels.model';
+import { fetcher } from '@services/fetcher.service';
+import { arqustikConfig } from 'arqustik.config';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import useSWR from 'swr';
 
-const { NEXT_SERVER } = arqustikConfig
+const { NEXT_SERVER } = arqustikConfig;
 
 const Systems = () => {
-  const router = useRouter()
-  const systemName = router.query?.systems
+  const router = useRouter();
+  const systemName = router.query?.systems;
   // aca se hace un call al back solicitando los modelos disponibles.
   // el Link se genera de manera dinamica en la tarjeta
-  const { data: system, error, isValidating } = useSWR<SystemResponseI>(`${NEXT_SERVER}/systems/${systemName}`, fetcher)
+  const { data: system, error, isValidating } = useSWR<SystemResponseI>(`${NEXT_SERVER}/systems/${systemName}`, fetcher);
 
   if (!system && !error)
     return (
       <Container>
         <LoadingSpinner />
       </Container>
-    )
+    );
   if (error)
     return (
       <Container>
         <p>{error.message}</p>
       </Container>
-    )
+    );
 
   return (
     <Container>
@@ -63,6 +63,6 @@ const Systems = () => {
         />
       )}
     </Container>
-  )
-}
-export default Systems
+  );
+};
+export default Systems;

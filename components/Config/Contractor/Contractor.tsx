@@ -1,6 +1,6 @@
-import { ServicesResponseI } from '@models/Service.model'
-import { currencyFormatter } from '@utils/currencyFormatter'
-import ContractorModalR from './ContractorModal'
+import { ServicesResponseI } from '@models/Service.model';
+import { currencyFormatter } from '@utils/currencyFormatter';
+import ContractorModalR from './ContractorModal';
 
 const Contractor = ({ services }: { services: ServicesResponseI }) => {
   return (
@@ -37,6 +37,6 @@ const Contractor = ({ services }: { services: ServicesResponseI }) => {
         </div>
       ))}
     </div>
-  )
-}
-export default Contractor
+  );
+};
+export default Contractor;

@@ -1,17 +1,17 @@
-import SubmitInput from '@components/SubmitInput'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { ClientDataI, ClientI, UpdateClientI } from '@models/Client.model'
-import { clientPVC } from '@services/client.service'
-import { Label, TextInput } from 'flowbite-react'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
-import { CreateClientSchema } from './ClientSchema'
+import SubmitInput from '@components/SubmitInput';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { ClientDataI, ClientI, UpdateClientI } from '@models/Client.model';
+import { clientPVC } from '@services/client.service';
+import { Label, TextInput } from 'flowbite-react';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { CreateClientSchema } from './ClientSchema';
 
 const ClientUpdateForm = ({ client }: { client: ClientDataI }) => {
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {
     register,
@@ -27,9 +27,9 @@ const ClientUpdateForm = ({ client }: { client: ClientDataI }) => {
       address: client.attributes.address,
       email: client.attributes.email,
     },
-  })
+  });
   const onSubmit: SubmitHandler<UpdateClientI> = async (data) => {
-    setIsLoading(true)
+    setIsLoading(true);
     toast.promise(
       clientPVC
         .update(client.id, {
@@ -46,8 +46,8 @@ const ClientUpdateForm = ({ client }: { client: ClientDataI }) => {
         success: <b>¡Cliente actualizado!</b>,
         error: <b>No se pudo actualizar el Cliente</b>,
       },
-    )
-  }
+    );
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -77,6 +77,6 @@ const ClientUpdateForm = ({ client }: { client: ClientDataI }) => {
 
       <SubmitInput value='Actualizar' isLoading={isLoading} />
     </form>
-  )
-}
-export default ClientUpdateForm
+  );
+};
+export default ClientUpdateForm;

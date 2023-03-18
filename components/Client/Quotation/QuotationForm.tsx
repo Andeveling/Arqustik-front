@@ -1,19 +1,19 @@
-import SubmitInput from '@components/SubmitInput'
-import { Transition } from '@headlessui/react'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { CreateQuotationI, ProtectionEnum, SiliconeEnum } from '@models/Quotation.model'
-import { quotationPVC } from '@services/quotation.service'
-import { Checkbox, Label, Select, Textarea, TextInput } from 'flowbite-react'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
-import { QuotationSchema } from './QuotationSchema'
-import { useEffect } from 'react'
+import SubmitInput from '@components/SubmitInput';
+import { Transition } from '@headlessui/react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { CreateQuotationI, ProtectionEnum, SiliconeEnum } from '@models/Quotation.model';
+import { quotationPVC } from '@services/quotation.service';
+import { Checkbox, Label, Select, Textarea, TextInput } from 'flowbite-react';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { QuotationSchema } from './QuotationSchema';
+import { useEffect } from 'react';
 
 const QuotationForm = () => {
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -28,14 +28,14 @@ const QuotationForm = () => {
       transport: false,
     },
     mode: 'onChange',
-  })
+  });
 
   useEffect(() => {
-    if (getValues('transport') === false) setValue('transport_mount', 0)
-  }, [getValues, setValue])
+    if (getValues('transport') === false) setValue('transport_mount', 0);
+  }, [getValues, setValue]);
 
   const onSubmit: SubmitHandler<CreateQuotationI> = async (data) => {
-    setIsLoading(true)
+    setIsLoading(true);
     toast.promise(
       quotationPVC
         .create({
@@ -62,8 +62,8 @@ const QuotationForm = () => {
         success: <b>¡Cotización creada!</b>,
         error: <b>No se pudo crear</b>,
       },
-    )
-  }
+    );
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -158,6 +158,6 @@ const QuotationForm = () => {
 
       <SubmitInput value='Añadir' isLoading={isLoading} />
     </form>
-  )
-}
-export default QuotationForm
+  );
+};
+export default QuotationForm;

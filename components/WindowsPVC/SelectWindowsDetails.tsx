@@ -1,13 +1,13 @@
-import { ArrowsRightLeftIcon, ArrowsUpDownIcon } from "@heroicons/react/24/solid"
-import { CreateWindowPVCI } from "@models/WindowPVC.model"
-import { Label, TextInput } from "flowbite-react"
-import { useFormContext } from "react-hook-form"
+import { ArrowsRightLeftIcon, ArrowsUpDownIcon } from "@heroicons/react/24/solid";
+import { CreateWindowPVCI } from "@models/WindowPVC.model";
+import { Label, TextInput } from "flowbite-react";
+import { useFormContext } from "react-hook-form";
 
 export default function SelectWindowsDetails() {
   const {
     register,
     formState: { errors },
-  } = useFormContext<CreateWindowPVCI>()
+  } = useFormContext<CreateWindowPVCI>();
   return (
     <>
       <div className='grid grid-cols-1 gap-0 sm:grid-cols-2 sm:gap-4'>
@@ -37,5 +37,5 @@ export default function SelectWindowsDetails() {
         </div>
       </div>
     </>
-  )
+  );
 }

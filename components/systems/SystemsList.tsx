@@ -1,6 +1,6 @@
-import { SystemsResponseI } from '@models/System.model'
+import { SystemsResponseI } from '@models/System.model';
 
-import SystemCard from './SystemCard'
+import SystemCard from './SystemCard';
 
 const SystemsList = ({ systems }: { systems: SystemsResponseI }) => {
   return (
@@ -15,6 +15,6 @@ const SystemsList = ({ systems }: { systems: SystemsResponseI }) => {
         <p>No hay sistemas</p>
       )}
     </div>
-  )
-}
-export default SystemsList
+  );
+};
+export default SystemsList;

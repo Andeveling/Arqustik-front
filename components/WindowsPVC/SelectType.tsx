@@ -1,8 +1,8 @@
-import { Label, Select } from "flowbite-react"
-import { useFormContext } from "react-hook-form"
+import { Label, Select } from "flowbite-react";
+import { useFormContext } from "react-hook-form";
 
 export default function SelectType() {
-  const { register } = useFormContext()
+  const { register } = useFormContext();
 
   return (
     <div className='mb-6'>
@@ -12,5 +12,5 @@ export default function SelectType() {
         <option value='door'>Puerta Ventana</option>
       </Select>
     </div>
-  )
+  );
 }

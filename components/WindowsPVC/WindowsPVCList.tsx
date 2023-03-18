@@ -1,14 +1,14 @@
-import ModalEdit from '@components/ModalEdit'
-import { TrashIcon } from '@heroicons/react/24/solid'
-import { WindowI, WindowsQuotationResponseI } from '@models/WindowPVC.model'
-import { windowPVC } from '@services/window.service'
-import { Button, Dropdown, Modal, Table } from 'flowbite-react'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { toast } from 'react-hot-toast'
-import { currencyFormatter } from 'utils/currencyFormatter'
-import { ProjectDataProps } from './WindowsPVCForm'
-import WindowsPVCUpdateForm from './WindowsPVCUpdateForm'
+import ModalEdit from '@components/ModalEdit';
+import { TrashIcon } from '@heroicons/react/24/solid';
+import { WindowI, WindowsQuotationResponseI } from '@models/WindowPVC.model';
+import { windowPVC } from '@services/window.service';
+import { Button, Dropdown, Modal, Table } from 'flowbite-react';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { currencyFormatter } from 'utils/currencyFormatter';
+import { ProjectDataProps } from './WindowsPVCForm';
+import WindowsPVCUpdateForm from './WindowsPVCUpdateForm';
 
 interface Props {
   windows: WindowsQuotationResponseI['data']
@@ -17,9 +17,9 @@ interface Props {
 }
 
 const WindowsPVCList = ({ windows, projectData, transport_mount }: Props) => {
-  const [openModal, setOpenModal] = useState<string | undefined>()
-  let total = 0
-  const router = useRouter()
+  const [openModal, setOpenModal] = useState<string | undefined>();
+  let total = 0;
+  const router = useRouter();
   const deleteHandle = async (id: WindowI['id']) => {
     toast
       .promise(windowPVC.delete(id), {
@@ -27,8 +27,8 @@ const WindowsPVCList = ({ windows, projectData, transport_mount }: Props) => {
         success: <b>¡Ventana borrada!</b>,
         error: <b>Algo salio mal</b>,
       })
-      .then(() => router.reload())
-  }
+      .then(() => router.reload());
+  };
 
   if (windows) {
     return (
@@ -51,8 +51,8 @@ const WindowsPVCList = ({ windows, projectData, transport_mount }: Props) => {
               {windows.map((window) => {
                 const {
                   attributes: { title, width, height, price, cant, model },
-                } = window
-                total += price * cant
+                } = window;
+                total += price * cant;
                 return (
                   <Table.Row key={window.id}>
                     <Table.Cell>{title}</Table.Cell>
@@ -102,7 +102,7 @@ const WindowsPVCList = ({ windows, projectData, transport_mount }: Props) => {
                     </Table.Cell>
                     <Table.Cell className='text-right'>{currencyFormatter(cant * price)}</Table.Cell>
                   </Table.Row>
-                )
+                );
               })}
             </Table.Body>
           </Table>
@@ -118,9 +118,9 @@ const WindowsPVCList = ({ windows, projectData, transport_mount }: Props) => {
           <span className='text-right pr-6 font-bold'>{currencyFormatter(total * 1.19 + transport_mount)}</span>
         </div>
       </div>
-    )
+    );
   } else {
-    return null
+    return null;
   }
-}
-export default WindowsPVCList
+};
+export default WindowsPVCList;

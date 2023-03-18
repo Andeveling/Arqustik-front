@@ -1,12 +1,12 @@
-import { WindowsDatum } from '@models/WindowPVC.model'
-import { currencyFormatter } from '@utils/currencyFormatter'
-import { getArea, getMillimeters } from '@utils/getDimensions'
-import WindowDraw from './WindowDraw'
+import { WindowsDatum } from '@models/WindowPVC.model';
+import { currencyFormatter } from '@utils/currencyFormatter';
+import { getArea, getMillimeters } from '@utils/getDimensions';
+import WindowDraw from './WindowDraw';
 
 const WindowPDFDetailsCard = ({ window }: { window: WindowsDatum }) => {
   const {
     attributes: { title, location, height, width, price, cant, model, color, description, glass },
-  } = window
+  } = window;
   return (
     <div className='grid sm:grid-cols-2 print:grid-cols-2 grid-cols-1 justify-center my-5 border-t p-4 break-after-auto break-before-auto  break-inside-avoid'>
       <div className='flex justify-center items-center'>
@@ -59,6 +59,6 @@ const WindowPDFDetailsCard = ({ window }: { window: WindowsDatum }) => {
         </div>
       </div>
     </div>
-  )
-}
-export default WindowPDFDetailsCard
+  );
+};
+export default WindowPDFDetailsCard;

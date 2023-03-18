@@ -1,7 +1,7 @@
-import { SystemResponseI, SystemsEnum } from '@models/System.model'
-import { Button, Tooltip } from 'flowbite-react'
-import Image from 'next/image'
-import Link from 'next/link'
+import { SystemResponseI, SystemsEnum } from '@models/System.model';
+import { Button, Tooltip } from 'flowbite-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const SystemCard = ({ system }: { system: SystemResponseI['data'] }) => {
   return (
@@ -32,14 +32,14 @@ const SystemCard = ({ system }: { system: SystemResponseI['data'] }) => {
         </div>
       </div>
     </div>
-  )
-}
-export default SystemCard
+  );
+};
+export default SystemCard;
 
 const convertName = (name: SystemsEnum) => {
   const systems = {
     [SystemsEnum.BellaSliding]: 'Ventanas, Puertas Ventanas, Correderas',
     [SystemsEnum.EverestMax]: 'Batientes, Proyectantes, Oscilobatientes',
-  }
-  return systems[name]
-}
+  };
+  return systems[name];
+};

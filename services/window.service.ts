@@ -1,9 +1,9 @@
-import { CreateWindowPVCI, WindowI } from '@models/WindowPVC.model'
-import { arqustikConfig, endpoints } from 'arqustik.config'
-import axios from 'axios'
+import { CreateWindowPVCI, WindowI } from '@models/WindowPVC.model';
+import { arqustikConfig, endpoints } from 'arqustik.config';
+import axios from 'axios';
 
-const { STRAPI_SERVER } = arqustikConfig
-const { windows } = endpoints
+const { STRAPI_SERVER } = arqustikConfig;
+const { windows } = endpoints;
 
 export const windowPVC = {
   create: async (window: CreateWindowPVCI) =>
@@ -23,4 +23,4 @@ export const windowPVC = {
       })
       .then((res) => res.data)
       .catch((err) => console.log(err)),
-}
+};

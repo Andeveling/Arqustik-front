@@ -1,11 +1,11 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, ReactNode, useState } from 'react'
-import { XMarkIcon, PlusIcon } from '@heroicons/react/24/outline'
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, ReactNode, useState } from 'react';
+import { XMarkIcon, PlusIcon } from '@heroicons/react/24/outline';
 
 export default function ModalR({ form, title }: { form: ReactNode; title: string }) {
-  let [isOpen, setIsOpen] = useState(false)
-  const closeModal = () => setIsOpen(false)
-  const openModal = () => setIsOpen(true)
+  let [isOpen, setIsOpen] = useState(false);
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
 
   return (
     <>
@@ -61,5 +61,5 @@ export default function ModalR({ form, title }: { form: ReactNode; title: string
         </Dialog>
       </Transition>
     </>
-  )
+  );
 }

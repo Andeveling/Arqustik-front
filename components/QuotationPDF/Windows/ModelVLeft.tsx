@@ -1,4 +1,4 @@
-import { WindowI } from '@models/WindowPVC.model'
+import { WindowI } from '@models/WindowPVC.model';
 
 const ModelVLeft = ({ width, height }: { width: WindowI['width']; height: WindowI['height'] }) => {
   return (
@@ -18,6 +18,6 @@ const ModelVLeft = ({ width, height }: { width: WindowI['width']; height: Window
         </div>
       </div>
     </div>
-  )
-}
-export default ModelVLeft
+  );
+};
+export default ModelVLeft;

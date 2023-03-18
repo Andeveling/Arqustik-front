@@ -1,8 +1,8 @@
-import { Label, Select } from "flowbite-react"
-import { useFormContext } from "react-hook-form"
+import { Label, Select } from "flowbite-react";
+import { useFormContext } from "react-hook-form";
 
 export default function SelectColorPVC() {
-  const { register } = useFormContext()
+  const { register } = useFormContext();
   return (
     <div className='mb-6'>
       <Label id='select-color-pvc' htmlFor='color'>
@@ -12,5 +12,5 @@ export default function SelectColorPVC() {
         <option value='blanco'>blanco</option>
       </Select>
     </div>
-  )
+  );
 }

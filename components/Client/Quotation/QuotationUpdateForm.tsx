@@ -1,18 +1,18 @@
-import SubmitInput from '@components/SubmitInput'
-import { Transition } from '@headlessui/react'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { CreateQuotationI, ProtectionEnum, QuotationI, SiliconeEnum } from '@models/Quotation.model'
-import { quotationPVC } from '@services/quotation.service'
-import { Checkbox, Label, Select, Textarea, TextInput } from 'flowbite-react'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
-import { QuotationUpdateSchema } from './QuotationSchema'
+import SubmitInput from '@components/SubmitInput';
+import { Transition } from '@headlessui/react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { CreateQuotationI, ProtectionEnum, QuotationI, SiliconeEnum } from '@models/Quotation.model';
+import { quotationPVC } from '@services/quotation.service';
+import { Checkbox, Label, Select, Textarea, TextInput } from 'flowbite-react';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { QuotationUpdateSchema } from './QuotationSchema';
 
 const QuotationUpdateForm = ({ quotation }: { quotation: QuotationI }) => {
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {
     register,
@@ -39,13 +39,13 @@ const QuotationUpdateForm = ({ quotation }: { quotation: QuotationI }) => {
       transport_mount: quotation.attributes.transport_mount,
     },
     mode: 'onChange',
-  })
+  });
 
-  const watchTransport = watch('transport')
-  if (!watchTransport) setValue('transport_mount', 0)
+  const watchTransport = watch('transport');
+  if (!watchTransport) setValue('transport_mount', 0);
 
   const onSubmit: SubmitHandler<CreateQuotationI> = async (data) => {
-    setIsLoading(true)
+    setIsLoading(true);
     toast.promise(
       quotationPVC
         .update(quotation.id, {
@@ -74,8 +74,8 @@ const QuotationUpdateForm = ({ quotation }: { quotation: QuotationI }) => {
         success: <b>¡Cotización Actualizada!</b>,
         error: <b>No se pudo acualizar</b>,
       },
-    )
-  }
+    );
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -171,6 +171,6 @@ const QuotationUpdateForm = ({ quotation }: { quotation: QuotationI }) => {
 
       <SubmitInput value='Actualizar' isLoading={isLoading} />
     </form>
-  )
-}
-export default QuotationUpdateForm
+  );
+};
+export default QuotationUpdateForm;

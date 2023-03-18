@@ -1,12 +1,12 @@
-import { DocumentIcon } from '@heroicons/react/24/solid'
-import { InterestedI } from '@models/Interested.model'
-import { clientPVC } from '@services/client.service'
-import { Button, Modal } from 'flowbite-react'
-import { useState } from 'react'
-import toast from 'react-hot-toast'
+import { DocumentIcon } from '@heroicons/react/24/solid';
+import { InterestedI } from '@models/Interested.model';
+import { clientPVC } from '@services/client.service';
+import { Button, Modal } from 'flowbite-react';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const CreateInterestedToClient = ({ interested }: { interested: InterestedI }) => {
-  const [openPopup, setOpenPopup] = useState<string | undefined>()
+  const [openPopup, setOpenPopup] = useState<string | undefined>();
 
   const createClientHandle = () => {
     toast.promise(
@@ -27,8 +27,8 @@ const CreateInterestedToClient = ({ interested }: { interested: InterestedI }) =
         success: <b>¡Cliente creado!</b>,
         error: <b>Algo salio mal</b>,
       },
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -56,9 +56,9 @@ const CreateInterestedToClient = ({ interested }: { interested: InterestedI }) =
         </Modal.Body>
       </Modal>
     </>
-  )
-}
-export default CreateInterestedToClient
+  );
+};
+export default CreateInterestedToClient;
 function setOpenPopup(undefined: undefined): any {
-  throw new Error('Function not implemented.')
+  throw new Error('Function not implemented.');
 }

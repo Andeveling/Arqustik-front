@@ -1,18 +1,18 @@
-import Heading from '@components/Heading'
-import { DocumentIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/solid'
-import { ClientByIDResponse, QuotationI } from '@models/Quotation.model'
-import { quotationPVC } from '@services/quotation.service'
-import { Button, Modal, Table } from 'flowbite-react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import toast from 'react-hot-toast'
-import QuotationModal from './Quotation/QuotationModal'
-import QuotationUpdateModal from './Quotation/QuotationUpdateModal'
+import Heading from '@components/Heading';
+import { DocumentIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
+import { ClientByIDResponse, QuotationI } from '@models/Quotation.model';
+import { quotationPVC } from '@services/quotation.service';
+import { Button, Modal, Table } from 'flowbite-react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import QuotationModal from './Quotation/QuotationModal';
+import QuotationUpdateModal from './Quotation/QuotationUpdateModal';
 
 const ClientQuotations = ({ client }: { client: ClientByIDResponse }) => {
-  const router = useRouter()
-  const [openModal, setOpenModal] = useState<string | undefined>()
+  const router = useRouter();
+  const [openModal, setOpenModal] = useState<string | undefined>();
   const deleteHandle = (id: QuotationI['id']) => {
     toast
       .promise(quotationPVC.delete(id), {
@@ -20,8 +20,8 @@ const ClientQuotations = ({ client }: { client: ClientByIDResponse }) => {
         success: <b>¡Cotización borrada!</b>,
         error: <b>Algo salio mal</b>,
       })
-      .then(() => router.reload())
-  }
+      .then(() => router.reload());
+  };
 
   return (
     <>
@@ -41,7 +41,7 @@ const ClientQuotations = ({ client }: { client: ClientByIDResponse }) => {
         <Table.Body className='divide-y divide-gray-400 pl-10'>
           {client &&
             client.data.attributes.quotations.data?.map((quote) => {
-              const { arqustik_id, project, address, createdAt } = quote.attributes
+              const { arqustik_id, project, address, createdAt } = quote.attributes;
               return (
                 <Table.Row key={quote.id}>
                   <Table.Cell className='font-bold'>{arqustik_id}</Table.Cell>
@@ -85,7 +85,7 @@ const ClientQuotations = ({ client }: { client: ClientByIDResponse }) => {
                     </Modal>
                   </Table.Cell>
                 </Table.Row>
-              )
+              );
             })}
         </Table.Body>
       </Table>
@@ -94,6 +94,6 @@ const ClientQuotations = ({ client }: { client: ClientByIDResponse }) => {
         <p className='text-center mt-4'>No hay cotizaciones, crea una.</p>
       )}
     </>
-  )
-}
-export default ClientQuotations
+  );
+};
+export default ClientQuotations;

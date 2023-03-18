@@ -1,14 +1,14 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/solid'
-import { Button } from 'flowbite-react'
-import { useRef } from 'react'
-import { Fragment, useState } from 'react'
+import { Dialog, Transition } from '@headlessui/react';
+import { XMarkIcon } from '@heroicons/react/24/solid';
+import { Button } from 'flowbite-react';
+import { useRef } from 'react';
+import { Fragment, useState } from 'react';
 
 const Model3D = ({ url }: { url: string }) => {
-  let [isOpen, setIsOpen] = useState<boolean>(false)
-  const closeModal = () => setIsOpen(false)
-  const openModal = () => setIsOpen(true)
-  const iframeRef = useRef<HTMLIFrameElement | null>(null)
+  let [isOpen, setIsOpen] = useState<boolean>(false);
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
   return (
     <div>
@@ -69,6 +69,6 @@ const Model3D = ({ url }: { url: string }) => {
         </Dialog>
       </Transition>
     </div>
-  )
-}
-export default Model3D
+  );
+};
+export default Model3D;

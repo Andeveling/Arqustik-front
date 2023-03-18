@@ -1,4 +1,4 @@
-import { WindowI } from '@models/WindowPVC.model'
+import { WindowI } from '@models/WindowPVC.model';
 
 const ModelO = ({ width, height }: { width: WindowI['width']; height: WindowI['height'] }) => {
   return (
@@ -11,6 +11,6 @@ const ModelO = ({ width, height }: { width: WindowI['width']; height: WindowI['h
         </div>
       </div>
     </div>
-  )
-}
-export default ModelO
+  );
+};
+export default ModelO;

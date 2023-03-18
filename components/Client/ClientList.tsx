@@ -1,18 +1,18 @@
-import Heading from '@components/Heading'
-import { MagnifyingGlassIcon, PencilIcon, TrashIcon, DocumentIcon } from '@heroicons/react/24/outline'
-import { ClientI, ResponseClientsI } from '@models/Client.model'
-import { clientPVC } from '@services/client.service'
-import { Button, Modal, Table } from 'flowbite-react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import toast from 'react-hot-toast'
-import ClientModal from './ClientModal'
-import ClientModalUpdate from './ClientModalUpdate'
+import Heading from '@components/Heading';
+import { MagnifyingGlassIcon, PencilIcon, TrashIcon, DocumentIcon } from '@heroicons/react/24/outline';
+import { ClientI, ResponseClientsI } from '@models/Client.model';
+import { clientPVC } from '@services/client.service';
+import { Button, Modal, Table } from 'flowbite-react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import ClientModal from './ClientModal';
+import ClientModalUpdate from './ClientModalUpdate';
 
 const ClientList = ({ clients }: { clients: ResponseClientsI }) => {
-  const router = useRouter()
-  const [openPopup, setOpenPopup] = useState<string | undefined>()
+  const router = useRouter();
+  const [openPopup, setOpenPopup] = useState<string | undefined>();
   const deleteHandle = (id: ClientI['id']) => {
     toast
       .promise(clientPVC.delete(id), {
@@ -20,8 +20,8 @@ const ClientList = ({ clients }: { clients: ResponseClientsI }) => {
         success: <b>¡Cliente borrado!</b>,
         error: <b>Algo salio mal</b>,
       })
-      .then(() => router.reload())
-  }
+      .then(() => router.reload());
+  };
   return (
     <div className='overflow-x-auto p-2 relative sm:rounded-lg'>
       <Heading as='h4'>Clientes</Heading>
@@ -53,8 +53,8 @@ const ClientList = ({ clients }: { clients: ResponseClientsI }) => {
           <Table.Body className='divide-y divide-gray-400'>
             {clients &&
               clients.data.map((client) => {
-                const id = client.id
-                const { fullName, cellphone, address, email } = client.attributes
+                const id = client.id;
+                const { fullName, cellphone, address, email } = client.attributes;
                 return (
                   <Table.Row className="pl-10'" key={id}>
                     <Table.Cell className='font-bold'>{fullName}</Table.Cell>
@@ -100,13 +100,13 @@ const ClientList = ({ clients }: { clients: ResponseClientsI }) => {
                       </Modal>
                     </Table.Cell>
                   </Table.Row>
-                )
+                );
               })}
           </Table.Body>
         </Table>
       </div>
       {clients.data.length === 0 && <p className='text-center mt-4'>No hay clientes, crea uno.</p>}
     </div>
-  )
-}
-export default ClientList
+  );
+};
+export default ClientList;

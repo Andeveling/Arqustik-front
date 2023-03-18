@@ -1,5 +1,5 @@
-import { ArrowRightIcon } from '@heroicons/react/24/solid'
-import { WindowI } from '@models/WindowPVC.model'
+import { ArrowRightIcon } from '@heroicons/react/24/solid';
+import { WindowI } from '@models/WindowPVC.model';
 const ModelOXX = ({ width, height }: { width: WindowI['width']; height: WindowI['height'] }) => {
   return (
     <div className='flex justify-center items-center h-44 w-56 print:h-52 print:w-52  border border-gray-700 bg-white'>
@@ -27,6 +27,6 @@ const ModelOXX = ({ width, height }: { width: WindowI['width']; height: WindowI[
         </div>
       </div>
     </div>
-  )
-}
-export default ModelOXX
+  );
+};
+export default ModelOXX;

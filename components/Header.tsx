@@ -1,27 +1,27 @@
-import { useCart } from '@context/CartContext'
-import { Disclosure, Transition } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { ShoppingBagIcon, DocumentTextIcon } from '@heroicons/react/24/solid'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import MenuLinks from './MenuLinks'
-import NextLink from './NextLink'
-import ThemeHandled from './ThemeHandled'
-import TopArea from './TopArea'
-import { Tooltip } from 'flowbite-react'
-import { PublicRoutes } from 'routes'
+import { useCart } from '@context/CartContext';
+import { Disclosure, Transition } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ShoppingBagIcon, DocumentTextIcon } from '@heroicons/react/24/solid';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import MenuLinks from './MenuLinks';
+import NextLink from './NextLink';
+import ThemeHandled from './ThemeHandled';
+import TopArea from './TopArea';
+import { Tooltip } from 'flowbite-react';
+import { PublicRoutes } from 'routes';
 
-const navigation = [{ name: 'Cotizar', href: '/', current: false }]
+const navigation = [{ name: 'Cotizar', href: '/', current: false }];
 
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Header() {
-  const { count: cartCount } = useCart()
-  const [mounted, setMounted] = useState<boolean>(false)
-  useEffect(() => setMounted(true), [])
-  if (!mounted) return null
+  const { count: cartCount } = useCart();
+  const [mounted, setMounted] = useState<boolean>(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
   return (
     <header className='min-h-20 items-center bg-gray-200 dark:bg-gray-900 border-b border-gray-400'>
       <Disclosure as='nav'>
@@ -104,5 +104,5 @@ export default function Header() {
         <TopArea />
       </div>
     </header>
-  )
+  );
 }

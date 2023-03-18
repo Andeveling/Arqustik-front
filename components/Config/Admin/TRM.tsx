@@ -1,19 +1,19 @@
-import { yupResolver } from '@hookform/resolvers/yup'
-import { AdminCostAttributesI, AdminCostI } from '@models/AdminCost.model'
-import { currencyFormatter } from '@utils/currencyFormatter'
-import { Button, Label, TextInput } from 'flowbite-react'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { UpdateAdministrativeCostSchema } from './UpdateAdministrativeCostSchema'
-import toast from 'react-hot-toast'
-import { adminCostService } from '@services/adminCost.service'
+import { yupResolver } from '@hookform/resolvers/yup';
+import { AdminCostAttributesI, AdminCostI } from '@models/AdminCost.model';
+import { currencyFormatter } from '@utils/currencyFormatter';
+import { Button, Label, TextInput } from 'flowbite-react';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { UpdateAdministrativeCostSchema } from './UpdateAdministrativeCostSchema';
+import toast from 'react-hot-toast';
+import { adminCostService } from '@services/adminCost.service';
 
 const TRM = ({ dollar }: { dollar: AdminCostI }) => {
-  let [isOpen, setIsOpen] = useState(false)
-  const closeModal = () => setIsOpen(false)
-  const openModal = () => setIsOpen(true)
-  const router = useRouter()
+  let [isOpen, setIsOpen] = useState(false);
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -21,7 +21,7 @@ const TRM = ({ dollar }: { dollar: AdminCostI }) => {
     formState: { errors },
   } = useForm<Partial<AdminCostAttributesI>>({
     resolver: yupResolver(UpdateAdministrativeCostSchema),
-  })
+  });
 
   const onSubmit: SubmitHandler<Partial<AdminCostAttributesI>> = async (adminCost) => {
     toast.promise(
@@ -39,8 +39,8 @@ const TRM = ({ dollar }: { dollar: AdminCostI }) => {
         success: <b>¡Valor actualizado!</b>,
         error: <b>No se pudo actualizar el Valor</b>,
       },
-    )
-  }
+    );
+  };
 
   return (
     <div>
@@ -58,6 +58,6 @@ const TRM = ({ dollar }: { dollar: AdminCostI }) => {
         </div>
       </form>
     </div>
-  )
-}
-export default TRM
+  );
+};
+export default TRM;

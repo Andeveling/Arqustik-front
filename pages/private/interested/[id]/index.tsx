@@ -1,28 +1,28 @@
-import Container from '@components/Container'
-import Heading from '@components/Heading'
-import InterestedWindowsList from '@components/Interested/InterestedWindowsList'
-import { InterestedResponseI } from '@models/Interested.model'
-import { fetcher } from '@services/fetcher.service'
-import { arqustikConfig, endpoints } from 'arqustik.config'
-import { useRouter } from 'next/router'
-import useSWR from 'swr'
+import Container from '@components/Container';
+import Heading from '@components/Heading';
+import InterestedWindowsList from '@components/Interested/InterestedWindowsList';
+import { InterestedResponseI } from '@models/Interested.model';
+import { fetcher } from '@services/fetcher.service';
+import { arqustikConfig, endpoints } from 'arqustik.config';
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
 
-const { STRAPI_SERVER } = arqustikConfig
-const { interesteds } = endpoints
+const { STRAPI_SERVER } = arqustikConfig;
+const { interesteds } = endpoints;
 
 const Index = () => {
-  const router = useRouter()
+  const router = useRouter();
   const { data: interested, error } = useSWR<InterestedResponseI>(
     `${STRAPI_SERVER}${interesteds}/${router.query.id}`,
     fetcher,
-  )
+  );
 
   if (error)
     return (
       <Container>
         <p>Error</p>
       </Container>
-    )
+    );
 
   if (interested)
     return (
@@ -51,6 +51,6 @@ const Index = () => {
           />
         )}
       </Container>
-    )
-}
-export default Index
+    );
+};
+export default Index;

@@ -1,16 +1,16 @@
-import { ServiceI } from '@models/Service.model'
-import { arqustikConfig, endpoints } from 'arqustik.config'
-import axios from 'axios'
+import { ServiceI } from '@models/Service.model';
+import { arqustikConfig, endpoints } from 'arqustik.config';
+import axios from 'axios';
 
-const { STRAPI_SERVER } = arqustikConfig
-const { services } = endpoints
+const { STRAPI_SERVER } = arqustikConfig;
+const { services } = endpoints;
 
 export const arqustikService = {
   update: async (serviceID: ServiceI['id'], data: any) => {
     try {
-      await axios.put(`${STRAPI_SERVER}${services}/${serviceID}`, data)
+      await axios.put(`${STRAPI_SERVER}${services}/${serviceID}`, data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   },
-}
+};

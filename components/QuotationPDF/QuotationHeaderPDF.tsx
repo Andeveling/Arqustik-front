@@ -1,13 +1,13 @@
-import { QuotationResponseI } from '@models/Quotation.model'
-import logo from '@public/img/logo.png'
-import Image from 'next/image'
+import { QuotationResponseI } from '@models/Quotation.model';
+import logo from '@public/img/logo.png';
+import Image from 'next/image';
 
 const QuotationHeaderPDF = ({ quotation }: { quotation: QuotationResponseI }) => {
   const {
     data: {
       attributes: { protection, client, silicone, polyurethane },
     },
-  } = quotation
+  } = quotation;
 
   return (
     <header className='px-2'>
@@ -37,6 +37,6 @@ const QuotationHeaderPDF = ({ quotation }: { quotation: QuotationResponseI }) =>
         </div>
       </div>
     </header>
-  )
-}
-export default QuotationHeaderPDF
+  );
+};
+export default QuotationHeaderPDF;

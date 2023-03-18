@@ -1,4 +1,4 @@
-import cn from "classnames"
+import cn from "classnames";
 
 type Props = {
   value: string
@@ -10,11 +10,11 @@ const SubmitInput = ({ value, isLoading }: Props) => {
     "inline-block text-white rounded px-4 py-3 w-fit": true,
     "bg-gray-700 hover:bg-gray-800 cursor-pointer": !isLoading,
     "bg-gray-400": isLoading,
-  })
+  });
 
-  const label = isLoading ? "Loading..." : value
+  const label = isLoading ? "Loading..." : value;
 
-  return <input className={classes} type='submit' value={label} disabled={isLoading} />
-}
+  return <input className={classes} type='submit' value={label} disabled={isLoading} />;
+};
 
-export default SubmitInput
+export default SubmitInput;

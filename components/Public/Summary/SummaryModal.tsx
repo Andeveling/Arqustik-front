@@ -1,18 +1,18 @@
-import { CreateClientSchema } from '@components/Client/ClientSchema'
-import SubmitInput from '@components/SubmitInput'
-import { useCart } from '@context/CartContext'
-import { Dialog, Transition } from '@headlessui/react'
-import { ArrowDownTrayIcon, PrinterIcon, XMarkIcon } from '@heroicons/react/24/solid'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { CartItemI } from '@models/CartItem.model'
-import { InterestedI } from '@models/Interested.model'
-import { interestedPVC } from '@services/interested.service'
-import { currencyFormatter } from '@utils/currencyFormatter'
-import axios from 'axios'
-import { Button, Label, TextInput } from 'flowbite-react'
-import { Fragment, useEffect, useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
+import { CreateClientSchema } from '@components/Client/ClientSchema';
+import SubmitInput from '@components/SubmitInput';
+import { useCart } from '@context/CartContext';
+import { Dialog, Transition } from '@headlessui/react';
+import { ArrowDownTrayIcon, PrinterIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { CartItemI } from '@models/CartItem.model';
+import { InterestedI } from '@models/Interested.model';
+import { interestedPVC } from '@services/interested.service';
+import { currencyFormatter } from '@utils/currencyFormatter';
+import axios from 'axios';
+import { Button, Label, TextInput } from 'flowbite-react';
+import { Fragment, useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 interface TotalsI {
   subTotal: string | number
@@ -24,25 +24,25 @@ const SummaryModal = ({ handlePrint, windows }: { handlePrint: () => void; windo
   const {
     subTotal,
     handleShowPrice: { showPrice, setShowPrice },
-  } = useCart()
-  const [isOpen, setIsOpen] = useState(false)
-  const closeModal = () => setIsOpen(false)
-  const openModal = () => setIsOpen(true)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  } = useCart();
+  const [isOpen, setIsOpen] = useState(false);
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [totals, setTotals] = useState<TotalsI>({
     subTotal: '',
     iva: '',
     total: '',
-  })
+  });
 
   useEffect(() => {
     setTotals({
       subTotal: currencyFormatter(subTotal),
       iva: currencyFormatter(subTotal * 0.19),
       total: currencyFormatter(subTotal * 1.19),
-    })
-  }, [subTotal])
+    });
+  }, [subTotal]);
 
   const {
     register,
@@ -51,15 +51,15 @@ const SummaryModal = ({ handlePrint, windows }: { handlePrint: () => void; windo
     formState: { errors },
   } = useForm<InterestedI>({
     resolver: yupResolver(CreateClientSchema),
-  })
+  });
   const onSubmit: SubmitHandler<InterestedI> = async (data: {
     fullName: string
     cellphone: string
     email: string
     address: string
   }) => {
-    setIsLoading(true)
-    await axios.post(`/api/mail`, { ...data, ...totals }).catch((err: any) => console.log(err))
+    setIsLoading(true);
+    await axios.post(`/api/mail`, { ...data, ...totals }).catch((err: any) => console.log(err));
     toast.promise(
       interestedPVC
         .create({
@@ -72,10 +72,10 @@ const SummaryModal = ({ handlePrint, windows }: { handlePrint: () => void; windo
           },
         })
         .then(() => {
-          closeModal()
-          setShowPrice(true)
-          reset()
-          setIsLoading(false)
+          closeModal();
+          setShowPrice(true);
+          reset();
+          setIsLoading(false);
         })
         .catch(() => setIsLoading(false))
         .catch((err) => console.error(err)),
@@ -84,8 +84,8 @@ const SummaryModal = ({ handlePrint, windows }: { handlePrint: () => void; windo
         success: <b>¡Cotización creada!</b>,
         error: <b>No se pudo crear la cotización</b>,
       },
-    )
-  }
+    );
+  };
 
   return (
     <div>
@@ -185,6 +185,6 @@ const SummaryModal = ({ handlePrint, windows }: { handlePrint: () => void; windo
         </Transition>
       </div>
     </div>
-  )
-}
-export default SummaryModal
+  );
+};
+export default SummaryModal;

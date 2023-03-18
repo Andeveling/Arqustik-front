@@ -1,24 +1,24 @@
-import WindowDraw from '@components/QuotationPDF/WindowDraw'
-import { useCart, useCartMutations } from '@context/CartContext'
-import { CartItemI } from '@models/CartItem.model'
-import { currencyFormatter } from '@utils/currencyFormatter'
-import { getArea, getMillimeters } from '@utils/getDimensions'
-import { Button, Modal } from 'flowbite-react'
-import { useState } from 'react'
-import toast from 'react-hot-toast'
+import WindowDraw from '@components/QuotationPDF/WindowDraw';
+import { useCart, useCartMutations } from '@context/CartContext';
+import { CartItemI } from '@models/CartItem.model';
+import { currencyFormatter } from '@utils/currencyFormatter';
+import { getArea, getMillimeters } from '@utils/getDimensions';
+import { Button, Modal } from 'flowbite-react';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const SummaryCard = ({ window }: { window: CartItemI }) => {
-  const [openPopup, setOpenPopup] = useState<string | undefined>()
+  const [openPopup, setOpenPopup] = useState<string | undefined>();
   const {
     handleShowPrice: { showPrice, setShowPrice },
-  } = useCart()
-  const { removeFromCart } = useCartMutations()
+  } = useCart();
+  const { removeFromCart } = useCartMutations();
   const deleteHandle = () => {
-    toast.success('¡Producto Removido!')
-    removeFromCart(window)
-  }
+    toast.success('¡Producto Removido!');
+    removeFromCart(window);
+  };
 
-  const { width, height, model, title, color, glass, cant, price, description } = window
+  const { width, height, model, title, color, glass, cant, price, description } = window;
   return (
     <div className='grid print:w-full print:grid-cols-2 sm:grid-cols-2 grid-cols-1 justify-center my-5 border-t p-4 break-after-auto break-before-auto  break-inside-avoid'>
       <div className='flex justify-end col-span-1 sm:col-span-2 print:col-span-2'>
@@ -96,6 +96,6 @@ const SummaryCard = ({ window }: { window: CartItemI }) => {
         )}
       </div>
     </div>
-  )
-}
-export default SummaryCard
+  );
+};
+export default SummaryCard;

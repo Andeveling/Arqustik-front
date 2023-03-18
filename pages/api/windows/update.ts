@@ -1,23 +1,23 @@
-import { NextApiHandler } from 'next'
-import { getPriceBellaSliding } from '@utils/getPricesBellaSliding'
+import { NextApiHandler } from 'next';
+import { getPriceBellaSliding } from '@utils/getPricesBellaSliding';
 
 const updateWindow: NextApiHandler = async (req, res) => {
-  const { method, body } = req
+  const { method, body } = req;
   switch (method) {
     case 'PUT':
       try {
-        const window = await getPriceBellaSliding(body)
-        res.status(200).json(window)
+        const window = await getPriceBellaSliding(body);
+        res.status(200).json(window);
       } catch (e) {
-        console.error('Request error', e)
-        res.status(500).end()
+        console.error('Request error', e);
+        res.status(500).end();
       }
-      break
+      break;
     default:
-      res.setHeader('Allow', ['PUT'])
-      res.status(405).end(`Method ${method} Not Allowed`)
-      break
+      res.setHeader('Allow', ['PUT']);
+      res.status(405).end(`Method ${method} Not Allowed`);
+      break;
   }
-}
+};
 
-export default updateWindow
+export default updateWindow;

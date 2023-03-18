@@ -1,4 +1,4 @@
-import { WindowI } from '@models/WindowPVC.model'
+import { WindowI } from '@models/WindowPVC.model';
 
 const ModelVRight = ({ width, height }: { width: WindowI['width']; height: WindowI['height'] }) => {
   return (
@@ -19,6 +19,6 @@ const ModelVRight = ({ width, height }: { width: WindowI['width']; height: Windo
         </div>
       </div>
     </div>
-  )
-}
-export default ModelVRight
+  );
+};
+export default ModelVRight;

@@ -1,5 +1,5 @@
-import { Button } from 'flowbite-react'
-import Link from 'next/link'
+import { Button } from 'flowbite-react';
+import Link from 'next/link';
 
 const WhatsAppButton = () => {
   return (
@@ -16,6 +16,6 @@ const WhatsAppButton = () => {
         </Button>
       </Link>
     </div>
-  )
-}
-export default WhatsAppButton
+  );
+};
+export default WhatsAppButton;

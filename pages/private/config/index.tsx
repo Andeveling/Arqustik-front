@@ -1,36 +1,36 @@
-import AdminCost from '@components/Config/Admin/AdminCost'
-import Contractor from '@components/Config/Contractor/Contractor'
-import Container from '@components/Container'
-import { Tab } from '@headlessui/react'
-import { AdminCostResponseI } from '@models/AdminCost.model'
-import { ServicesResponseI } from '@models/Service.model'
-import { fetcher } from '@services/fetcher.service'
-import { arqustikConfig, endpoints } from 'arqustik.config'
-import cn from 'classnames'
-import useSWR from 'swr'
+import AdminCost from '@components/Config/Admin/AdminCost';
+import Contractor from '@components/Config/Contractor/Contractor';
+import Container from '@components/Container';
+import { Tab } from '@headlessui/react';
+import { AdminCostResponseI } from '@models/AdminCost.model';
+import { ServicesResponseI } from '@models/Service.model';
+import { fetcher } from '@services/fetcher.service';
+import { arqustikConfig, endpoints } from 'arqustik.config';
+import cn from 'classnames';
+import useSWR from 'swr';
 
-const { STRAPI_SERVER } = arqustikConfig
-const { services, administrative_costs } = endpoints
+const { STRAPI_SERVER } = arqustikConfig;
+const { services, administrative_costs } = endpoints;
 
 const Config = () => {
-  const { data: servicesData, error: servicesError } = useSWR<ServicesResponseI>(`${STRAPI_SERVER}${services}`, fetcher)
+  const { data: servicesData, error: servicesError } = useSWR<ServicesResponseI>(`${STRAPI_SERVER}${services}`, fetcher);
   const { data: administrative_costData, error: administrative_costError } = useSWR<AdminCostResponseI>(
     `${STRAPI_SERVER}${administrative_costs}`,
     fetcher,
-  )
+  );
 
   if (!servicesData || !administrative_costData)
     return (
       <Container>
         <p>Loading</p>
       </Container>
-    )
+    );
   if (servicesError || administrative_costError)
     return (
       <Container>
         <p>Error</p>
       </Container>
-    )
+    );
   if (servicesData && administrative_costData) {
     return (
       <Container>
@@ -68,7 +68,7 @@ const Config = () => {
           </Tab.Panels>
         </Tab.Group>
       </Container>
-    )
+    );
   }
-}
-export default Config
+};
+export default Config;

@@ -1,5 +1,5 @@
-import logo from '@public/img/logo.png'
-import Image from 'next/image'
+import logo from '@public/img/logo.png';
+import Image from 'next/image';
 const CartPrintHeader = () => {
   return (
     <div>
@@ -28,6 +28,6 @@ const CartPrintHeader = () => {
         </div>
       </div>
     </div>
-  )
-}
-export default CartPrintHeader
+  );
+};
+export default CartPrintHeader;

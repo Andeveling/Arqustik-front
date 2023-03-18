@@ -1,6 +1,6 @@
-import cn from 'classnames'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import cn from 'classnames';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 type NavItemProps = {
   href: string
@@ -8,8 +8,8 @@ type NavItemProps = {
 }
 
 const NextLink = ({ href, text }: NavItemProps) => {
-  const router = useRouter()
-  const isActive = router.asPath === href
+  const router = useRouter();
+  const isActive = router.asPath === href;
 
   return (
     <Link
@@ -20,6 +20,6 @@ const NextLink = ({ href, text }: NavItemProps) => {
       )}>
       <span className='capsize flex content-center'>{text}</span>
     </Link>
-  )
-}
-export default NextLink
+  );
+};
+export default NextLink;

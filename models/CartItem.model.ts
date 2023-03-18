@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction } from 'react'
-import { WindowI } from './WindowPVC.model'
+import { Dispatch, SetStateAction } from 'react';
+import { WindowI } from './WindowPVC.model';
 
 export type QuantityT = number
 export interface CartItemI extends WindowI {}

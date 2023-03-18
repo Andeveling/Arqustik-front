@@ -1,7 +1,7 @@
-import { QuotationResponseI } from "@models/Quotation.model"
-import { WindowsDatum } from "@models/WindowPVC.model"
-import QuotationFooter from "./QuotationFooter"
-import WindowPDFDetailsCard from "./WindowPDFDetailsCard"
+import { QuotationResponseI } from "@models/Quotation.model";
+import { WindowsDatum } from "@models/WindowPVC.model";
+import QuotationFooter from "./QuotationFooter";
+import WindowPDFDetailsCard from "./WindowPDFDetailsCard";
 
 const QuotationBodyPDF = ({
   windows,
@@ -12,14 +12,14 @@ const QuotationBodyPDF = ({
   quotation: QuotationResponseI
   transport_mount: number
 }) => {
-  let total = 0
+  let total = 0;
 
   const getTotal = ({ windows }: { windows: WindowsDatum[] }) => {
     total = windows.reduce((acc, window) => {
-      return acc + window.attributes.price * window.attributes.cant
-    }, 0)
-  }
-  if (windows) getTotal({ windows })
+      return acc + window.attributes.price * window.attributes.cant;
+    }, 0);
+  };
+  if (windows) getTotal({ windows });
 
   return (
     <>
@@ -36,6 +36,6 @@ const QuotationBodyPDF = ({
       </div>
       <QuotationFooter quotation={quotation} total={total} transport_mount={transport_mount} />
     </>
-  )
-}
-export default QuotationBodyPDF
+  );
+};
+export default QuotationBodyPDF;

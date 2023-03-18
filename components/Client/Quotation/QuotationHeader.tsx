@@ -1,6 +1,6 @@
-import { ProtectionEnum, QuotationAttributes, SiliconeEnum } from "@models/Quotation.model"
-import { currencyFormatter } from "@utils/currencyFormatter"
-import { Badge, Card, Table } from "flowbite-react"
+import { ProtectionEnum, QuotationAttributes, SiliconeEnum } from "@models/Quotation.model";
+import { currencyFormatter } from "@utils/currencyFormatter";
+import { Badge, Card, Table } from "flowbite-react";
 
 const QuotationHeader = ({
   info: { silicone, polyurethane, installation, protection, transport_mount },
@@ -11,24 +11,24 @@ const QuotationHeader = ({
     if (typeService === "silicone") {
       switch (silicone) {
         case SiliconeEnum.zero:
-          return "NO"
+          return "NO";
         case SiliconeEnum.one:
-          return "Una cara"
+          return "Una cara";
         case SiliconeEnum.two:
-          return "Dos caras"
+          return "Dos caras";
       }
     }
     if (typeService === "protection") {
       switch (protection) {
         case ProtectionEnum.zero:
-          return "NO"
+          return "NO";
         case ProtectionEnum.one:
-          return "Una cara"
+          return "Una cara";
         case ProtectionEnum.two:
-          return "Dos caras"
+          return "Dos caras";
       }
     }
-  }
+  };
 
   return (
     <>
@@ -54,6 +54,6 @@ const QuotationHeader = ({
         </Table.Body>
       </Table>
     </>
-  )
-}
-export default QuotationHeader
+  );
+};
+export default QuotationHeader;

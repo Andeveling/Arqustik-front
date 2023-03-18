@@ -1,20 +1,20 @@
-import { WindowI } from '@models/WindowPVC.model'
-import { MailDataRequired } from '@sendgrid/helpers/classes/mail'
-import mail from '@sendgrid/mail'
-import { currencyFormatter } from '@utils/currencyFormatter'
-import { arqustikConfig } from 'arqustik.config'
-import { NextApiHandler } from 'next'
+import { WindowI } from '@models/WindowPVC.model';
+import { MailDataRequired } from '@sendgrid/helpers/classes/mail';
+import mail from '@sendgrid/mail';
+import { currencyFormatter } from '@utils/currencyFormatter';
+import { arqustikConfig } from 'arqustik.config';
+import { NextApiHandler } from 'next';
 
-mail.setApiKey(arqustikConfig.SENDGRID_API_KEY)
+mail.setApiKey(arqustikConfig.SENDGRID_API_KEY);
 
 const handler: NextApiHandler = async (req, res) => {
   try {
-    const { method } = req
-    const { body } = req
+    const { method } = req;
+    const { body } = req;
 
     switch (method) {
       case 'POST':
-        const message = `Hola`
+        const message = `Hola`;
         const data: MailDataRequired = {
           from: 'comercial1@arqustik.com',
           to: body.email,
@@ -1037,30 +1037,30 @@ const handler: NextApiHandler = async (req, res) => {
   </body>
 </html>
 `,
-        }
+        };
 
-        await mail.send(data).catch((err) => console.log(err))
-        res.status(200).json({ message: 'mail sended' })
-        break
+        await mail.send(data).catch((err) => console.log(err));
+        res.status(200).json({ message: 'mail sended' });
+        break;
       default:
-        res.setHeader('Allow', ['POST'])
-        res.status(405).end(`Method ${method} Not Allowed`)
-        break
+        res.setHeader('Allow', ['POST']);
+        res.status(405).end(`Method ${method} Not Allowed`);
+        break;
     }
   } catch (error) {
-    res.status(500).json(error)
+    res.status(500).json(error);
   }
-}
+};
 
 export const getWindows = (windows: WindowI[]): string => {
-  let windowsPVC = []
+  let windowsPVC = [];
   windowsPVC = windows.map(
     ({ title, width, height, cant, price, model }: WindowI) =>
       `<div class="grid grid-cols-1 gap-8 p-8 border"><div class="grid grid-cols-1 gap-4"><div class="grid gap-2 grid-cols-4 justify-between text-left"><strong>Referencia ${title}</strong><p>Model: ${model}</p><p>Ancho: ${width}mm</p><p>Alto: ${height}mm</p></div><div class="grid gap-4 grid-cols-4 justify-between text-left"><strong>Detalles</strong><p>Price: ${currencyFormatter(
         price,
       )}</p><p>Cant: ${cant}</p><p>Subtotal: ${currencyFormatter(cant * price)}</p></div></div></div>`,
-  )
-  return windowsPVC.join('').toString()
-}
+  );
+  return windowsPVC.join('').toString();
+};
 
-export default handler
+export default handler;

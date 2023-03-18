@@ -1,9 +1,9 @@
-import { Switch } from '@headlessui/react'
-import { MoonIcon, SunIcon } from '@heroicons/react/24/outline'
-import { useTheme } from 'next-themes'
+import { Switch } from '@headlessui/react';
+import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { useTheme } from 'next-themes';
 
 export default function ThemeHandled() {
-  const { theme, setTheme, resolvedTheme } = useTheme()
+  const { theme, setTheme, resolvedTheme } = useTheme();
 
   return (
     <Switch
@@ -29,5 +29,5 @@ export default function ThemeHandled() {
         )}
       </span>
     </Switch>
-  )
+  );
 }

@@ -1,8 +1,8 @@
-import { Carousel } from 'flowbite-react'
-import Image from 'next/image'
-import arqustikImage_1 from '@public/img/arqustik-1.jpeg'
-import arqustikImage_2 from '@public/img/arqustik-2.jpg'
-import arqustikImage_3 from '@public/img/arqustik-3.jpg'
+import { Carousel } from 'flowbite-react';
+import Image from 'next/image';
+import arqustikImage_1 from '@public/img/arqustik-1.jpeg';
+import arqustikImage_2 from '@public/img/arqustik-2.jpg';
+import arqustikImage_3 from '@public/img/arqustik-3.jpg';
 
 const CarouselGlass = () => {
   return (
@@ -139,9 +139,9 @@ const CarouselGlass = () => {
         </div>
       </Carousel>
     </div>
-  )
-}
-export default CarouselGlass
+  );
+};
+export default CarouselGlass;
 
 /* 
 

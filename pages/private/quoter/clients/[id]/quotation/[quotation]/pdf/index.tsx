@@ -1,35 +1,35 @@
-import Heading from '@components/Heading'
-import LoadingSpinner from '@components/LoadingSpinner'
-import QuotationBodyPDF from '@components/QuotationPDF/QuotationBodyPDF'
-import QuotationHeaderPDF from '@components/QuotationPDF/QuotationHeaderPDF'
-import { QuotationResponseI } from '@models/Quotation.model'
-import { fetcher } from '@services/fetcher.service'
-import { arqustikConfig, endpoints } from 'arqustik.config'
-import { Button } from 'flowbite-react'
-import { useRouter } from 'next/router'
-import { useEffect, useRef, useState } from 'react'
-import { useReactToPrint } from 'react-to-print'
-import useSWR from 'swr'
-import { PrinterIcon, ArrowLeftIcon } from '@heroicons/react/24/solid'
+import Heading from '@components/Heading';
+import LoadingSpinner from '@components/LoadingSpinner';
+import QuotationBodyPDF from '@components/QuotationPDF/QuotationBodyPDF';
+import QuotationHeaderPDF from '@components/QuotationPDF/QuotationHeaderPDF';
+import { QuotationResponseI } from '@models/Quotation.model';
+import { fetcher } from '@services/fetcher.service';
+import { arqustikConfig, endpoints } from 'arqustik.config';
+import { Button } from 'flowbite-react';
+import { useRouter } from 'next/router';
+import { useEffect, useRef, useState } from 'react';
+import { useReactToPrint } from 'react-to-print';
+import useSWR from 'swr';
+import { PrinterIcon, ArrowLeftIcon } from '@heroicons/react/24/solid';
 
-const { STRAPI_SERVER } = arqustikConfig
-const { quotations } = endpoints
+const { STRAPI_SERVER } = arqustikConfig;
+const { quotations } = endpoints;
 
 export default function Pdf() {
-  const [client, setClient] = useState(false)
-  useEffect(() => setClient(true), [])
+  const [client, setClient] = useState(false);
+  useEffect(() => setClient(true), []);
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
-  })
-  const componentRef = useRef(null)
-  const router = useRouter()
+  });
+  const componentRef = useRef(null);
+  const router = useRouter();
   const { data: quotation, error } = useSWR<QuotationResponseI>(
     `${STRAPI_SERVER}${quotations}/${router.query.quotation}?populate=*`,
     fetcher,
-  )
+  );
 
-  if (!quotation) return <LoadingSpinner />
-  if (error) return <p>{error.message}</p>
+  if (!quotation) return <LoadingSpinner />;
+  if (error) return <p>{error.message}</p>;
 
   return (
     <div
@@ -73,5 +73,5 @@ export default function Pdf() {
         />
       </div>
     </div>
-  )
+  );
 }

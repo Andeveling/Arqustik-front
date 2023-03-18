@@ -1,12 +1,12 @@
-import { CreateWindowPVCI } from "@models/WindowPVC.model"
-import { Label, TextInput } from "flowbite-react"
-import { useFormContext } from "react-hook-form"
+import { CreateWindowPVCI } from "@models/WindowPVC.model";
+import { Label, TextInput } from "flowbite-react";
+import { useFormContext } from "react-hook-form";
 
 export default function TitleLocation() {
   const {
     register,
     formState: { errors },
-  } = useFormContext<CreateWindowPVCI>()
+  } = useFormContext<CreateWindowPVCI>();
   return (
     <>
       <div className='mb-6'>
@@ -26,5 +26,5 @@ export default function TitleLocation() {
         {errors.location ? <p className='text-xs text-red-500'>{errors.location.message}</p> : <></>}
       </div>
     </>
-  )
+  );
 }
