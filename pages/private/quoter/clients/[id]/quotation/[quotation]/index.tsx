@@ -88,7 +88,7 @@ export default function QuotationByClientID() {
                   className='flex  justify-center items-center w-full h-full'
                   href={`${PrivateRoutes.QUOTER_CLIENT}/${query.id}/quotation/${query.quotation}/pdf`}>
                   <DocumentTextIcon className='w-6 h-6' />
-                  <span className='ml-2'>Resumén</span>
+                  <span className='ml-2'>Cotización</span>
                 </Link>
               </Button>
             )}
