@@ -14,7 +14,7 @@ const CartPrintHeader = () => {
         <div className='grid grid-cols-2 my-4'>
           <div className='col-span-2'>
             <div className='text-lg'>
-              <p className='font-bold text-3xl'>Resumén</p>
+              <p className='font-bold text-3xl'>Cotización</p>
             </div>
           </div>
         </div>

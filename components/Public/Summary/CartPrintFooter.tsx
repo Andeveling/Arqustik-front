@@ -23,7 +23,7 @@ const CartPrintFooter = () => {
           <li>No lleva poliuretano</li>
           <li>No lleva Protección</li>
           <li>No lleva silicona</li>
-          <li>Los vidrios no tienen garantía una vez se hayan entregado las escotillas en la planta Arqustik.</li>
+          <li>Los vidrios no tienen garantía una vez se hayan entregado.</li>
           <li>
             Para el proceso de fabricación es necesario tener definido sillar y acabado de vano (sobre piso, estucos,
             repello, etc.) para ser precisos en las medidas del producto final.
